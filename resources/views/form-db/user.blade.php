@@ -66,14 +66,14 @@
     <div class="max-w-lg mx-auto mt-10">
         <p class="text-gray-700">Cara Pengajuan Pembuatan User Baru/Reset Password :</p>
         <ol class="list-decimal list-inside">
-            <li>Lengkapi <b>Form</b> dan klik tombol <b>Save</b></li>
+            <li>Lengkapi <b>Form</b> dan klik tombol <b>Save</b></li> 
+            <img src="images/form_user.png" class="mt-4" height="200px" width="300px" alt="Form Pembuatan User">
             <li>Setelah berhasil, klik tombol <b>Print</b> dan <b>Cetak Dokumen</b></li>
+            <img src="images/detail_user.png" class="mt-4" height="200px" width="300px" alt="Detail User">
             <li>Tanda tangan <b>Pemohon</b> dan <b>Atasan</b></li>
+            <img src="images/cetak_user.png" class="mt-4" height="200px" width="300px" alt="Cetak User">
             <li>Serahkan <b>Form ke IT</b></li>
         </ol>
-        <img src="images/form_user.png" class="mt-4" height="200px" width="300px" alt="Form Pembuatan User">
-        <img src="images/detail_user.png" class="mt-4" height="200px" width="300px" alt="Detail User">
-        <img src="images/cetak_user.png" class="mt-4" height="200px" width="300px" alt="Cetak User">
     </div>
 </body>
 </html>
