@@ -87,5 +87,17 @@
                 <button type="submit" class="btn btn-info" onclick="return confirm('Save Form ?')">Save</button>
             </form>
         </div>
+        <div class="col-md-4">
+            <p>Cara Pengajuan Pembuatan User Baru/Reset Password :</p>
+            <ol>
+                <li>Lengkapi <b>Form</b> dan klik tombol <b>Save</b>
+                <img src="images/form_user.png" height="200px" width="300px"></li>            
+                <li>Setelah berhasil, klik tombil <b>Print</b> dan <b>Cetak Dokumen</b>.
+                <img src="images/detail_user.png" height="200px" width="300px"></li>
+                <li>Tanda tangan <b>Pemohon</b> dan <b>Atasan</b>
+                <img src="images/cetak_user.png" height="200px" width="300px"></li>
+                <li>Serahkan <b>Form ke IT</b></li>
+            </ol>
+        </div>
 </body>
 </html>
