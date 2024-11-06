@@ -12,7 +12,7 @@
 </head>
 <body bgcolor="#E2F1E7">
     <!-- Navbar -->
-    <div class="navbar bg-gray-800 text-white flex items-center p-4">
+    <div class="navbar fixed top-0 left-0 right-0 bg-gray-800 text-white flex items-center p-4 shadow-md z-50">
         <div class="navbar-links flex gap-10">
             <!-- Add the Home Icon Link -->
             <a href="#" class="hover:text-gray-400 flex items-center ml-20">
@@ -24,11 +24,14 @@
             <a href="#" class="hover:text-gray-400">Download Berita Acara</a>
         </div>
         <!-- Shift the Logo to the Left or Right -->
-        <div class="navbar-logo ml-auto mr-10"> <!-- Adjust this class for positioning -->
+        <div class="navbar-logo ml-auto mr-10">
             <h2 class="text-xl font-bold">Login IT</h2>
         </div>
     </div>
 
-    <!-- Rest of the content -->
+    <!-- Add padding to avoid content being hidden behind the navbar -->
+    <div class="pt-20">
+        <!-- Rest of the content -->
+    </div>
 </body>
 </html>
