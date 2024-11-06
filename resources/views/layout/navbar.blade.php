@@ -11,24 +11,22 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body bgcolor="#E2F1E7">
-    <!-- Navbar -->
+    <!-- Navbar dengan font-sans dari Tailwind -->
     <div class="navbar bg-gray-800 text-white flex items-center p-4">
         <div class="navbar-links flex gap-10">
-            <!-- Add the Home Icon Link -->
-            <a href="#" class="hover:text-gray-400 flex items-center ml-20">
+            <a href="/" class="hover:text-gray-400 flex items-center ml-20">
                 <i class="bi bi-house-fill mr-1"></i>
             </a>
-            <a href="#" class="hover:text-gray-400">Install Komputer/Laptop</a>
-            <a href="#" class="hover:text-gray-400">Pembuatan User/Reset Password</a>
-            <a href="#" class="hover:text-gray-400">Perbaikan Perangkat</a>
-            <a href="#" class="hover:text-gray-400">Download Berita Acara</a>
+            <a href="installasi-pc" class="hover:text-gray-400 font-sans">Install Komputer/Laptop</a>
+            <a href="pembuatan-user" class="hover:text-gray-400 font-sans">Pembuatan User/Reset Password</a>
+            <a href="perbaikan" class="hover:text-gray-400 font-sans">Perbaikan Perangkat</a>
+            <a href="#" class="hover:text-gray-400 font-sans">Download Berita Acara</a>
         </div>
-        <!-- Shift the Logo to the Left or Right -->
-        <div class="navbar-logo ml-auto mr-10"> <!-- Adjust this class for positioning -->
+        <div class="navbar-logo ml-auto mr-10">
             <h2 class="text-xl font-bold">Login IT</h2>
         </div>
     </div>
+    
 
-    <!-- Rest of the content -->
 </body>
 </html>
