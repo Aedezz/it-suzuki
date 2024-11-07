@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Mperbaikan;
 class perbaikanController extends Controller
 {
     /**
@@ -11,7 +11,8 @@ class perbaikanController extends Controller
      */
     public function index()
     {
-        //
+        $perbaikan = Mperbaikan::get();
+        return view('perbaikan.index', compact('perbaikan')); 
     }
 
     /**
