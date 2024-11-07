@@ -13,16 +13,16 @@
             <div style="flex: 1; margin-right: 20px;">
                 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="no_induk" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk
+                        <label for="nomor" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk
                             Karyawan</label>
-                        <input type="text" id="no_induk" name="no_induk"
+                        <input type="text" id="nomor" name="nomor"
                             style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="nama_leng" style="display: block; font-weight: bold; font-size: 16px;">Nama
+                        <label for="nama_lengkap" style="display: block; font-weight: bold; font-size: 16px;">Nama
                             Lengkap</label>
-                        <input type="text" id="nama_leng" name="nama_leng"
+                        <input type="text" id="nama_lengkap" name="nama_lengkap"
                             style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
@@ -34,30 +34,29 @@
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="divisi_cbg"
+                        <label for="divisi_cabang"
                             style="display: block; font-weight: bold; font-size: 16px;">Divisi/Cabang</label>
-                        <input type="text" id="divisi_cbg" name="divisi_cbg"
+                        <input type="text" id="divisi_cabang" name="divisi_cabang"
                             style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="kode_ass" style="display: block; font-weight: bold; font-size: 16px;">Kode
+                        <label for="kode_asset" style="display: block; font-weight: bold; font-size: 16px;">Kode
                             Asset</label>
-                        <input type="text" id="kode_ass" name="kode_ass"
+                        <input type="text" id="kode_asset" name="kode_asset"
                             style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="tanggal" style="display: block; font-weight: bold; font-size: 16px;">Tanggal
+                        <label for="tgl_beli" style="display: block; font-weight: bold; font-size: 16px;">Tanggal
                             Beli</label>
-                        <input type="date" id="tanggal" name="tanggal"
+                        <input type="date" id="tgl_beli" name="tgl_beli"
                             style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
                     <script>
-                        // Mengisi tanggal saat ini pada input tanggal
                         const today = new Date();
-                        const formattedDate = today.toISOString().split('T')[0]; // Format ke YYYY-MM-DD
+                        const formattedDate = today.toISOString().split('T')[0]; 
                         document.getElementById("tanggal").value = formattedDate;
                     </script>
 
@@ -92,7 +91,7 @@
 
                 <button type="submit"
                     style="max-width: 20%; padding: 10px 20px; background-color: #6A1E55; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px; font-size: 16px;">
-                    Save
+                    SIMPAN
                 </button>
             </div>
 
