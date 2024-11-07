@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF; // Import DomPDF
 
 class perbaikanController extends Controller
 {
@@ -62,20 +61,4 @@ class perbaikanController extends Controller
     {
         //
     }
-
-    /**
-     * Generate PDF and download.
-     */
-    public function generatePDF()
-    {
-        try {
-            $data = ['title' => 'Example PDF'];
-            $pdf = PDF::loadView('pdf_view', $data);
-            return $pdf->download('file.pdf');
-        } catch (\Exception $e) {
-            // Log error atau tampilkan pesan error
-            return response()->json(['error' => $e->getMessage()]);
-        }
-    }
-    
 }
