@@ -4,33 +4,39 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cdash;
 use App\Http\Controllers\Clogin;
 
+// Route for the welcome page (accessible to everyone)
+Route::get('/', function () {
+    return view('dashboard'); // Ensure 'welcome.blade.php' exists
+})->name('dashboard');
+
 // Routes for guests (unauthenticated users)
 Route::middleware(['guest'])->group(function () { 
-    Route::get('/', [Clogin::class, 'index'])->name('login'); 
-    Route::post('/', [Clogin::class, 'login_proses'])->name('login_proses'); 
+    Route::get('/login', [Clogin::class, 'index'])->name('login'); 
+    Route::post('/login', [Clogin::class, 'login_proses'])->name('login_proses'); 
 }); 
 
-// Redirect /home to the main/dashboard page for consistency
+// Redirect /home to main2 for authenticated users
 Route::get('/home', function () { 
-    return redirect()->route('dashboard'); 
-}); 
+    return redirect()->route('main2'); 
+})->name('home');
 
-// Routes for authenticated users
+// Form routes for both authenticated and guest users (no auth middleware)
+Route::get('/pembuatan-user', function () {
+    return view('form-db/user');
+})->name('pembuatan-user'); // Explicitly naming the route
+
+// Form routes for both authenticated and guest users (no auth middleware)
+Route::get('/installasi-pc', function () {
+    return view('form-db/pc');
+})->name('installasi-pc'); // Explicitly naming the route
+
+
+Route::get('/perbaikan', function () {
+    return view('form-db/perbaikan');
+})->name('perbaikan'); // Explicitly naming the route
+
+// Authenticated routes
 Route::middleware(['auth'])->group(function () { 
-    Route::get('/home', [Cdash::class, 'index'])->name('dashboard'); // Define 'main' route for authenticated users
-    Route::get('/dashboard', [Cdash::class, 'index'])->name('dashboard');
+    Route::get('/main2', [Cdash::class, 'index'])->name('main2'); // Main dashboard for authenticated users
     Route::get('/logout', [Clogin::class, 'logout'])->name('logout'); 
-});
-
-// Routes for other pages (accessible to authenticated users)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/pembuatan-user', function () {
-        return view('form-db/user');
-    });
-    Route::get('/installasi-pc', function () {
-        return view('form-db/pc');
-    });
-    Route::get('/perbaikan', function () {
-        return view('form-db/perbaikan');
-    });
 });
