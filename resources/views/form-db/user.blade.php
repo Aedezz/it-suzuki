@@ -32,7 +32,7 @@
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="keterangan" style="display: block; font-weight: bold; font-size: 16px;">Keterangan</label>
-                        <input type="text" id="keterangan" name="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <textarea name="keterangan" id="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;"></textarea>
                     </div>
                 </div>
 
