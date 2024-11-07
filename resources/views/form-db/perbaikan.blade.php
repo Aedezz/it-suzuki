@@ -38,7 +38,15 @@
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="tanggal" style="display: block; font-weight: bold; font-size: 16px;">Tanggal Beli</label>
                         <input type="date" id="tanggal" name="tanggal" style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>     
+                    </div>
+                    
+                    <script>
+                        // Mengisi tanggal saat ini pada input tanggal
+                        const today = new Date();
+                        const formattedDate = today.toISOString().split('T')[0]; // Format ke YYYY-MM-DD
+                        document.getElementById("tanggal").value = formattedDate;
+                    </script>
+                    
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="nama_barang" style="display: block; font-weight: bold; font-size: 16px;">Nama Barang</label>
