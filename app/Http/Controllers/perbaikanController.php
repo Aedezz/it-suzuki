@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mperbaikan;
 use Illuminate\Http\Request;
 
 class perbaikanController extends Controller
@@ -11,7 +12,8 @@ class perbaikanController extends Controller
      */
     public function index()
     {
-        
+        $perbaikan = Mperbaikan::get();
+        return view('perbaikan.index', compact('perbaikan')); 
     }
 
     /**
