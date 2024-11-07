@@ -6,33 +6,43 @@
             Form Pembuatan User Baru/Reset Password
         </h2>
 
-        <form style="display: flex;">
+        <form style="display: flex;" method="POST" action="{{ route('pembuatan.store') }}">
+            @csrf
             <!-- Left section for form fields -->
             <div style="flex: 1; margin-right: 20px;">
                 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="no_induk" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk Karyawan</label>
-                        <input type="text" id="no_induk" name="no_induk" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <label for="nik" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk Karyawan</label>
+                        <input type="text" id="nikk" name="nik" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
+                        @error('nik') {{ $message }} @enderror
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="nama_leng" style="display: block; font-weight: bold; font-size: 16px;">Nama Lengkap</label>
-                        <input type="text" id="nama_leng" name="nama_leng" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <label for="nama_lengap" style="display: block; font-weight: bold; font-size: 16px;">Nama Lengkap</label>
+                        <input type="text" id="nama_lengkap" name="nama_lengkap" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
+                        @error('nama_lengkap') {{ $message }} @enderror
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="jabatan" style="display: block; font-weight: bold; font-size: 16px;">Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <input type="text" id="jabatan" name="jabatan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
+                        @error('jabatan') {{ $message }} @enderror
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="divisi_cbg" style="display: block; font-weight: bold; font-size: 16px;">Divisi/Cabang</label>
-                        <input type="text" id="divisi_cbg" name="divisi_cbg" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <label for="divisi_cabang" style="display: block; font-weight: bold; font-size: 16px;">Divisi/Cabang</label>
+                        <input type="text" id="divisi_cabang" name="divisi_cabang" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
+                        @error('divisi_cabang') {{ $message }} @enderror
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="keterangan" style="display: block; font-weight: bold; font-size: 16px;">Keterangan</label>
+<<<<<<< Updated upstream
                         <textarea name="keterangan" id="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;"></textarea>
+=======
+                        <input type="text" id="keterangan" name="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
+                        @error('keterangan') {{ $message }} @enderror
+>>>>>>> Stashed changes
                     </div>
                 </div>
 
@@ -56,8 +66,20 @@
                     </p>
                 </div>
 
+<<<<<<< Updated upstream
                 <!-- Save button -->
                 <button type="submit" style="max-width: 20%; padding: 10px 20px; background-color: #6A1E55; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px; font-size: 16px;">
+=======
+                <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
+                    <label for="keterangan" style="display: block; font-weight: bold; font-size: 16px;">Modul</label>
+                    <textarea name="modul" id="modul" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required></textarea>
+                    @error('modul') {{ $message }} @enderror
+                </div>
+            
+
+                 <!-- Save button moved here -->
+                 <button type="submit" style="max-width: 20%; padding: 10px 20px; background-color: #6A1E55; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px; font-size: 16px;">
+>>>>>>> Stashed changes
                     Save
                 </button>
             </div>
