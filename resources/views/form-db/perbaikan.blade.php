@@ -1,7 +1,7 @@
 @include('layout.navbar')
 
 <div style="display: flex; justify-content: center; align-items: flex-start; height: 100vh; padding: 20px;">
-    <div style="width: 70%; max-width: 1000px; background-color: #f5f5f5; border-radius: 8px; padding: 40px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); text-align: left; position: relative;">
+    <div style="width: 100%; max-width: 1000px; background-color: #f5f5f5; border-radius: 8px; padding: 40px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); text-align: left; position: relative;">
         <h2 class="font-sans text-2xl font-bold" style="font-size: 22px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
            Form Perbaikan Perangkat
         </h2>
@@ -71,24 +71,23 @@
                 <h3 style="font-size: 16px; margin-bottom: 15px;">Cara Pengajuan Install Komputer/Laptop :</h3>
                 
                 {{-- Section 1 --}}
-                <h3>1. Lengkapi Form dan klik tombol Save</h3>
-                <img src="../images/perbaikan/disposisi.pg" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
+                <h3>1. Minta form disposisi dengan Purchasing. Isi, tanda tangan <b>Pemohon dan Atasan</b></h3>
+                <img src="../images/perbaikan/disposisi.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
 
                 {{-- Section 2 --}}
-                <h3>2. Setelah berhasil, klik tombol Print dan Cetak Dokumen.</h3>
-                <img src="../images/installasi/detail_install.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
+                <h3>2. Lengkapi <b>Form</b> dan klik tombol <b>Save</b></h3>
+                <img src="../images/perbaikan/form_perangkat.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
 
                 {{-- Section 3 --}}
-                <h3>3. Tanda tangan Pemohon (materai 6.0000) dan Atasan</h3>
-                <img src="../images/installasi/cetak_install.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
+                <h3>3. Setelah berhasil, klik tombol <b>Print</b> dan <b>Cetak Dokumen</b>.</h3>
+                <img src="../images/perbaikan/detail_perangkat.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
 
                 {{-- Section 4 --}}
-                <h3>4. Serahkan Form ke IT</h3>
+                <h3>4. Tanda tangan <b>Pemohon</b> </h3>
+                <img src="../images/perbaikan/cetak_perangkat.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
                 <br>
+                <h3>5. Serahkan <b>Form Disposisi dan Tanda Terima ke IT</b> </h3>
 
-                <p style="font-size: 14px; color: #555; margin-top: 10px;">
-                    Gambar ini menunjukkan langkah-langkah yang perlu diikuti untuk mengajukan instalasi komputer atau laptop.
-                </p>
             </div>
         </form>
     </div>
