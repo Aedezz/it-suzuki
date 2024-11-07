@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <button type="submit" onclick="window.print()"
+                <button type="submit"
                     style="max-width: 20%; padding: 10px 20px; background-color: #6A1E55; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px; font-size: 16px;">
                     Save
                 </button>
