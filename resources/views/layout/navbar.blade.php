@@ -23,6 +23,6 @@
         </div>
         {{-- Login --}}
         <div class="navbar-logo ml-auto mr-10">
-            <h2 class="text-xl font-bold">Login IT</h2>
-        </div>
+            <a href="{{ route('login') }}" class="text-xl font-bold">Login IT</a>
+        </div>        
     </div>

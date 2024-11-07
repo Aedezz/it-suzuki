@@ -52,7 +52,7 @@
                 {{-- Section 2 --}}
                 <h3>2. Setelah berhasil, klik tombol Print dan Cetak Dokumen.</h3>
                 <img src="../images/installasi/detail_install.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
-
+                
                 {{-- Section 3 --}}
                 <h3>3. Tanda tangan Pemohon (materai 6.0000) dan Atasan</h3>
                 <img src="../images/installasi/cetak_install.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
