@@ -1,4 +1,3 @@
-
 @include('layout.navbar')
 
 <div style="display: flex; justify-content: center; align-items: flex-start; height: 100vh; padding: 20px;">
@@ -32,25 +31,32 @@
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label class="block text-gray-700">Aplikasi</label>
-                        <p>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="EMAIL" class="form-checkbox text-blue-600"> EMAIL</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="SDMS" class="form-checkbox text-blue-600"> SDMS</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ITS" class="form-checkbox text-blue-600"> ITS</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="HRIS" class="form-checkbox text-blue-600"> HRIS</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="PURCHASE" class="form-checkbox text-blue-600"> PURCHASE</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ASET" class="form-checkbox text-blue-600"> ASET</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ATT" class="form-checkbox text-blue-600"> ATT</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="INDENT" class="form-checkbox text-blue-600"> INDENT</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="AUDIT" class="form-checkbox text-blue-600"> AUDIT</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="E-PART" class="form-checkbox text-blue-600"> E-PART</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ACCESS DOOR" class="form-checkbox text-blue-600"> ACCESS DOOR</label>
-                            <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="INTERNET" class="form-checkbox text-blue-600"> INTERNET</label>
-                            <input type="text" class="form-control block w-full mt-1 p-2 border-2 border-gray-500 rounded-md shadow-sm focus:ring focus:ring-blue-300" name="aplikasi_lainnya" placeholder="Lainnya">
-                        </p>
-                    </div>                    
+                        <label for="keterangan" style="display: block; font-weight: bold; font-size: 16px;">Keterangan</label>
+                        <input type="text" id="keterangan" name="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                    </div>
                 </div>
 
+                <!-- Wrapper div for aplikasi section -->
+                <div style="margin-top: 20px;">
+                    <label class="block text-gray-700">Aplikasi</label>
+                    <p>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="EMAIL" class="form-checkbox text-blue-600"> EMAIL</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="SDMS" class="form-checkbox text-blue-600"> SDMS</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ITS" class="form-checkbox text-blue-600"> ITS</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="HRIS" class="form-checkbox text-blue-600"> HRIS</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="PURCHASE" class="form-checkbox text-blue-600"> PURCHASE</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ASET" class="form-checkbox text-blue-600"> ASET</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ATT" class="form-checkbox text-blue-600"> ATT</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="INDENT" class="form-checkbox text-blue-600"> INDENT</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="AUDIT" class="form-checkbox text-blue-600"> AUDIT</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="E-PART" class="form-checkbox text-blue-600"> E-PART</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ACCESS DOOR" class="form-checkbox text-blue-600"> ACCESS DOOR</label>
+                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="INTERNET" class="form-checkbox text-blue-600"> INTERNET</label>
+                        <input type="text" class="form-control block w-full mt-1 p-2 border-2 border-gray-500 rounded-md shadow-sm focus:ring focus:ring-blue-300" name="aplikasi_lainnya" placeholder="Lainnya">
+                    </p>
+                </div>
+
+                <!-- Save button -->
                 <button type="submit" style="max-width: 20%; padding: 10px 20px; background-color: #6A1E55; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px; font-size: 16px;">
                     Save
                 </button>
