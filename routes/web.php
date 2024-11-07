@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cdash;
 use App\Http\Controllers\Clogin;
+use App\Http\Controllers\InstallController;
 
 // Route for the welcome page (accessible to everyone)
 Route::get('/', function () {
@@ -40,3 +41,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/main2', [Cdash::class, 'index'])->name('main2'); // Main dashboard for authenticated users
     Route::get('/logout', [Clogin::class, 'logout'])->name('logout'); 
 });
+
+// Database Installasi PC
+Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
