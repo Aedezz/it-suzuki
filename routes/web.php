@@ -3,39 +3,40 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cdash;
 use App\Http\Controllers\Clogin;
-use Illuminate\Support\Facades\Auth;
 
-// Public default dashboard route for unauthenticated users
+// Route for the welcome page (accessible to everyone)
 Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('main2'); // Redirect to main2 if already authenticated
-    }
-    return view('dashboard'); // This view serves as the public dashboard
-})->name('default.dashboard');
+    return view('dashboard'); // Ensure 'welcome.blade.php' exists
+})->name('dashboard');
 
-// Guest routes
+// Routes for guests (unauthenticated users)
 Route::middleware(['guest'])->group(function () { 
     Route::get('/login', [Clogin::class, 'index'])->name('login'); 
     Route::post('/login', [Clogin::class, 'login_proses'])->name('login_proses'); 
 }); 
 
+// Redirect /home to main2 for authenticated users
+Route::get('/home', function () { 
+    return redirect()->route('main2'); 
+})->name('home');
+
+// Form routes for both authenticated and guest users (no auth middleware)
+Route::get('/pembuatan-user', function () {
+    return view('form-db/user');
+})->name('pembuatan-user'); // Explicitly naming the route
+
+// Form routes for both authenticated and guest users (no auth middleware)
+Route::get('/installasi-pc', function () {
+    return view('form-db/pc');
+})->name('installasi-pc'); // Explicitly naming the route
+
+
+Route::get('/perbaikan', function () {
+    return view('form-db/perbaikan');
+})->name('perbaikan'); // Explicitly naming the route
+
 // Authenticated routes
 Route::middleware(['auth'])->group(function () { 
     Route::get('/main2', [Cdash::class, 'index'])->name('main2'); // Main dashboard for authenticated users
     Route::get('/logout', [Clogin::class, 'logout'])->name('logout'); 
-});
-
-Route::get('/home', function () { 
-    return redirect()->route('main2'); 
-})->name('dashboard');
-
-
-Route::get('/pembuatan-user', function () {
-    return view('form-db/user');
-});
-Route::get('/installasi-pc', function () {
-    return view('form-db/pc');
-});
-Route::get('/perbaikan', function () {
-    return view('form-db/perbaikan');
 });
