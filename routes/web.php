@@ -29,15 +29,13 @@ Route::get('/home', function () {
     return redirect()->route('main2'); 
 })->name('dashboard');
 
-// Additional authenticated routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/pembuatan-user', function () {
-        return view('form-db/user');
-    });
-    Route::get('/installasi-pc', function () {
-        return view('form-db/pc');
-    });
-    Route::get('/perbaikan', function () {
-        return view('form-db/perbaikan');
-    });
+
+Route::get('/pembuatan-user', function () {
+    return view('form-db/user');
+});
+Route::get('/installasi-pc', function () {
+    return view('form-db/pc');
+});
+Route::get('/perbaikan', function () {
+    return view('form-db/perbaikan');
 });
