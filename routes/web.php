@@ -3,26 +3,33 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cdash;
 use App\Http\Controllers\Clogin;
+use Illuminate\Support\Facades\Auth;
 
-// Routes for guests (unauthenticated users)
+// Public default dashboard route for unauthenticated users
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('main2'); // Redirect to main2 if already authenticated
+    }
+    return view('dashboard'); // This view serves as the public dashboard
+})->name('default.dashboard');
+
+// Guest routes
 Route::middleware(['guest'])->group(function () { 
-    Route::get('/', [Clogin::class, 'index'])->name('login'); 
-    Route::post('/', [Clogin::class, 'login_proses'])->name('login_proses'); 
+    Route::get('/login', [Clogin::class, 'index'])->name('login'); 
+    Route::post('/login', [Clogin::class, 'login_proses'])->name('login_proses'); 
 }); 
 
-// Redirect /home to the main/dashboard page for consistency
-Route::get('/home', function () { 
-    return redirect()->route('dashboard'); 
-}); 
-
-// Routes for authenticated users
+// Authenticated routes
 Route::middleware(['auth'])->group(function () { 
-    Route::get('/home', [Cdash::class, 'index'])->name('dashboard'); // Define 'main' route for authenticated users
-    Route::get('/dashboard', [Cdash::class, 'index'])->name('dashboard');
+    Route::get('/main2', [Cdash::class, 'index'])->name('main2'); // Main dashboard for authenticated users
     Route::get('/logout', [Clogin::class, 'logout'])->name('logout'); 
 });
 
-// Routes for other pages (accessible to authenticated users)
+Route::get('/home', function () { 
+    return redirect()->route('main2'); 
+})->name('dashboard');
+
+// Additional authenticated routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/pembuatan-user', function () {
         return view('form-db/user');

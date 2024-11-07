@@ -13,7 +13,7 @@ class Clogin extends Controller
     {
         // If the user is already logged in, redirect to the main page
         if (Auth::check()) {
-            return redirect()->route('main'); // Ensure 'main' route is defined for authenticated users
+            return redirect()->route('main2'); // Ensure 'main' route is defined for authenticated users
         }
 
         return view('login.login-form');
@@ -37,7 +37,7 @@ class Clogin extends Controller
         }
 
         // Redirect to the main page or dashboard on successful login
-        return redirect()->route('dashboard')->with('success', "Selamat Datang di Halaman IT"); 
+        return redirect()->route('main2')->with('success', "Selamat Datang di Halaman IT"); 
     }
 
     // Logout function

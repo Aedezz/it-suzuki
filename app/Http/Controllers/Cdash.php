@@ -8,6 +8,6 @@ class Cdash extends Controller
 {
     public function index()
     {
-    	return view('dalam/main');
-	}
+        return view('dalam.main2');
+    }
 }
