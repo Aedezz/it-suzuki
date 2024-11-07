@@ -47,7 +47,7 @@
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="jumlah" style="display: block; font-weight: bold; font-size: 16px;">Jumlah</label>
-                        <input type="text" id="jumlah" name="jumlah" style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <input type="number" id="jumlah" name="jumlah" style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
                     
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
