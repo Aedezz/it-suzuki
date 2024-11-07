@@ -57,7 +57,7 @@
                     <script>
                         const today = new Date();
                         const formattedDate = today.toISOString().split('T')[0]; 
-                        document.getElementById("tanggal").value = formattedDate;
+                        document.getElementById("tgl_beli").value = formattedDate;
                     </script>
 
 
