@@ -7,16 +7,9 @@ use Illuminate\Support\Facades\DB;
 class perbaikanController extends Controller
 {
 
-    // public function index()
-    // {
-    //     $perbaikan = Mperbaikan::get();
-    //     return view('form-db.perbaikan', compact('perbaikan')); 
-    // }
-
-
     public function create()
     {
-        return view('perbaikan');
+        return view('form-db.perbaikan');
     }
         public function store(Request $request)
         {
