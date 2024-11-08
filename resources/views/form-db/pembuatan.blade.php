@@ -6,40 +6,34 @@
             Form Pembuatan User Baru/Reset Password
         </h2>
 
-        <form style="display: flex;" method="POST" action="#">
+        <form style="display: flex;" method="POST" action="{{ route('pembuatan.store') }}">
             @csrf
             <!-- Left section for form fields -->
             <div style="flex: 1; margin-right: 20px;">
                 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="nik" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk Karyawan</label>
-                        <input type="text" id="nikk" name="nik" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
-                        @error('nik') {{ $message }} @enderror
+                        <input type="text" id="nik" name="nik" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="nama_lengap" style="display: block; font-weight: bold; font-size: 16px;">Nama Lengkap</label>
-                        <input type="text" id="nama_lengkap" name="nama_lengkap" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
-                        @error('nama_lengkap') {{ $message }} @enderror
+                        <label for="nama_lengkap" style="display: block; font-weight: bold; font-size: 16px;">Nama Lengkap</label>
+                        <input type="text" id="nama_lengkap" name="nama_lengkap" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="jabatan" style="display: block; font-weight: bold; font-size: 16px;">Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
-                        @error('jabatan') {{ $message }} @enderror
+                        <input type="text" id="jabatan" name="jabatan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="divisi_cabang" style="display: block; font-weight: bold; font-size: 16px;">Divisi/Cabang</label>
-                        <input type="text" id="divisi_cabang" name="divisi_cabang" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
-                        @error('divisi_cabang') {{ $message }} @enderror
+                        <input type="text" id="divisi_cabang" name="divisi_cabang" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="keterangan" style="display: block; font-weight: bold; font-size: 16px;">Keterangan</label>
-                        <textarea name="keterangan" id="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;"></textarea>
-                        <input type="text" id="keterangan" name="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required>
-                        @error('keterangan') {{ $message }} @enderror
+                        <input type="text" id="keterangan" name="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" >
                     </div>
                 </div>
 
@@ -64,9 +58,8 @@
                 </div>
 
                  <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                    <label for="keterangan" style="display: block; font-weight: bold; font-size: 16px;">Modul</label>
-                    <textarea name="modul" id="modul" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required></textarea>
-                    @error('modul') {{ $message }} @enderror
+                    <label for="modul" style="display: block; font-weight: bold; font-size: 16px;">Modul</label>
+                    <textarea name="modul" id="modul" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;"></textarea>
                 </div>
             
 
@@ -81,7 +74,7 @@
                 <h3 style="font-size: 16px; margin-bottom: 15px;">Cara Pengajuan Install Komputer/Laptop :</h3>
                 
                 {{-- Section 1 --}}
-                <h3>1. Lengkapi <b>Form</b> dan klik tombol <b>Save</b</h3>
+                <h3>1. Lengkapi <b>Form</b> dan klik tombol <b>Save</b></h3>
                 <img src="images/pembuat-user/form_user.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
 
                 {{-- Section 2 --}}
