@@ -35,7 +35,7 @@ class perangkatController extends Controller
         }
 
         // Format nomor baru (SLV/11/24/0001)
-        $formattedNumber = sprintf('SLV/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
+        $formattedNumber = sprintf('SPP/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
         
         Mperbaikan::create([
             'nomor' => $formattedNumber,

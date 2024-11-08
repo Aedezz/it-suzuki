@@ -41,6 +41,7 @@ Route::get('/installasi-pc', function () {
 Route::get('/perbaikan', function () {
     return view('form-db/perbaikan');
 })->name('perbaikan');
+Route::resource('perbaikan', perangkatController::class);
 
 // Authenticated routes
 Route::middleware(['guest'])->group(function () { 
