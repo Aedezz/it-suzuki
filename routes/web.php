@@ -38,20 +38,17 @@ Route::get('/home', function () {
     return redirect()->route('main2'); 
 })->name('home');
 
-// Form routes for both authenticated and guest users (no auth middleware)
 Route::get('/pembuatan-user', function () {
     return view('form-db/user');
-})->name('pembuatan-user'); // Explicitly naming the route
+})->name('pembuatan-user');
 
-// Form routes for both authenticated and guest users (no auth middleware)
 Route::get('/installasi-pc', function () {
     return view('form-db/pc');
-})->name('installasi-pc'); // Explicitly naming the route
-
+})->name('installasi-pc');
 
 Route::get('/perbaikan', function () {
     return view('form-db/perbaikan');
-})->name('perbaikan'); // Explicitly naming the route
+})->name('perbaikan');
 
 // Authenticated routes
 Route::middleware(['auth'])->group(function () { 
