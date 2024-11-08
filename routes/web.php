@@ -41,11 +41,13 @@ Route::get('/perbaikan', function () {
     return view('form-db/perbaikan');
 })->name('perbaikan');
 
+
 // Authenticated routes
 Route::middleware(['guest'])->group(function () { 
     Route::get('/login', [Clogin::class, 'index'])->name('login'); 
     Route::post('/login', [Clogin::class, 'login_proses'])->name('login_proses'); 
 });
+
 
 
 // Database Installasi PC

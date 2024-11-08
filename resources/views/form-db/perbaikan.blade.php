@@ -8,7 +8,7 @@
             Form Perbaikan Perangkat
         </h2>
 
-        <form style="display: flex;">
+        <form style="display: flex;"  method="POST" action="{{ route('perbaikan.store') }}">
             <!-- Left section for form fields -->
             <div style="flex: 1; margin-right: 20px;">
                 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
