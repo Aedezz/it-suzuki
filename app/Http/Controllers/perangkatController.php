@@ -58,11 +58,11 @@ class perangkatController extends Controller
             'keluhan' => $request->input('keluhan'),
             'tanggal' => now()->format('Y-m-d'),
             'it' => $request->it,
-            // 'date_it' =>1,
+            'date_it' =>1,
             'cek' => 1,
         ]);
 
-        // dd($request->all());
+        dd($request->all());
 
         return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan.');
     }

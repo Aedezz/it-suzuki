@@ -90,3 +90,4 @@ Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 
 // Resource route for Cpembuatan controller
 Route::resource('/form-db/user', Cpembuatan::class);
+
