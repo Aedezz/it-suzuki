@@ -17,10 +17,8 @@ Route::get('/', function () {
 })->name('dashboard');
 
 // Routes for form input with CobaController
-Route::prefix('data-entry')->group(function () {
-    Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
-    Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
-});
+Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
+Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
 
 Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 // Route::resource()
