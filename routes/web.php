@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cdash;
 use App\Http\Controllers\Clogin;
 use App\Http\Controllers\InstallController;
-use App\Http\Controllers\Cuser;
-
-// ---------------------------------------------------------------
 use App\Http\Controllers\CobaController;
+use App\Http\Controllers\Cpembuatan;
+
 Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
 Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
 // ------------------------------------------------------------------------
@@ -63,4 +62,4 @@ Route::middleware(['auth'])->group(function () {
 // Database Installasi PC
 Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 // Route::resource()
-Route::resource('/form-db/user',Cuser::class);
+Route::resource('/form-db/user',Cpembuatan::class);
