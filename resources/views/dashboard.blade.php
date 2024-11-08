@@ -29,6 +29,7 @@
                 <i class="bi bi-file-earmark-word text-red-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
                 <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Perbaikan Perangkat</span>
             </div>
+
         </div>
     </div>
 </div>

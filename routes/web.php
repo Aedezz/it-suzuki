@@ -5,6 +5,12 @@ use App\Http\Controllers\Cdash;
 use App\Http\Controllers\Clogin;
 use App\Http\Controllers\InstallController;
 
+// ---------------------------------------------------------------
+use App\Http\Controllers\CobaController;
+Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
+Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
+// ------------------------------------------------------------------------
+
 // Route for the welcome page (accessible to everyone)
 Route::get('/', function () {
     return view('dashboard'); // Ensure 'welcome.blade.php' exists
