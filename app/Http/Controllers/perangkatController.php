@@ -1,19 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Mperbaikan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class perangkatController extends Controller
 {
-
-    // public function index()
-    // {
-    //    $pembuatan = Mperbaikan::get();
-    //    return view('form-db.perbaikan', compact('pembuatan'));
-    // }
+    public function index()
+    {
+        //
+    }
 
     public function create()
     {
@@ -22,7 +18,6 @@ class perangkatController extends Controller
 
     public function store(Request $request)
     {
-
         $currentMonth = date('m');  // Bulan saat ini
         $currentYear = date('y');   // Tahun saat ini
 
@@ -42,8 +37,6 @@ class perangkatController extends Controller
         // Format nomor baru (SLV/11/24/0001)
         $formattedNumber = sprintf('SLV/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
         
-
-
         Mperbaikan::create([
             'nomor' => $formattedNumber,
             'nik' => $request->input('nik'),
@@ -67,5 +60,3 @@ class perangkatController extends Controller
         return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan.');
     }
 }
-
-
