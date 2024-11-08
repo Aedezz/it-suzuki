@@ -18,7 +18,7 @@ class perbaikanController extends Controller
 
     public function create()
     {
-        //
+        return view('perbaikan');
     }
         public function store(Request $request)
         {
