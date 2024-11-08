@@ -6,7 +6,7 @@
             Form Pembuatan User Baru/Reset Password
         </h2>
 
-        <form style="display: flex;" method="POST" action="{{ route('pembuatan.store') }}">
+        <form style="display: flex;" method="POST" action="#">
             @csrf
             <!-- Left section for form fields -->
             <div style="flex: 1; margin-right: 20px;">
