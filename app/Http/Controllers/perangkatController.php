@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 class perangkatController extends Controller
 {
 
-    public function index()
-    {
-       $pembuatan = Mperbaikan::get();
-       return view('form-db.perbaikan', compact('pembuatan'));
-    }
+    // public function index()
+    // {
+    //    $pembuatan = Mperbaikan::get();
+    //    return view('form-db.perbaikan', compact('pembuatan'));
+    // }
 
     public function create()
     {

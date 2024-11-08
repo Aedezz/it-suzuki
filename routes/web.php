@@ -6,6 +6,7 @@ use App\Http\Controllers\Clogin;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
+use App\Http\Controllers\perangkatController;
 
 
 Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
