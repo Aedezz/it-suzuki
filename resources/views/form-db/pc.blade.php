@@ -6,45 +6,51 @@
             Form Install Komputer/Laptop
         </h2>
 
-        <form style="display: flex;">
+        <form action="{{ route('pc.store') }}" method="POST" style="display: flex;">
             <!-- Left section for form fields -->
+            @csrf
             <div style="flex: 1; margin-right: 20px;">
                 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
                     
+                    <!-- NIK Field -->
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="nik" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk Karyawan</label>
-                        <input type="text" id="nik" name="nik" autocomplete="off" 
-                               style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <input type="text" id="nik" name="nik" required autocomplete="off" 
+                            placeholder="Masukkan NIK Anda" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
                     
+                    <!-- Nama Lengkap Field -->
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="nama_lengkap" style="display: block; font-weight: bold; font-size: 16px;">Nama Lengkap</label>
-                        <input type="text" id="nama_lengkap" name="nama_lengkap" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <input type="text" id="nama_lengkap" name="nama_lengkap" required placeholder="Masukkan Nama Lengkap Anda" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
                     
+                    <!-- Jabatan Field -->
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="jabatan" style="display: block; font-weight: bold; font-size: 16px;">Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <input type="text" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan Anda" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
                     
+                    <!-- Divisi/Cabang Field -->
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="divisi_cabang" style="display: block; font-weight: bold; font-size: 16px;">Divisi/Cabang</label>
-                        <input type="text" id="divisi_cabang" name="divisi_cabang" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <input type="text" id="divisi_cabang" name="divisi_cabang" placeholder="Masukkan Divisi/Cabang" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
                     
+                    <!-- Kode Asset Field -->
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="kode_ass" style="display: block; font-weight: bold; font-size: 16px;">Kode Asset</label>
-                        <input type="text" id="kode_ass" name="kode_ass" style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
+                        <label for="kode_asset" style="display: block; font-weight: bold; font-size: 16px;">Kode Asset</label>
+                        <input type="text" id="kode_asset" name="kode_asset" placeholder="Masukkan Kode Asset" required style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
-                                       
+                                    
                 </div>
-            
+                
+                <!-- Submit Button -->
                 <button type="submit" 
                         style="max-width: 20%; padding: 10px 20px; background-color: #6A1E55; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px; font-size: 16px;">
-                    Save
+                    Simpan
                 </button>
-            </div>
-            
+            </div>  
 
             <!-- Right section for image and heading -->
             <div style="flex: 1; max-width: 300px; background-color: #f8f8f8; padding: 20px; border-radius: 4px; border: 1px solid #ddd; text-align: center;">
@@ -73,34 +79,3 @@
         </form>
     </div>
 </div>
-
-<script>
-    document.getElementById('nik').addEventListener('input', function() {
-    const nik = this.value;
-
-        // Check if the NIK has a minimum length to search
-        if (nik.length >= 10) {  // Adjust this depending on your NIK format
-            fetch(`/fetch-data/${nik}`)  // Correct the URL to match the route
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.nama_lengkap) {
-                        // Populate the fields with the returned data
-                        document.getElementById('nama_lengkap').value = data.nama_lengkap;
-                        document.getElementById('jabatan').value = data.jabatan;
-                        document.getElementById('divisi_cabang').value = data.divisi_cabang;
-                        document.getElementById('kode_ass').value = data.kode_asset;
-                    } else {
-                        // Clear the fields if no data found
-                        document.getElementById('nama_lengkap').value = '';
-                        document.getElementById('jabatan').value = '';
-                        document.getElementById('divisi_cabang').value = '';
-                        document.getElementById('kode_ass').value = '';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                });
-        }
-    });
-</script>
-

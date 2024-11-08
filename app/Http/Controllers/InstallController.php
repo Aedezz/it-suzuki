@@ -1,47 +1,52 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\MInstal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class InstallController extends Controller
 {
-    public function fetchData($nik)
-{
-    // Retrieve data from 'it_2' database using 'nik'
-    $data = DB::connection('it_2')
-        ->table('form_install')
-        ->where('nik', $nik)
-        ->first();  // Get the first match
-
-    if ($data) {
-        return response()->json([
-            'nama_lengkap' => $data->nama_lengkap,
-            'jabatan' => $data->jabatan,
-            'divisi_cabang' => $data->divisi_cabang,
-            'kode_asset' => $data->kode_asset,
-        ]);
+    public function create()
+    {
+        return view('form-db/pc');
     }
 
-    return response()->json(['error' => 'Data not found'], 404);
-}
-
-
-    public function getNikData(Request $request)
+    public function store(Request $request)
     {
-        $nik = $request->query('nik');
-        
-        // Query the database to get the data for the given NIK
-        $data = DB::table('it_2')
-                ->where('nik', $nik)
-                ->first(['nama_lengkap', 'jabatan', 'divisi_cabang', 'kode_asset']); // Adjust fields as needed
+        $currentMonth = date('m');  // Bulan saat ini
+        $currentYear = date('y');   // Tahun saat ini
 
-        // Check if data exists
-        if ($data) {
-            return response()->json($data);
+        // Ambil entri terakhir berdasarkan nomor terbesar
+        $lastEntry = MInstal::orderByDesc('nomor')->first();
+
+        // Menentukan nomor berikutnya
+        if ($lastEntry) {
+            // Ambil 4 digit terakhir dari nomor
+            $lastNumber = (int) substr($lastEntry->nomor, -4);
+            $nextNumber = $lastNumber + 1;
+        } else {
+            // Jika belum ada entri, mulai dari nomor 1
+            $nextNumber = 1;
         }
 
-        // Return empty response if no data found
-        return response()->json([]);
+        // Format nomor baru (STD/11/24/0001)
+        $formattedNumber = sprintf('STD/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
+
+        // Simpan data baru ke dalam tabel 'it_magang' menggunakan model
+        MInstal::create([
+            'nik' => $request->input('nik'),
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'jabatan' => $request->input('jabatan'),
+            'divisi_cabang' => $request->input('divisi_cabang'),
+            'kode_asset' => $request->input('kode_asset'),
+            'nomor' => $formattedNumber,
+            'cek' => 0,  // Set nilai cek ke 0
+            'tanggal' => now()->format('Y-m-d')  // Set tanggal ke hari ini
+        ]);
+
+        // Redirect kembali ke dashboard dengan pesan sukses
+        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
     }
 }
