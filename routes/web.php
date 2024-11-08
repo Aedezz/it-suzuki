@@ -51,10 +51,11 @@ Route::get('/perbaikan', function () {
 })->name('perbaikan');
 
 // Authenticated routes
-Route::middleware(['auth'])->group(function () { 
-    Route::get('/main2', [Cdash::class, 'index'])->name('main2'); // Main dashboard for authenticated users
-    Route::get('/logout', [Clogin::class, 'logout'])->name('logout'); 
+Route::middleware(['guest'])->group(function () { 
+    Route::get('/login', [Clogin::class, 'index'])->name('login'); 
+    Route::post('/login', [Clogin::class, 'login_proses'])->name('login_proses'); 
 });
+
 
 // Database Installasi PC
 Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
