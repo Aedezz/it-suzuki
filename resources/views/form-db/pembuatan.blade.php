@@ -63,9 +63,7 @@
                     </p>
                 </div>
 
-                <!-- Save button -->
-                <button type="submit" style="max-width: 20%; padding: 10px 20px; background-color: #6A1E55; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px; font-size: 16px;">
-                <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
+                 <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                     <label for="keterangan" style="display: block; font-weight: bold; font-size: 16px;">Modul</label>
                     <textarea name="modul" id="modul" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" required></textarea>
                     @error('modul') {{ $message }} @enderror

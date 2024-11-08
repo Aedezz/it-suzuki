@@ -8,14 +8,15 @@
             Form Perbaikan Perangkat
         </h2>
 
-        <form style="display: flex;">
+        <form style="display: flex;" method="POST" action="{{ route('perbaikan.store') }}">
+            @csrf
             <!-- Left section for form fields -->
             <div style="flex: 1; margin-right: 20px;">
                 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="nomor" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk
+                        <label for="nik" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk
                             Karyawan</label>
-                        <input type="text" id="nomor" name="nomor"
+                        <input type="text" id="nik" name="nik"
                             style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
                     </div>
 
