@@ -22,9 +22,9 @@ Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store'
 
 Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 // Route::resource()
-Route::resource('/form-db/user',Cpembuatan::class);
+// Route::resource('/form-db/user',Cpembuatan::class);
 
-Route::resource('pembuatan',Cpembuatan::class);
+// Route::resource('pembuatan',Cpembuatan::class);
 
 
 // Routes for guests (unauthenticated users)
@@ -53,4 +53,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 
 // Resource route for Cpembuatan controller
-Route::resource('/form-db/user', Cpembuatan::class);
+// Route::resource('/form-db/user', Cpembuatan::class);
+
+Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
+Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
+
