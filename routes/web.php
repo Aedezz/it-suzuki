@@ -7,7 +7,11 @@ use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
 
-// Route for the dashboard/welcome page
+
+Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
+Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
+
+
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -49,6 +53,13 @@ Route::middleware(['guest'])->group(function () {
 // Routes for form input with CobaController
 Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
 Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
+
+Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
+// Route::resource()
+Route::resource('/form-db/user',Cpembuatan::class);
+
+Route::resource('pembuatan',Cpembuatan::class);
+
 
 // Routes for guests (unauthenticated users)
 Route::middleware(['guest'])->group(function () {
