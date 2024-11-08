@@ -51,7 +51,7 @@ class perbaikanController extends Controller
                 'cek' => 1,
             ]);
 
-            // dd($request->all());
+            dd($request->all());
 
             return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan.');
         }
