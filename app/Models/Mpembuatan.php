@@ -10,6 +10,9 @@ class Mpembuatan extends Model
     use HasFactory;
 
     protected $table = 'form_user';
-    protected $fillable = ['nomor', 'nik', 'tanggal', 'nama_lengkap', 'jabatan', 'divisi_cabang', 'keterangan', 'aplikasi', 'modul', 'it', 'date_it', 'cek'];
-    public $timestamps = false;
+    protected $fillable = [
+        'nik', 'nama_lengkap', 'jabatan', 'divisi_cabang', 'keterangan',
+        'aplikasi', 'modul', 'nomor', 'tanggal', 'cek'
+    ];    
+        public $timestamps = false;
 }
