@@ -15,26 +15,29 @@ class InstallController extends Controller
 
     public function store(Request $request)
     {
-        $currentMonth = date('m');  // Bulan saat ini
-        $currentYear = date('y');   // Tahun saat ini
+        $currentMonth = date('m');  // Current month
+        $currentYear = date('y');   // Current year
 
-        // Ambil entri terakhir berdasarkan nomor terbesar
-        $lastEntry = MInstal::orderByDesc('nomor')->first();
+        // Retrieve the entry with the highest numeric part of `nomor`
+        $lastEntry = MInstal::select('nomor')
+            ->whereRaw('SUBSTRING(nomor, -6) REGEXP "^[0-9]+$"')
+            ->orderBy(DB::raw('CAST(SUBSTRING(nomor, -6) AS UNSIGNED)'), 'desc')
+            ->first();
 
-        // Menentukan nomor berikutnya
+        // Determine the next number
         if ($lastEntry) {
-            // Ambil 4 digit terakhir dari nomor
-            $lastNumber = (int) substr($lastEntry->nomor, -4);
+            // Extract the last 6 digits and increment
+            $lastNumber = (int) substr($lastEntry->nomor, -6);
             $nextNumber = $lastNumber + 1;
         } else {
-            // Jika belum ada entri, mulai dari nomor 1
+            // If no entries, start from 1
             $nextNumber = 1;
         }
 
-        // Format nomor baru (STD/11/24/0001)
-        $formattedNumber = sprintf('STD/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
+        // Format the new number as `STD/MM/YY/XXXXXX`
+        $formattedNumber = sprintf('STD/%s/%s/%06d', $currentMonth, $currentYear, $nextNumber);
 
-        // Simpan data baru ke dalam tabel 'it_magang' menggunakan model
+        // Save the new data
         MInstal::create([
             'nik' => $request->input('nik'),
             'nama_lengkap' => $request->input('nama_lengkap'),
@@ -42,11 +45,11 @@ class InstallController extends Controller
             'divisi_cabang' => $request->input('divisi_cabang'),
             'kode_asset' => $request->input('kode_asset'),
             'nomor' => $formattedNumber,
-            'cek' => 0,  // Set nilai cek ke 0
-            'tanggal' => now()->format('Y-m-d')  // Set tanggal ke hari ini
+            'cek' => 0,  // Set `cek` to 0
+            'tanggal' => now()->format('Y-m-d')  // Set `tanggal` to today
         ]);
 
-        // Redirect kembali ke dashboard dengan pesan sukses
+        // Redirect back to the dashboard with a success message
         return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
     }
 }
