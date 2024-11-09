@@ -10,7 +10,7 @@ class InstallController extends Controller
 {
     public function create()
     {
-        return view('form-db/pc');
+        return view('form-db.pc');
     }
 
     public function store(Request $request)
