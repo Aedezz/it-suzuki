@@ -1,47 +1,55 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\MInstal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class InstallController extends Controller
 {
-    public function fetchData($nik)
-{
-    // Retrieve data from 'it_2' database using 'nik'
-    $data = DB::connection('it_2')
-        ->table('form_install')
-        ->where('nik', $nik)
-        ->first();  // Get the first match
-
-    if ($data) {
-        return response()->json([
-            'nama_lengkap' => $data->nama_lengkap,
-            'jabatan' => $data->jabatan,
-            'divisi_cabang' => $data->divisi_cabang,
-            'kode_asset' => $data->kode_asset,
-        ]);
+    public function create()
+    {
+        return view('form-db.pc');
     }
 
-    return response()->json(['error' => 'Data not found'], 404);
-}
-
-
-    public function getNikData(Request $request)
+    public function store(Request $request)
     {
-        $nik = $request->query('nik');
-        
-        // Query the database to get the data for the given NIK
-        $data = DB::table('it_2')
-                ->where('nik', $nik)
-                ->first(['nama_lengkap', 'jabatan', 'divisi_cabang', 'kode_asset']); // Adjust fields as needed
+        $currentMonth = date('m');  // Current month
+        $currentYear = date('y');   // Current year
 
-        // Check if data exists
-        if ($data) {
-            return response()->json($data);
+        // Retrieve the entry with the highest numeric part of `nomor`
+        $lastEntry = MInstal::select('nomor')
+            ->whereRaw('SUBSTRING(nomor, -6) REGEXP "^[0-9]+$"')
+            ->orderBy(DB::raw('CAST(SUBSTRING(nomor, -6) AS UNSIGNED)'), 'desc')
+            ->first();
+
+        // Determine the next number
+        if ($lastEntry) {
+            // Extract the last 6 digits and increment
+            $lastNumber = (int) substr($lastEntry->nomor, -6);
+            $nextNumber = $lastNumber + 1;
+        } else {
+            // If no entries, start from 1
+            $nextNumber = 1;
         }
 
-        // Return empty response if no data found
-        return response()->json([]);
+        // Format the new number as `STD/MM/YY/XXXXXX`
+        $formattedNumber = sprintf('STD/%s/%s/%06d', $currentMonth, $currentYear, $nextNumber);
+
+        // Save the new data
+        MInstal::create([
+            'nik' => $request->input('nik'),
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'jabatan' => $request->input('jabatan'),
+            'divisi_cabang' => $request->input('divisi_cabang'),
+            'kode_asset' => $request->input('kode_asset'),
+            'nomor' => $formattedNumber,
+            'cek' => 0,  // Set `cek` to 0
+            'tanggal' => now()->format('Y-m-d')  // Set `tanggal` to today
+        ]);
+
+        // Redirect back to the dashboard with a success message
+        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
     }
 }
