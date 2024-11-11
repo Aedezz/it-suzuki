@@ -10,7 +10,7 @@ class Cpembuatan extends Controller
 {
     public function create()
     {
-        return view('user.pembuatan');
+        return view('pembuatan');
     }
 
     public function store(Request $request)
@@ -27,13 +27,14 @@ class Cpembuatan extends Controller
             'modul' => 'string|max:100', 
         ]);
 
-<<<<<<< Updated upstream
+
         // dd($request->all());
         // Redirect kembali ke dashboard dengan pesan sukses
         return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
-=======
+
         // Mendapatkan bulan dan tahun sekarang
         $currentMonth = date('m');
+        
         $currentYear = date('y');
 
         // Mendapatkan entri terakhir untuk nomor
@@ -66,6 +67,6 @@ class Cpembuatan extends Controller
         return redirect()->route('pembuatan.create')
             ->with('success', 'Data berhasil disimpan')
             ->with('data', $pembuatan);
->>>>>>> Stashed changes
+
     }
 }
