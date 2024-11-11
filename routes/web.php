@@ -6,7 +6,7 @@ use App\Http\Controllers\Clogin;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
-
+use App\Http\Controllers\perbaikanController;
 
 Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
 Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
@@ -56,6 +56,10 @@ Route::middleware(['guest'])->group(function () {
 Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
 Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
 
+// Rout Perbaikan Perangkat
+Route::get('/perbaikan', [perbaikanController::class, 'create'])->name('perbaikan.create');
+Route::post('/perbaikan', [perbaikanController::class, 'store'])->name('perbaikan.store');
+
 Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 // Route::resource()
 Route::resource('/form-db/user',Cpembuatan::class);
@@ -91,3 +95,4 @@ Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 
 // Resource route for Cpembuatan controller
 Route::resource('/form-db/user', Cpembuatan::class);
+
