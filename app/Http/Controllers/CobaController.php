@@ -34,7 +34,7 @@ class CobaController extends Controller
         $formattedNumber = sprintf('SLV/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
 
         // Simpan data baru ke dalam tabel 'data_coba' menggunakan model
-        Mcoba::create([
+        $newEntry = Mcoba::create([
             'nik' => $request->input('nik'),
             'nama' => $request->input('nama'),
             'nomor' => $formattedNumber,
@@ -42,8 +42,16 @@ class CobaController extends Controller
             'tanggal' => now()->format('Y-m-d')  // Set tanggal ke hari ini
         ]);
 
-        // Redirect kembali ke dashboard dengan pesan sukses
-        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
+        // Redirect ke halaman baru yang menampilkan data yang telah disubmit
+        return redirect()->route('data-entry.show', ['id' => $newEntry->id])->with('success', 'Data berhasil disimpan');
     }
+
+    public function show($id)
+    {
+        $data = MCoba::findOrFail($id);
+        return view('cobaview', compact('data'));
+    }
+
+
 }
 

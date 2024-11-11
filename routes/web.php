@@ -19,11 +19,12 @@ Route::get('/', function () {
 // Routes for form input with CobaController
 Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
 Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
+Route::get('/view/{id}', [CobaController::class, 'show'])->name('data-entry.show');
 
 // Rout Perbaikan Perangkat
 Route::view('/perbaikan', 'form-db/perbaikan')->name('perbaikan');
-Route::get('/perbaikan', [PerbaikanController::class, 'create'])->name('perbaikan.create');
-Route::post('/perbaikan', [PerbaikanController::class, 'store'])->name('perbaikan.store');
+Route::get('/perbaikan/create', [PerbaikanController::class, 'create'])->name('perbaikan.create');
+Route::post('/perbaikan/store', [PerbaikanController::class, 'store'])->name('perbaikan.store');
 
 // Route pembuatan
 Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
