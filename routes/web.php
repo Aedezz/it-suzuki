@@ -6,8 +6,11 @@ use App\Http\Controllers\Clogin;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
-use App\Http\Controllers\perangkatController;
-use Psy\VersionUpdater\Installer;
+use App\Http\Controllers\PerbaikanController;
+
+Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
+Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
+
 
 Route::get('/', function () {
     return view('dashboard');
@@ -16,6 +19,10 @@ Route::get('/', function () {
 // Routes for form input with CobaController
 Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
 Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
+
+// Rout Perbaikan Perangkat
+Route::get('/perbaikan', [PerbaikanController::class, 'create'])->name('perbaikan.create');
+Route::post('/perbaikan', [PerbaikanController::class, 'store'])->name('perbaikan.store');
 
 Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 // Route::resource()
@@ -52,6 +59,7 @@ Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 
 // Resource route for Cpembuatan controller
 // Route::resource('/form-db/user', Cpembuatan::class);
+
 
 Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
 Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
