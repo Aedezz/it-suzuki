@@ -1,5 +1,5 @@
-Ini halaman dashboard 
-<br /> 
+@include('layout.menu-navbar')
+
 Selamat datang {{ Auth::user()->name }} 
 <br /> 
 <a href="{{ route('logout') }}">Logout</a> 

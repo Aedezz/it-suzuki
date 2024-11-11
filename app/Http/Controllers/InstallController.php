@@ -38,7 +38,7 @@ class InstallController extends Controller
         $formattedNumber = sprintf('STD/%s/%s/%06d', $currentMonth, $currentYear, $nextNumber);
 
         // Save the new data
-        MInstal::create([
+        $savedData = MInstal::create([
             'nik' => $request->input('nik'),
             'nama_lengkap' => $request->input('nama_lengkap'),
             'jabatan' => $request->input('jabatan'),
@@ -49,7 +49,13 @@ class InstallController extends Controller
             'tanggal' => now()->format('Y-m-d')  // Set `tanggal` to today
         ]);
 
-        // Redirect back to the dashboard with a success message
-        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
+        // Redirect to the view and pass the saved data
+        return redirect()->route('viewdata', ['data' => $savedData]);
+    }
+
+    // Add a new method to handle displaying the saved data
+    public function viewdata(MInstal $data)
+    {
+        return view('form-db.pc-show', compact('data'));
     }
 }
