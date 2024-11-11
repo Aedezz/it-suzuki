@@ -11,7 +11,7 @@
         <div class="mt-16 flex justify-center gap-10">
             <!-- Card 1 -->
             <div class="w-full md:w-1/3 lg:w-1/3 h-64 bg-white rounded-lg shadow-md hover:bg-gray-50 transition duration-200 flex flex-col items-center justify-center relative">
-                <a href="{{ route('installasi-pc') }}" class="absolute inset-0 z-10"></a>
+                <a href="{{ route('pc.create') }}" class="absolute inset-0 z-10"></a>
                 <i class="bi bi-file-earmark text-blue-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
                 <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Install Komputer/Laptop</span>
             </div>

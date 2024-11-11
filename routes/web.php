@@ -56,3 +56,6 @@ Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
 Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
 
+// Route Data Form
+Route::get('/create-instal', [InstallController::class, 'create'])->name('pc.create');
+Route::post('/store-instal', [InstallController::class, 'store'])->name('pc.store');
