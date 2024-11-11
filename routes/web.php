@@ -6,7 +6,7 @@ use App\Http\Controllers\Clogin;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
-use App\Http\Controllers\perangkatController;
+use App\Http\Controllers\perbaikanController;
 
 
 Route::get('/create', [CobaController::class, 'create'])->name('data-entry.create');
@@ -41,7 +41,7 @@ Route::get('/installasi-pc', function () {
 Route::get('/perbaikan', function () {
     return view('form-db/perbaikan');
 })->name('perbaikan');
-Route::resource('perbaikan', perangkatController::class);
+Route::resource('perbaikan', perbaikanController::class);
 
 // Authenticated routes
 Route::middleware(['guest'])->group(function () { 

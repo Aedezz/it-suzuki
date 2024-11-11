@@ -8,7 +8,7 @@
             Form Perbaikan Perangkat
         </h2>
 
-        <form style="display: flex;" method="POST" action="{{ route('perbaikan.store') }}">
+        <form style="display: flex;" method="POST" action="#">
             @csrf
             <!-- Left section for form fields -->
             <div style="flex: 1; margin-right: 20px;">
@@ -18,42 +18,48 @@
                             Karyawan</label>
                         <input type="text" id="nik" name="nik"
                             style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                            @error('nik') {{ $message }} @enderror
+                        </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="nama_lengkap" style="display: block; font-weight: bold; font-size: 16px;">Nama
                             Lengkap</label>
                         <input type="text" id="nama_lengkap" name="nama_lengkap"
                             style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                            @error('nama_lengkap') {{ $message }} @enderror
+                        </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="jabatan"
                             style="display: block; font-weight: bold; font-size: 16px;">Jabatan</label>
                         <input type="text" id="jabatan" name="jabatan"
                             style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                            @error('jabatan') {{ $message }} @enderror
+                        </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="divisi_cabang"
                             style="display: block; font-weight: bold; font-size: 16px;">Divisi/Cabang</label>
                         <input type="text" id="divisi_cabang" name="divisi_cabang"
                             style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                            @error('divisi_cabang') {{ $message }} @enderror
+                        </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="kode_asset" style="display: block; font-weight: bold; font-size: 16px;">Kode
                             Asset</label>
                         <input type="text" id="kode_asset" name="kode_asset"
                             style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                            @error('kode_asset') {{ $message }} @enderror
+                        </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="tgl_beli" style="display: block; font-weight: bold; font-size: 16px;">Tanggal
                             Beli</label>
                         <input type="date" id="tgl_beli" name="tgl_beli"
                             style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                            @error('tgl_beli') {{ $message }} @enderror
+                        </div>
 
                     <script>
                         const today = new Date();
@@ -67,27 +73,31 @@
                             Barang</label>
                         <input type="text" id="nama_barang" name="nama_barang"
                             style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                            @error('nama_barang') {{ $message }} @enderror
+                        </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="jumlah" style="display: block; font-weight: bold; font-size: 16px;">Jumlah</label>
                         <input type="text" id="jumlah" name="jumlah"
                             style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                            @error('jumlah') {{ $message }} @enderror
+                        </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="spesifikasi"
                             style="display: block; font-weight: bold; font-size: 16px;">Spesifikasi</label>
                         <input type="text" id="spesifikasi" name="spesifikasi"
                             style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                     @error('spesifikasi') {{ $message }} @enderror
+                        </div>
 
                     <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
                         <label for="keluhan"
                             style="display: block; font-weight: bold; font-size: 16px;">Keluhan</label>
                         <input type="text" id="keluhan" name="keluhan"
                             style="width: 100%; max-width: 290px; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
+                      @error('keluhan') {{ $message }} @enderror
+                        </div>
                 </div>
 
                 <button type="submit"
