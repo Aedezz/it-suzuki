@@ -4,56 +4,62 @@ namespace App\Http\Controllers;
 
 use App\Models\Mpembuatan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;  // Perbaikan kapitalisasi
+use Illuminate\Support\Facades\DB;
 
 class Cpembuatan extends Controller
 {
     public function create()
     {
-        return view('pembuatan');
+        return view('form-db/pembuatan');
     }
 
     public function store(Request $request)
     {
-        $currentMonth = date('m');  // Bulan saat ini
-$currentYear = date('y');   // Tahun saat ini
-
-// Ambil entri terakhir berdasarkan nomor terbesar (4 digit terakhir)
-$lastEntry = Mpembuatan::select('nomor')
-    ->whereRaw('SUBSTRING(nomor, -4) REGEXP "^[0-9]+$"')  // Ambil 4 digit terakhir jika hanya angka
-    ->orderBy(DB::raw('CAST(SUBSTRING(nomor, -4) AS UNSIGNED)'), 'desc')  // Urutkan berdasarkan 4 digit terakhir
-    ->first();
-
-// Menentukan nomor berikutnya
-if ($lastEntry) {
-    // Ambil 4 digit terakhir dari nomor dan tambahkan 1
-    $lastNumber = (int) substr($lastEntry->nomor, -4);
-    $nextNumber = $lastNumber + 1;
-} else {
-    // Jika belum ada entri, mulai dari nomor 1
-    $nextNumber = 1;
-}
-
-// Format nomor baru (STD/MM/YY/XXXX)
-$formattedNumber = sprintf('SLV/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
-
-
-        // Simpan data baru ke dalam tabel 'data_coba' menggunakan model
-        Mpembuatan::create([
-            'nik' => $request->input('nik'),
-            'nama_lengkap'=> $request->input('nama_lengkap'),
-            'jabatan'=> $request->input('jabatan'),
-            'divisi_cabang'=> $request->input('divisi_cabang'),
-            'keterangan'=> $request->input('keterangan'),  
-            'aplikasi'=> implode(',', $request->input('aplikasi', [])),
-            'modul'=> $request->input('modul'),
-            'nomor'=> $formattedNumber,
-            'tanggal'=> now()->format('y-m-d'),
-            'cek'=> 0,  // Set nilai cek ke 0
+        // Validasi input
+        $request->validate([
+            'nik' => 'required|string|max:25', 
+            'nama_lengkap' => 'required|string|max:100',
+            'jabatan' => 'required|string|max:100', 
+            'divisi_cabang' => 'required|string|max:100',
+            'keterangan' => 'nullable|string|max:100', 
+            'aplikasi' => 'array',
+            'aplikasi.*' => 'string|max:100', 
+            'modul' => 'nullable|string|max:100', 
         ]);
 
-        // dd($request->all());
-        // Redirect kembali ke dashboard dengan pesan sukses
-        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
+        // Mendapatkan bulan dan tahun sekarang
+        $currentMonth = date('m');
+        $currentYear = date('y');
+
+        // Mendapatkan entri terakhir untuk nomor
+        $lastEntry = Mpembuatan::select('nomor')
+            ->whereRaw('SUBSTRING(nomor, -6) REGEXP "^[0-9]+$"')
+            ->orderBy(DB::raw('CAST(SUBSTRING(nomor, -6) AS UNSIGNED)'), 'desc')
+            ->first();
+
+        // Menentukan nomor urut berikutnya
+        $nextNumber = $lastEntry ? (int) substr($lastEntry->nomor, -6) + 1 : 1;
+
+        // Format nomor sesuai dengan aturan
+        $formattedNumber = sprintf('SLV/%s/%s/%06d', $currentMonth, $currentYear, $nextNumber);
+
+        // Menyimpan data ke dalam tabel Mpembuatan
+        $pembuatan = Mpembuatan::create([
+            'nik' => $request->input('nik'),
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'jabatan' => $request->input('jabatan'),
+            'divisi_cabang' => $request->input('divisi_cabang'),
+            'keterangan' => $request->input('keterangan'),
+            'aplikasi' => implode(',', $request->input('aplikasi', [])),
+            'modul' => $request->input('modul'),
+            'nomor' => $formattedNumber,
+            'tanggal' => now()->format('y-m-d'),
+            'cek' => 0,
+        ]);
+
+        // Redirect ke halaman form dengan data baru yang disimpan
+        return redirect()->route('pembuatan.create')
+            ->with('success', 'Data berhasil disimpan')
+            ->with('data', $pembuatan);
     }
 }
