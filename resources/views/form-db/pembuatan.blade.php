@@ -119,7 +119,7 @@
         </div>
 
         <div class="action-buttons">
-            <button onclick="window.print()" class="print-btn">Print</button>
+            <a href="#" class="print-btn">Print</a>
             <a href="{{ route('dashboard') }}" class="finish-btn">Finish</a>
         </div>
         @endif
