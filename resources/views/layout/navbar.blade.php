@@ -18,7 +18,7 @@
                 <i class="bi bi-house-fill mr-1"></i>
             </a>
             {{-- Menu --}}
-            <a href="{{ route('pc.create') }}" class="hover:text-gray-400 font-sans">Install Komputer/Laptop</a>
+            <a href="{{ route('installasi-pc') }}" class="hover:text-gray-400 font-sans">Install Komputer/Laptop</a>
             <a href="{{ route('pembuatan-user') }}" class="hover:text-gray-400 font-sans">Pembuatan User/Reset Password</a>
             <a href="{{ route('perbaikan') }}" class="hover:text-gray-400 font-sans">Perbaikan Perangkat</a>
             <a href="#" class="hover:text-gray-400 font-sans">Download Berita Acara</a>

@@ -52,7 +52,7 @@ $formattedNumber = sprintf('SLV/%s/%s/%04d', $currentMonth, $currentYear, $nextN
             'cek'=> 0,  // Set nilai cek ke 0
         ]);
 
-        dd($request->all());
+        // dd($request->all());
         // Redirect kembali ke dashboard dengan pesan sukses
         return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
     }
