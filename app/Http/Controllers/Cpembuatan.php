@@ -2,64 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mpembuatan;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;  // Perbaikan kapitalisasi
 
 class Cpembuatan extends Controller
 {
-    private function generateNumber($prefix, $month, $year, $number) {
-        return sprintf('%s/%02d/%02d/%06d', $prefix, $month, $year, $number);
-    }
-
     public function create()
     {
-        return view('pembuatan.create');
+        return view('pembuatan');
     }
 
     public function store(Request $request)
     {
-        $request->merge(['tanggal' => Carbon::now()->toDateString()]);
+        $currentMonth = date('m');  // Bulan saat ini
+$currentYear = date('y');   // Tahun saat ini
 
-        $request->validate([
-            'nomor' => 'string|max:25',
-            'tanggal' => 'date',
-            'nik' => 'required|string|max:25',
-            'nama_lengkap' => 'required|string|max:100',
-            'jabatan' => 'required|string|max:100',
-            'divisi_cabang' => 'required|string|max:100',
-            'keterangan' => 'required|string|max:100',
-            'aplikasi' => 'array',
-            'modul' => 'required|string|max:100',
+// Ambil entri terakhir berdasarkan nomor terbesar (4 digit terakhir)
+$lastEntry = Mpembuatan::select('nomor')
+    ->whereRaw('SUBSTRING(nomor, -4) REGEXP "^[0-9]+$"')  // Ambil 4 digit terakhir jika hanya angka
+    ->orderBy(DB::raw('CAST(SUBSTRING(nomor, -4) AS UNSIGNED)'), 'desc')  // Urutkan berdasarkan 4 digit terakhir
+    ->first();
+
+// Menentukan nomor berikutnya
+if ($lastEntry) {
+    // Ambil 4 digit terakhir dari nomor dan tambahkan 1
+    $lastNumber = (int) substr($lastEntry->nomor, -4);
+    $nextNumber = $lastNumber + 1;
+} else {
+    // Jika belum ada entri, mulai dari nomor 1
+    $nextNumber = 1;
+}
+
+// Format nomor baru (STD/MM/YY/XXXX)
+$formattedNumber = sprintf('SLV/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
+
+
+        // Simpan data baru ke dalam tabel 'data_coba' menggunakan model
+        Mpembuatan::create([
+            'nik' => $request->input('nik'),
+            'nama_lengkap'=> $request->input('nama_lengkap'),
+            'jabatan'=> $request->input('jabatan'),
+            'divisi_cabang'=> $request->input('divisi_cabang'),
+            'keterangan'=> $request->input('keterangan'),  
+            'aplikasi'=> implode(',', $request->input('aplikasi', [])),
+            'modul'=> $request->input('modul'),
+            'nomor'=> $formattedNumber,
+            'tanggal'=> now()->format('y-m-d'),
+            'cek'=> 0,  // Set nilai cek ke 0
         ]);
 
-        // Step 1: Define prefix and get current month and year
-        $prefix = 'SLV';
-        $month = date('m'); // Current month in two digits
-        $year = date('y'); // Last two digits of the current year
-
-        // Simulate last entry check with a session variable (alternative to model-based logic)
-        $lastNumber = session('last_number', 0); // Default to 0 if not set
-        $newNumber = $lastNumber + 1;
-
-        // Step 2: Generate the formatted `nomor`
-        $nomor = $this->generateNumber($prefix, $month, $year, $newNumber);
-
-        // Step 3: Save data in session or file (for testing)
-        $data = [
-            'nomor' => $nomor,
-            'tanggal' => $request->tanggal,
-            'nik' => $request->nik,
-            'nama_lengkap' => $request->nama_lengkap,
-            'jabatan' => $request->jabatan,
-            'divisi_cabang' => $request->divisi_cabang,
-            'keterangan' => $request->keterangan,
-            'aplikasi' => implode(',', $request->input('aplikasi', [])),
-            'modul' => $request->modul,
-        ];
-
-        // Store in session for testing purposes
-        session(['last_number' => $newNumber, 'data' => $data]);
-
-        return redirect()->route('pembuatan.index')->with('success', 'Data berhasil disimpan!');
+        dd($request->all());
+        // Redirect kembali ke dashboard dengan pesan sukses
+        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
     }
 }
