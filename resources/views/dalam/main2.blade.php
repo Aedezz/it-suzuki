@@ -1,8 +1,6 @@
-Ini halaman dashboard 
-<br /> 
-Selamat datang {{ Auth::user()->name }} 
-<br /> 
-<a href="{{ route('logout') }}">Logout</a> 
+@include('layout.menu-navbar')
+
+{{-- Selamat datang {{ Auth::user()->name }} --}}
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
