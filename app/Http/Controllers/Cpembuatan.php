@@ -10,31 +10,25 @@ class Cpembuatan extends Controller
 {
     public function create()
     {
-        return view('pembuatan');
+        return view('form-db/pembuatan');
     }
 
     public function store(Request $request)
     {
         // Validasi input
         $request->validate([
-            'nik' => 'required|string|max:25', // NIK harus berupa angka dan memiliki 8 digit
-            'nama_lengkap' => 'required|string|max:100', // Nama lengkap harus string dan max 255 karakter
-            'jabatan' => 'required|string|max:100', // Jabatan harus string dan max 100 karakter
-            'divisi_cabang' => 'required|string|max:100', // Divisi/cabang harus string dan max 100 karakter
-            'keterangan' => '|string|max:100', // Keterangan bersifat opsional, tetapi jika ada, maksimal 255 karakter
-            'aplikasi' => 'array', // Aplikasi harus berupa array jika diisi
-            'aplikasi.*' => 'string|max:100', // Setiap aplikasi dalam array harus string
-            'modul' => 'string|max:100', 
+            'nik' => 'required|string|max:25', 
+            'nama_lengkap' => 'required|string|max:100',
+            'jabatan' => 'required|string|max:100', 
+            'divisi_cabang' => 'required|string|max:100',
+            'keterangan' => 'nullable|string|max:100', 
+            'aplikasi' => 'array',
+            'aplikasi.*' => 'string|max:100', 
+            'modul' => 'nullable|string|max:100', 
         ]);
-
-
-        // dd($request->all());
-        // Redirect kembali ke dashboard dengan pesan sukses
-        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan');
 
         // Mendapatkan bulan dan tahun sekarang
         $currentMonth = date('m');
-        
         $currentYear = date('y');
 
         // Mendapatkan entri terakhir untuk nomor
@@ -67,6 +61,5 @@ class Cpembuatan extends Controller
         return redirect()->route('pembuatan.create')
             ->with('success', 'Data berhasil disimpan')
             ->with('data', $pembuatan);
-
     }
 }
