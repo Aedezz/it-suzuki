@@ -21,14 +21,23 @@ Route::get('/create', [CobaController::class, 'create'])->name('data-entry.creat
 Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
 
 // Rout Perbaikan Perangkat
+Route::view('/perbaikan', 'form-db/perbaikan')->name('perbaikan');
 Route::get('/perbaikan', [PerbaikanController::class, 'create'])->name('perbaikan.create');
 Route::post('/perbaikan', [PerbaikanController::class, 'store'])->name('perbaikan.store');
 
-Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
-// Route::resource()
-// Route::resource('/form-db/user',Cpembuatan::class);
+// Route pembuatan
+Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
+Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
+Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
 
-// Route::resource('pembuatan',Cpembuatan::class);
+// Route Data Form
+Route::view('/installasi-pc', 'form-db/pc')->name('installasi-pc');
+Route::get('/create-instal', [InstallController::class, 'create'])->name('pc.create');
+Route::post('/store-instal', [InstallController::class, 'store'])->name('pc.store');
+
+
+
+Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
 
 
 // Routes for guests (unauthenticated users)
@@ -42,10 +51,6 @@ Route::get('/home', function () {
     return redirect()->route('main2');
 })->name('home');
 
-// Routes for different form views
-Route::view('/installasi-pc', 'form-db/pc')->name('installasi-pc');
-Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
-Route::view('/perbaikan', 'form-db/perbaikan')->name('perbaikan');
 
 // Authenticated routes
 Route::middleware(['auth'])->group(function () {
@@ -56,14 +61,3 @@ Route::middleware(['auth'])->group(function () {
 // Route for fetching data from InstallController
 // 0599d9d2510118ed05fdc56126d1f2ead9f6ff4a
 Route::get('/fetch-data/{nik}', [InstallController::class, 'fetchData']);
-
-// Resource route for Cpembuatan controller
-// Route::resource('/form-db/user', Cpembuatan::class);
-
-
-Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
-Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
-
-// Route Data Form
-Route::get('/create-instal', [InstallController::class, 'create'])->name('pc.create');
-Route::post('/store-instal', [InstallController::class, 'store'])->name('pc.store');
