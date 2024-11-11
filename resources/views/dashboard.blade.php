@@ -3,24 +3,23 @@
 <div class="car-animation">
     <div class="car"></div>
 </div>
-
 <div style="display: flex; justify-content: center; align-items: center; height: 65vh;">
     <div style="margin-bottom: -130px; width: 90%; max-width: 1200px; background-color: #f5f5f5; border-radius: 8px; padding: 50px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); text-align: center; position: relative;">
-        <h2 class="font-sans text-2xl font-bold absolute top-4 left-6 form-it-title">Form IT</h2>
+        <h2 class="font-sans text-2xl font-bold absolute top-4 left-6 form-it-title">FORM IT</h2>
 
         <div class="mt-16 flex justify-center gap-10">
             <!-- Card 1 -->
             <div class="w-full md:w-1/3 lg:w-1/3 h-64 bg-white rounded-lg shadow-md hover:bg-gray-50 transition duration-200 flex flex-col items-center justify-center relative">
                 <a href="{{ route('pc.create') }}" class="absolute inset-0 z-10"></a>
                 <i class="bi bi-file-earmark text-blue-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
-                <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Install Komputer/Laptop</span>
+                <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Install Komputer & Laptop</span>
             </div>
             
             <!-- Card 2 -->
             <div class="w-full md:w-1/3 lg:w-1/3 h-64 bg-white rounded-lg shadow-md hover:bg-gray-50 transition duration-200 flex flex-col items-center justify-center relative">
                 <a href="pembuatan-user" class="absolute inset-0 z-10"></a>
                 <i class="bi bi-file-earmark-text text-green-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
-                <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Pembuatan User/Reset Password</span>
+                <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Pembuatan User & Reset Password</span>
             </div>
             
             <!-- Card 3 -->

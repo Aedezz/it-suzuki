@@ -25,6 +25,12 @@ Route::get('/view/{id}', [CobaController::class, 'show'])->name('data-entry.show
 Route::view('/perbaikan', 'form-db/perbaikan')->name('perbaikan');
 Route::get('/perbaikan/create', [PerbaikanController::class, 'create'])->name('perbaikan.create');
 Route::post('/perbaikan/store', [PerbaikanController::class, 'store'])->name('perbaikan.store');
+Route::get('/view/{id}', [PerbaikanController::class, 'show'])->name('perbaikan.show');
+Route::get('/table-perbaikan', function () {
+    return view('table_perbaikan');
+})->name('table_perbaikan');
+
+
 
 // Route pembuatan
 Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
