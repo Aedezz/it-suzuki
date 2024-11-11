@@ -1,98 +1,306 @@
 @include('layout.navbar')
 
-<div style="display: flex; justify-content: center; align-items: flex-start; height: 100vh; padding: 20px;">
-    <div style="width: 100%; max-width: 1000px; background-color: #f5f5f5; border-radius: 8px; padding: 40px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); text-align: left; position: relative;">
-        <h2 class="font-sans text-2xl font-bold" style="font-size: 22px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-            Form Pembuatan User Baru/Reset Password
-        </h2>
+<div class="container">
+    <div class="form-container">
+        <!-- Form Input Data -->
+        @if(session('data') == null) <!-- Tampilkan form jika data belum ada -->
+        <h2 class="form-title">Form Pembuatan User Baru/Reset Password</h2>
 
-        <form style="display: flex;" method="POST" action="{{ route('pembuatan.store') }}">
+        <form method="POST" action="{{ route('pembuatan.store') }}">
             @csrf
-            <!-- Left section for form fields -->
-            <div style="flex: 1; margin-right: 20px;">
-                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-                    <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="nik" style="display: block; font-weight: bold; font-size: 16px;">Nomor Induk Karyawan</label>
-                        <input type="text" id="nik" name="nik" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
-
-                    <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="nama_lengkap" style="display: block; font-weight: bold; font-size: 16px;">Nama Lengkap</label>
-                        <input type="text" id="nama_lengkap" name="nama_lengkap" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
-
-                    <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="jabatan" style="display: block; font-weight: bold; font-size: 16px;">Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
-
-                    <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="divisi_cabang" style="display: block; font-weight: bold; font-size: 16px;">Divisi/Cabang</label>
-                        <input type="text" id="divisi_cabang" name="divisi_cabang" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;">
-                    </div>
-
-                    <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                        <label for="keterangan" style="display: block; font-weight: bold; font-size: 16px;">Keterangan</label>
-                        <input type="text" id="keterangan" name="keterangan" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;" >
-                    </div>
+            <div class="form-grid">
+                <!-- Input Field 1 -->
+                <div class="form-group">
+                    <label for="nik"><i class="fas fa-id-card"></i> Nomor Induk Karyawan</label>
+                    <input type="text" id="nik" name="nik" class="form-control" required>
                 </div>
 
-                <!-- Wrapper div for aplikasi section -->
-                <div style="margin-top: 20px;">
-                    <label class="block text-gray-700">Aplikasi</label>
-                    <p>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="EMAIL" class="form-checkbox text-blue-600"> EMAIL</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="SDMS" class="form-checkbox text-blue-600"> SDMS</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ITS" class="form-checkbox text-blue-600"> ITS</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="HRIS" class="form-checkbox text-blue-600"> HRIS</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="PURCHASE" class="form-checkbox text-blue-600"> PURCHASE</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ASET" class="form-checkbox text-blue-600"> ASET</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ATT" class="form-checkbox text-blue-600"> ATT</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="INDENT" class="form-checkbox text-blue-600"> INDENT</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="AUDIT" class="form-checkbox text-blue-600"> AUDIT</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="E-PART" class="form-checkbox text-blue-600"> E-PART</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="ACCESS DOOR" class="form-checkbox text-blue-600"> ACCESS DOOR</label>
-                        <label class="inline-flex items-center mr-6"><input type="checkbox" name="aplikasi[]" value="INTERNET" class="form-checkbox text-blue-600"> INTERNET</label>
-                        <input type="text" class="form-control block w-full mt-1 p-2 border-2 border-gray-500 rounded-md shadow-sm focus:ring focus:ring-blue-300" name="aplikasi_lainnya" placeholder="Lainnya">
-                    </p>
+                <!-- Input Field 2 -->
+                <div class="form-group">
+                    <label for="nama_lengkap"><i class="fas fa-user"></i> Nama Lengkap</label>
+                    <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" required>
                 </div>
 
-                 <div style="flex: 1; min-width: 45%; margin-bottom: 20px;">
-                    <label for="modul" style="display: block; font-weight: bold; font-size: 16px;">Modul</label>
-                    <textarea name="modul" id="modul" style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;"></textarea>
+                <!-- Input Field 3 -->
+                <div class="form-group">
+                    <label for="jabatan"><i class="fas fa-briefcase"></i> Jabatan</label>
+                    <input type="text" id="jabatan" name="jabatan" class="form-control" required>
                 </div>
-            
 
-                 <!-- Save button moved here -->
-                 <button type="submit" style="max-width: 20%; padding: 10px 20px; background-color: #6A1E55; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px; font-size: 16px;">
-                    Save
-                </button>
+                <!-- Input Field 4 -->
+                <div class="form-group">
+                    <label for="divisi_cabang"><i class="fas fa-building"></i> Divisi/Cabang</label>
+                    <input type="text" id="divisi_cabang" name="divisi_cabang" class="form-control" required>
+                </div>
+
+                <!-- Input Field 5 -->
+                <div class="form-group">
+                    <label for="keterangan"><i class="fas fa-info-circle"></i> Keterangan</label>
+                    <input type="text" id="keterangan" name="keterangan" class="form-control">
+                </div>
+
+                <!-- Aplikasi Checkboxes -->
+                <div class="form-group">
+                    <label><i class="fas fa-cogs"></i> Aplikasi</label><br>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="aplikasi[]" value="EMAIL"> EMAIL</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="SDMS"> SDMS</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="ITS"> ITS</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="HRIS"> HRIS</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="PURCHASE"> PURCHASE</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="ASET"> ASET</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="ATT"> ATT</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="INDENT"> INDENT</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="AUDIT"> AUDIT</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="E-PART"> E-PART</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="ACCESS DOOR"> ACCESS DOOR</label>
+                        <label><input type="checkbox" name="aplikasi[]" value="INTERNET"> INTERNET</label>
+                    </div>
+                    <input type="text" class="form-control" name="aplikasi_lainnya" placeholder="Lainnya">
+                </div>
+
+                <!-- Modul Input -->
+                <div class="form-group">
+                    <label for="modul"><i class="fas fa-cogs"></i> Modul</label>
+                    <textarea id="modul" name="modul" class="form-control"></textarea>
+                </div>
             </div>
 
-            <!-- Right section for image and heading -->
-            <div style="flex: 1; max-width: 300px; background-color: #f8f8f8; padding: 20px; border-radius: 4px; border: 1px solid #ddd; text-align: center;">
-                <h3 style="font-size: 16px; margin-bottom: 15px;">Cara Pengajuan Install Komputer/Laptop :</h3>
-                
-                {{-- Section 1 --}}
-                <h3>1. Lengkapi <b>Form</b> dan klik tombol <b>Save</b></h3>
-                <img src="images/pembuat-user/form_user.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
-
-                {{-- Section 2 --}}
-                <h3>2. Setelah berhasil, klik tombol <b>Print</b> dan <b>Cetak Dokumen</b></h3>
-                <img src="images/pembuat-user/cetak_user.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
-
-                {{-- Section 3 --}}
-                <h3>3. Tanda tangan <b>Pemohon</b> dan <b>Atasan</b></h3>
-                <img src="images/pembuat-user/detail_user.png" alt="Petunjuk Visual" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
-
-                {{-- Section 4 --}}
-                <h3>4. Serahkan Form ke IT</h3>
-                <br>
-
-                <p style="font-size: 14px; color: #555; margin-top: 10px;">
-                    Gambar ini menunjukkan langkah-langkah yang perlu diikuti untuk mengajukan instalasi komputer atau laptop.
-                </p>
+            <div class="button-container">
+                <button type="submit" class="submit-btn">Save</button>
             </div>
         </form>
+        @else <!-- Tampilkan data yang sudah disimpan jika ada -->
+        <h2 class="form-title">Data yang Baru Disimpan</h2>
+
+        <!-- Tabel Menampilkan Data -->
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nomor</td>
+                        <td>{{ session('data')->nomor }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal</td>
+                        <td>{{ session('data')->tanggal }}</td>
+                    </tr>
+                    <tr>
+                        <td>NIK</td>
+                        <td>{{ session('data')->nik }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Lengkap</td>
+                        <td>{{ session('data')->nama_lengkap }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jabatan</td>
+                        <td>{{ session('data')->jabatan }}</td>
+                    </tr>
+                    <tr>
+                        <td>Divisi/Cabang</td>
+                        <td>{{ session('data')->divisi_cabang }}</td>
+                    </tr>
+                    <tr>
+                        <td>Keterangan</td>
+                        <td>{{ session('data')->keterangan }}</td>
+                    </tr>
+                    <tr>
+                        <td>Aplikasi</td>
+                        <td>{{ session('data')->aplikasi }}</td>
+                    </tr>
+                    <tr>
+                        <td>Modul</td>
+                        <td>{{ session('data')->modul }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="action-buttons">
+            <a heff="#" class="print-btn">Print</button>
+            <a href="{{ route('dashboard') }}" class="finish-btn">Finish</a>
+        </div>
+
+        @endif
     </div>
 </div>
+
+<style>
+/* Form Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    padding: 20px;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+}
+
+/* Form Title */
+.form-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Form Section */
+.form-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Mengatur dua kolom */
+    gap: 20px;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Form Control */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+/* Checkbox Group */
+.checkbox-group label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+}
+/* Submit Button */
+.submit-btn {
+    background-color: #6A1E55;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: auto;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #8c3360;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.print-btn, .finish-btn {
+    background-color: #6A1E55;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.print-btn:hover, .finish-btn:hover {
+    background-color: #8c3360;
+}
+
+/* Table Styles */
+.table-container {
+    margin-top: 30px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.table td {
+    background-color: #fff;
+}
+
+.table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Sidebar */
+.sidebar {
+    flex: 1;
+    max-width: 300px;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.sidebar h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.sidebar img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.sidebar p {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+</style>
