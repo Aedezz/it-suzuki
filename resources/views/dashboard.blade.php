@@ -1,9 +1,5 @@
 @include('layout.navbar')
 
-<div class="car-animation">
-    <div class="car"></div>
-</div>
-
 <div style="display: flex; justify-content: center; align-items: center; height: 65vh; color:;" >
     <div class="form-it-container">
         <h2 class="font-sans text-2xl font-bold form-it-title" style="color: rgb(45, 45, 45)">FORM IT</h2>
@@ -11,87 +7,75 @@
             <!-- Card 1 -->
             <div class="card w-full md:w-1/3 lg:w-1/3 h-64 bg-white rounded-lg shadow-md hover:bg-gray-50 transition duration-200 flex flex-col items-center justify-center relative">
                 <a href="{{ route('pc.create') }}" class="absolute inset-0 z-10"></a>
-                <i class="bi bi-file-earmark text-blue-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
-                <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Install Komputer & Laptop</span>
+                <div class="icon-container">
+                    <i class="bi bi-file-earmark text-blue-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
+                    <span class="text-lg text-gray-600 card-title">Install Komputer & Laptop</span>
+                </div>
             </div>
             
             <!-- Card 2 -->
             <div class="card w-full md:w-1/3 lg:w-1/3 h-64 bg-white rounded-lg shadow-md hover:bg-gray-50 transition duration-200 flex flex-col items-center justify-center relative">
                 <a href="pembuatan-user" class="absolute inset-0 z-10"></a>
-                <i class="bi bi-file-earmark-text text-green-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
-                <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Pembuatan User & Reset Password</span>
+                <div class="icon-container">
+                    <i class="bi bi-file-earmark-text text-green-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
+                    <span class="text-lg text-gray-600 card-title">Pembuatan User & Reset Password</span>
+                </div>
             </div>
             
             <!-- Card 3 -->
             <div class="card w-full md:w-1/3 lg:w-1/3 h-64 bg-white rounded-lg shadow-md hover:bg-gray-50 transition duration-200 flex flex-col items-center justify-center relative">
                 <a href="perbaikan" class="absolute inset-0 z-10"></a>
-                <i class="bi bi-file-earmark-word text-red-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
-                <span class="font-sans text-lg text-layer absolute transition-opacity duration-300 ease-in-out opacity-0 hover-info">Perbaikan Perangkat</span>
+                <div class="icon-container">
+                    <i class="bi bi-file-earmark-word text-red-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
+                    <span class="text-lg text-gray-600 card-title">Perbaikan Perangkat</span>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
 
 <style>
-    /* Car Animation at the Bottom */
-    .car-animation {
-        position: fixed; /* fixed to the bottom of the screen */
-        bottom: 0; /* positions it at the bottom */
-        left: 0;
-        width: 100%;
-        height: 100px; /* height of the animation container */
-        overflow: hidden; /* prevents overflow of car out of container */
-        z-index: 1; /* places it behind the main content */
-    }
-
-    .car {
-        width: 200px;
-        height: 60px;
-        background: url('../images/car2.png') no-repeat center center;
-        background-size: contain;
-        position: absolute;
-        bottom: 0;
-        animation: drive 10s linear infinite;
-    }
-
-    @keyframes drive {
-        0% {
-            left: -120px; /* starts off-screen from left */
-        }
-        100% {
-            left: 100%; /* ends off-screen to the right */
-        }
-    }
-
     /* Card Styles */
+    .card {
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease-out; /* Animasi untuk transformasi */
+    }
+
+    /* Container untuk ikon dan teks */
+    .icon-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Ikon */
     .icon-layer {
         opacity: 1;
         transition: opacity 0.3s ease-in-out;
     }
 
-    .text-layer {
-        transition: opacity 0.3s ease-in-out;
+    /* Teks di bawah icon */
+    .card-title {
+        font-size: 1rem;
+        color: rgb(45, 45, 45);
+        margin-top: 5px;
+        font-weight: 600;
     }
 
-    .card:hover .icon-layer {
-        opacity: 0;
-    }
-
-    .card:hover .text-layer {
-        opacity: 1;
-        transition: opacity 0.5s ease-out;
-    }
-
-    .card {
-        height: 250px;
-    }
-
-    .text-layer {
-        font-size: 1.125rem;
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 5px;
-        border-radius: 5px;
+    /* Hover Animasi untuk memperbesar */
+    .card:hover {
+        transform: scale(1.1); /* Membesarkan card */
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan lebih besar saat hover */
     }
 
     .form-it-title {
@@ -127,7 +111,7 @@
     @media (max-width: 768px) {
         .form-it-container {
             padding: 30px;
-            margin-top: 100px
+            margin-top: 100px;
         }
 
         .form-it-title {
@@ -159,10 +143,46 @@
         .card {
             height: 180px;
         }
-
-        .car {
-            width: 80px;
-            height: 40px;
-        }
     }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Alert untuk login sukses -->
+@if(session('success'))
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: 'Sukses!',
+      text: '{{ session('success') }}',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  </script>
+@endif
+
+<!-- Alert untuk logout sukses -->
+@if(session('logout'))
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil Logout',
+      text: '{{ session('logout') }}',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  </script>
+@endif
+
+<!-- Alert untuk login gagal -->
+@if(session('errors'))
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Gagal!',
+      text: 'Periksa username dan password Anda.',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  </script>
+@endif

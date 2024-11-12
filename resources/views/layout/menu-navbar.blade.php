@@ -4,17 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>IT</title>
+    <title>IT System | Dashboard</title>
+    <link rel="icon" href="{{ asset('images/logo-tab.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Dropdown transition */
+        /* Navbar fixed to top */
+        .navbar {
+            position: fixed; /* Make navbar fixed */
+            top: 0; /* Align navbar to top of the screen */
+            left: 0;
+            width: 100%; /* Make it full width */
+            z-index: 1000; /* Ensure it stays above other content */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            background-color: #2d3748; /* Warna navbar sama dengan navbar1 */
+            color: white; /* Teks navbar menjadi putih */
+        }
+
+        /* Adjust the body content to avoid overlap with navbar */
+        body {
+            padding-top: 60px; /* Adjust the top padding to the height of the navbar */
+        }
+
+        /* Hover effect for menu items - Same as navbar 1 */
+        .menu-link {
+            position: relative;
+            display: inline-block;
+            padding: 10px 3px;
+            color: white;
+            font-weight: normal;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Add the line animation */
+        .menu-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e2e8f0; /* Warna garis */
+            transition: width 0.3s ease; /* Animasi panjang garis */
+        }
+
+        /* Hover effect for menu link */
+        .menu-link:hover {
+            color: #e2e8f0; /* Warna teks berubah saat hover */
+            transform: scale(1.05); /* Pembesaran saat hover */
+        }
+
+        .menu-link:hover::after {
+            width: 100%; /* Garis akan penuh ketika hover */
+        }
+
+        /* Rotate arrow icon smoothly */
+        .rotate-180 {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover effect for caret icon */
+        .caret-hover:hover {
+            transform: scale(1.2);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* Profile dropdown styling */
         .menuDropdown {
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, transform 0.3s ease;
             transform: translateY(-10px);
-            min-width: max-content; /* Ensures the width adjusts based on content */
+            min-width: max-content;
         }
 
         /* Show menu with animation */
@@ -24,81 +88,44 @@
             transform: translateY(0);
         }
 
-        /* Menu item hover effect - bigger shadow and text highlight */
-        .menuDropdown a:hover {
-            background-color: #cbd5e1;
-            text-decoration: none;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /* Ensure dropdown is below the button */
+        .menuDropdown {
+            top: 100%; /* Position it below the button */
         }
 
-        /* Rotate arrow icon smoothly */
-        .rotate-180 {
-            transform: rotate(180deg);
-            transition: transform 0.3s ease;
-        }
-
-        /* Hover effect for menu items */
-        .menu-link {
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, font-weight 0.3s ease, border 0.3s ease;
-            text-decoration: none;
-            border: 2px solid transparent;
-            border-radius: 4px;
-        }
-
-        .menu-link:hover {
-            background-color: #e2e8f0;
+        /* Adjust position for dropdown */
+        .menuDropdown a {
+            display: block;
+            padding: 8px 16px;
             color: #2d3748;
-            transform: scale(1.1);
-            font-weight: bold;
-            border-color: #4b5563;
+            text-decoration: none;
+            font-weight: normal;
         }
 
-        /* Hover effect for caret icon */
-        .caret-hover:hover {
-            transform: scale(1.2);
-            transition: transform 0.2s ease-in-out;
-        }
-
-        /* Focus effect on the button */
-        button:focus {
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Focus ring effect */
-        }
-
-        /* Smooth dropdown for profile */
-        #profileDropdown {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            transform: translateY(-10px);
-        }
-
-        /* Show profile dropdown with animation */
-        #profileDropdown.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        /* Change color on hover */
+        .menuDropdown a:hover {
+            background-color: #2d3748;
         }
     </style>
 </head>
-<body bgcolor="#E2F1E7">
-    <div class="navbar bg-gray-800 text-white flex items-center p-4">
-        <div class="navbar-links flex gap-8">
-            <!-- Icon Home -->
-            <a href="#" class="hover:text-gray-400 flex items-center ml-8">
-                <i class="bi bi-bar-chart-fill text-2xl"></i>
-            </a>              
-    
-            <!-- All Link -->
-            <a href="#" class="flex items-center text-xl font-semibold focus:outline-none">Log Book</a>
-            <a href="#" class="flex items-center text-xl font-semibold focus:outline-none">OutStanding</a>
-            <a href="#" class="flex items-center text-xl font-semibold focus:outline-none">Branch Information</a>
-            <a href="#" class="flex items-center text-xl font-semibold focus:outline-none">Help</a>
-            <a href="#" class="flex items-center text-xl font-semibold focus:outline-none">Report</a>
+<body class="bg-gray-100">
+    <div class="navbar bg-black text-white flex items-center py-2 px-4">
+        <div class="navbar-links flex gap-6 w-full items-center justify-between">
+            <!-- Logo Icon -->
+            <a href="/dashboard" class="hover:text-gray-300 flex items-center ml-4">
+                <i class="bi bi-bar-chart-fill text-xl"></i>
+            </a>
+
+            <!-- Other menu links -->
+            <a href="#" class="menu-link text-base font-medium">Log Book</a>
+            <a href="#" class="menu-link text-base font-medium">OutStanding</a>
+            <a href="#" class="menu-link text-base font-medium">Branch Information</a>
+            <a href="#" class="menu-link text-base font-medium">Help</a>
+            <a href="#" class="menu-link text-base font-medium">Report</a>
     
             <!-- Network Dropdown -->
             <div class="relative">
-                <button onclick="toggleMenuDropdown('networkDropdown', 'networkIcon')" class="flex items-center text-xl font-semibold focus:outline-none">
+                <button onclick="toggleMenuDropdown('networkDropdown', 'networkIcon')" class="flex items-center text-base font-medium focus:outline-none">
                     <span class="mr-2">Network</span>
                     <i id="networkIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
                 </button>
@@ -110,7 +137,7 @@
     
             <!-- Service Dropdown -->
             <div class="relative">
-                <button onclick="toggleMenuDropdown('serviceDropdown', 'serviceIcon')" class="flex items-center text-xl font-semibold focus:outline-none">
+                <button onclick="toggleMenuDropdown('serviceDropdown', 'serviceIcon')" class="flex items-center text-base font-medium focus:outline-none">
                     <span class="mr-2">Service</span>
                     <i id="serviceIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
                 </button>
@@ -121,10 +148,10 @@
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Komputer</a>
                 </div>
             </div>
-    
+
             <!-- General Dropdown -->
             <div class="relative">
-                <button onclick="toggleMenuDropdown('generalDropdown', 'generalIcon')" class="flex items-center text-xl font-semibold focus:outline-none">
+                <button onclick="toggleMenuDropdown('generalDropdown', 'generalIcon')" class="flex items-center text-base font-medium focus:outline-none">
                     <span class="mr-2">General</span>
                     <i id="generalIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
                 </button>
@@ -137,34 +164,43 @@
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Modul</a>
                 </div>
             </div>
-    
+
             <!-- Form Dropdown -->
             <div class="relative">
-                <button onclick="toggleMenuDropdown('formDropdown', 'formIcon')" class="flex items-center text-xl font-semibold focus:outline-none">
+                <button onclick="toggleMenuDropdown('formDropdown', 'formIcon')" class="flex items-center text-base font-medium focus:outline-none">
                     <span class="mr-2">Form</span>
                     <i id="formIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
                 </button>
                 <div id="formDropdown" class="menuDropdown absolute bg-white text-gray-800 left-0 mt-2 w-48 rounded-lg shadow-lg">
-                    <a href="{{ route('pc.create') }}" class="menu-link block px-4 py-2 hover:bg-gray-200">Install Komputer/Laptop</a>
-                    <a href="{{ route('pembuatan-user') }}" class="menu-link block px-4 py-2 hover:bg-gray-200">Pembuatan User/Reset Password</a>
-                    <a href="{{ route('perbaikan') }}" class="menu-link block px-4 py-2 hover:bg-gray-200">Perbaikan Perangkat</a>
+                    <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Install Komputer/Laptop</a>
+                    <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Pembuatan User Baru</a>
+                    <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Perbaikan Perangkat</a>
                 </div>
             </div>
-        </div>
     
-        <!-- Profile Dropdown (aligned to the right) -->
-        <div class="ml-auto relative">
-            <button onclick="toggleMenuDropdown('profileDropdown', 'profileIcon')" class="flex items-center text-xl font-semibold focus:outline-none">
-                <span class="mr-2">Profile</span>
-                <i id="profileIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
-            </button>
-            <div id="profileDropdown" class="menuDropdown absolute bg-white text-gray-800 right-0 mt-2 w-48 rounded-lg shadow-lg">
-                <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Settings</a>
-                <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Log Out</a>
+            <!-- Profile Dropdown (aligned to the right) -->
+            <div class="ml-auto relative">
+                <!-- Ganti "Profile" dengan nama pengguna yang login -->
+                <button onclick="toggleMenuDropdown('profileDropdown', 'profileIcon')" class="flex items-center text-base font-medium focus:outline-none">
+                    <span class="mr-2">{{ Auth::user()->nama }}</span>
+                    <i id="profileIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
+                </button>
+                <div id="profileDropdown" class="menuDropdown absolute bg-white text-gray-800 right-0 mt-2 w-48 rounded-lg shadow-lg">
+                    <a href="{{ route('reset.password.form') }}" class="menu-link block px-4 py-2 hover:bg-gray-200">Rubah Password</a>
+                    <a href="{{ route('logout') }}" class="menu-link block px-4 py-2 hover:bg-gray-200">Log Out</a>
+                </div>
             </div>
+        </div>  
+    </div>
+
+    {{-- <!-- Content Below the Navbar -->
+    <div class="container mx-auto mt-16">
+        <h1 class="text-4xl font-bold mb-6">Welcome to the IT Dashboard</h1>
+        <p class="text-lg">Scroll down to see the content!</p>
+        <div class="h-screen bg-gray-200 mt-6 p-8">
+            <p>This is some content below the navbar. Scroll to see how the navbar stays fixed at the top.</p>
         </div>
-    </div>    
-    
+    </div> --}}
 
     <script>
         // Toggle visibility of a specific menu dropdown

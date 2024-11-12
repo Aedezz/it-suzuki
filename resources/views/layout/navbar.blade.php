@@ -6,11 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>IT Suzuki</title>
-    {{-- <link rel="icon" href="{{ asset('computing.png') }}" type="image/png"> --}}
+    <title>IT System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
+        /* Tombol Login */
+        .login-btn {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            padding: 8px 12px;
+            background-color: #4A90E2;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            cursor: pointer; /* Menambahkan cursor pointer */
+        }
+
+        .login-btn:hover {
+            background-color: #357ABD;
+        }
+
         /* Gaya umum navbar */
         .navbar {
             display: flex;
@@ -29,17 +45,24 @@
             color: white;
         }
 
+        .navbar-logo a {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
         .navbar-links {
             display: flex;
-            gap: 10px;
+            gap: 4px; /* Mengurangi gap antar elemen menu */
+            padding-left: 8px; /* Menjaga jarak antara logo dan menu */
         }
 
         .navbar-links a {
             color: white;
             font-size: 16px;
             text-decoration: none;
-            position: relative;
             padding: 8px 12px;
+            position: relative;
         }
 
         /* Garis bawah dan warna hover */
@@ -65,35 +88,6 @@
         .sidebar a:hover {
             color: #cbd5e0;
             /* Warna hover */
-        }
-
-        /* Dropdown styles */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #333;
-            padding: 10px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            min-width: 150px;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #4a5568;
         }
 
         /* Gaya sidebar responsif */
@@ -136,7 +130,27 @@
             color: white;
             cursor: pointer;
             position: absolute;
-            right: 20px;
+            right: 60px;
+        }
+
+        /* Tombol Login */
+        .login-btn {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            padding: 8px 12px;
+            background-color: #4A90E2;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #357ABD;
+        }
+
+        .login-btn i {
+            margin-right: 8px;
         }
 
         /* Responsif untuk tampilan mobile */
@@ -176,12 +190,12 @@
 
 <body bgcolor="#E2F1E7">
     <div class="navbar bg-gray-800 text-white flex items-center p-4">
-        <div class="navbar-logo ml-2 mr-2">
-            <a href="{{ route('login') }}" class="text-xl font-bold">LOGIN IT</a>
+        <div class="navbar-logo ml-0 mr-2"> <!-- Mengurangi margin kiri pada logo -->
+            <a href="#" class="text-xl font-bold">IT System</a>
         </div>
-        <div class="navbar-links flex gap-10">
+        <div class="navbar-links flex gap-4"> <!-- Mengurangi gap lebih jauh -->
             {{-- Icon Home --}}
-            <a href="/" class="hover:text-gray-400 flex items-center ml-20">
+            <a href="/" class="hover:text-gray-400 flex items-center">
                 <i class="bi bi-house-fill mr-1"></i>
                 Beranda
             </a>
@@ -191,19 +205,20 @@
             <a href="{{ route('perbaikan') }}" class="hover:text-gray-400 font-sans">Perbaikan Perangkat</a>
             <a href="#" class="hover:text-gray-400 font-sans">Download Berita Acara</a>
         </div>
-        {{-- Login --}}
-       
+
+        <div class="login-btn flex items-center ml-4" onclick="window.location.href='{{ route('login') }}'">
+            <i class="bi bi-box-arrow-in-right"></i>
+            Login
+        </div>
 
         <div class="menu-btn" onclick="toggleSidebar()">☰</div>
     </div>
 
     <div id="sidebar" class="sidebar">
-
         <a href="{{ route('pc.create') }}" class="hover:text-gray-400 font-sans">Install Komputer/Laptop</a>
         <a href="{{ route('pembuatan-user') }}" class="hover:text-gray-400 font-sans">Pembuatan User/Reset Password</a>
         <a href="{{ route('perbaikan') }}" class="hover:text-gray-400 font-sans">Perbaikan Perangkat</a>
         <a href="#" class="hover:text-gray-400 font-sans">Download Berita Acara</a>
-
     </div>
 
     <script>
