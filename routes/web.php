@@ -5,7 +5,6 @@ use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
 use App\Http\Controllers\PerbaikanController;
-use App\Http\Controllers\FormPerbaikanController;
 use App\Http\Controllers\AuthController;
 
 
@@ -27,11 +26,7 @@ Route::get('/table-perbaikan', function () {
     return view('table_perbaikan');
 })->name('table_perbaikan');
 
-//Modul
-Route::get('/modul', [FormPerbaikanController::class, 'index'])->name('modul.index');
-Route::post('/perbaikan', [perbaikanController::class, 'store'])->name('modul.store');
-Route::delete('/perbaikan/{id}', [FormPerbaikanController::class, 'destroy'])->name('modul.destroy');
-Route::post('/perbaikan/{id}/update-status', [FormPerbaikanController::class, 'updateStatus'])->name('modul.updateStatus');
+
 
 /////
 
