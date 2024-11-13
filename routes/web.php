@@ -6,16 +6,17 @@ use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormPc;
 
-
+//Dashboard depan
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
-// Home
-Route::get('/home', function () {
-    return redirect()->route('main2');
-})->name('home');
+// Dashboard dalam menu2
+Route::get('/dashboard', function () {
+    return redirect()->route('dalam/main2');
+})->name('dashboard');
 
 // Route Perbaikan Perangkat
 Route::view('/perbaikan', 'form-db/perbaikan')->name('perbaikan');
@@ -31,7 +32,7 @@ Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
 Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
 Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
 
-// Route Data Installasi
+// Route Data Installasi Pc
 Route::view('/installasi-pc', 'form-db/pc')->name('installasi-pc');
 Route::get('/create-instal', [InstallController::class, 'create'])->name('pc.create');
 Route::post('/store-instal', [InstallController::class, 'store'])->name('pc.store');
@@ -46,6 +47,7 @@ Route::get('dashboard', function () {
     return view('dashboard.dashboard2');
 })->middleware('auth');
 
+//Login and Register Section
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::get('regi', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -54,3 +56,15 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 
+
+// Route Form Dalam Installasi Pc
+Route::get('form-pc', [FormPc::class, 'form'])->name('table');
+Route::delete('/delete-form/{id}', [FormPc::class, 'destroy'])->name('pc.destroy');
+Route::post('/pc/check/{id}', [FormPc::class, 'check'])->name('pc.check');
+// Route::get('/pc/print/{id}', [FormPc::class, 'print'])->name('print');
+
+//Route Laporan Installasi Pc
+Route::get('form-laporan', [FormPc::class, 'laporan'])->name('laporan');
+
+//Route Ceklist Installasi Pc
+Route::get('form-ceklist', [FormPc::class, 'ceklist'])->name('ceklist');

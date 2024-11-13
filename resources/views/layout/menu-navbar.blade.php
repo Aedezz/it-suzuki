@@ -172,7 +172,7 @@
                     <i id="formIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
                 </button>
                 <div id="formDropdown" class="menuDropdown absolute bg-white text-gray-800 left-0 mt-2 w-48 rounded-lg shadow-lg">
-                    <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Install Komputer/Laptop</a>
+                    <a href="{{ route('table') }}" class="menu-link block px-4 py-2 hover:bg-gray-200">Install Komputer/Laptop</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Pembuatan User Baru</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Perbaikan Perangkat</a>
                 </div>
