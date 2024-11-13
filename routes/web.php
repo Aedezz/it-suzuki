@@ -6,6 +6,7 @@ use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormPembuatanController;
 
 
 Route::get('/', function () {
@@ -54,3 +55,12 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 
+Route::prefix('/form-pembuatan')->group(function() {
+Route::get('/create', [FormPembuatanController::class, 'create'])->name('form-pembuatan.create');
+Route::post('/store', [FormPembuatanController::class, 'store'])->name('form-pembuatan.store');
+Route::get('/index', [FormPembuatanController::class, 'index'])->name('form-pembuatan.index');
+Route::get('/edit/{id}', [FormPembuatanController::class, 'edit'])->name('form-pembuatan.edit');
+Route::put('/update/{id}', [FormPembuatanController::class, 'update'])->name('form-pembuatan.update');
+Route::delete('/destroy/{id}', [FormPembuatanController::class, 'destroy'])->name('form-pembuatan.destroy');
+Route::put('/form-pembuatan/{id}/update-status', [FormPembuatanController::class, 'updateStatus'])->name('form-pembuatan.updateStatus');
+});
