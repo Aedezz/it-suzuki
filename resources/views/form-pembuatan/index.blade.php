@@ -1,4 +1,4 @@
-@extends('layout.tabel')
+@extends('form-pembuatan.tabel')
 
 @section('content')
 @endsection
