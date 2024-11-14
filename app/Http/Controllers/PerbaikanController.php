@@ -8,7 +8,7 @@ class PerbaikanController extends Controller
 {
     public function create()
     {
-        return view('form-db.perbaikan');
+        return view('perbaikan.perbaikan');
     }
     public function store(Request $request)
     {
@@ -45,7 +45,7 @@ class PerbaikanController extends Controller
             'jumlah' => $request->jumlah,
             'spesifikasi' => $request->spesifikasi,
             'keluhan' => $request->keluhan,
-            'cek' => 1,
+            'cek' => 0,
         ]);
     
         // Redirect ke route 'table_perbaikan' dengan data yang baru disimpan
