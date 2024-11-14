@@ -10,13 +10,14 @@ class FormPembuatanController extends Controller
     // Menampilkan semua data formUser menggunakan Query Builder
     
     public function index()
-{
+    {
     // Menggunakan Query Builder untuk pagination
     $formUser = DB::table('form_user')->paginate(10);
 
     // Mengirimkan data ke view
     return view('form-pembuatan.index', compact('formUser'));
-}
+    }
+    
     // Menampilkan form untuk membuat form baru
     // public function create()
     // {
@@ -90,29 +91,15 @@ class FormPembuatanController extends Controller
         return redirect()->route('form-pembuatan.index')->with('success', 'Form User berhasil dihapus.');
     }
 
-    public function updateStatus($id)
+public function updateStatus(Request $request, $id)
 {
-    // Cari data berdasarkan ID
-    $formUser = DB::table('form_user')->where('id', $id)->first();
+    // Menggunakan Query Builder untuk memperbarui kolom 'cek' menjadi 1 (selesai)
+    DB::table('form_user')
+        ->where('id', $id)
+        ->update(['cek' => 1]); // 1 menandakan status selesai
 
-    if ($formUser) {
-        // Update status (cek 0 ke 1, atau 1 ke 0)
-        $newStatus = $formUser->cek == 0 ? 1 : 0;
-
-        // Update status di database
-        DB::table('form_user')
-            ->where('id', $id)
-            ->update(['cek' => $newStatus]);
-
-        // Redirect kembali dengan pesan sukses
-        return redirect()->route('form-pembuatan.index')
-            ->with('success', 'Status berhasil diperbarui');
-    } else {
-        // Jika data tidak ditemukan, kembali ke halaman sebelumnya
-        return redirect()->route('form-pembuatan.index')
-            ->with('error', 'Data tidak ditemukan');
-    }
-
+    // Mengirim pesan ke session untuk ditampilkan di SweetAlert
+    return redirect()->route('form-pembuatan.index')->with('statusUpdate', 'Status telah diperbarui menjadi Selesai.');
 }
 
 }
