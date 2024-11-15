@@ -102,4 +102,18 @@ public function updateStatus(Request $request, $id)
     return redirect()->route('form-pembuatan.index')->with('statusUpdate', 'Status telah diperbarui menjadi Selesai.');
 }
 
+public function updateStatusByYear(Request $request)
+{
+    $year = $request->input('year');
+    $status = $request->input('status');
+
+    // Update status untuk semua data yang sesuai dengan tahun
+    DB::table('form_user')
+        ->whereYear('tanggal', $year)
+        ->update(['cek' => $status]);
+
+    return redirect()->back()->with('success', 'Status berhasil diperbarui untuk tahun ' . $year);
+}
+
+
 }
