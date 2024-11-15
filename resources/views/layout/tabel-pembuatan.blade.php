@@ -154,6 +154,7 @@
         }
 
     </style>
+    @yield('style')
 </head>
 <body class="bg-gray-100">
 
@@ -235,7 +236,7 @@
             {{ $formUser->links() }}
         </div>
     </div>
-
+@yield('content')
     <!-- SweetAlert Script -->
     @if (session('statusUpdate'))
         <script>
@@ -247,6 +248,5 @@
             });
         </script>
     @endif
-
 </body>
 </html>
