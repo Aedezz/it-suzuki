@@ -131,13 +131,13 @@
         <h3>Cara Pengajuan Install Komputer/Laptop :</h3>
         
         <h3>1. Lengkapi <b>Form</b> dan klik tombol <b>Save</b></h3>
-        <img src="images/pembuat-user/form_user.png" alt="Petunjuk Visual">
+        <img src="{{ asset('images/pembuat-user/form_user.png') }}" alt="Petunjuk Visual">
 
         <h3>2. Setelah berhasil, klik tombol <b>Print</b> dan <b>Cetak Dokumen</b></h3>
-        <img src="images/pembuat-user/cetak_user.png" alt="Petunjuk Visual">
+        <img src="{{ asset('images/pembuat-user/cetak_user.png') }}" alt="Petunjuk Visual">
 
         <h3>3. Tanda tangan <b>Pemohon</b> dan <b>Atasan</b></h3>
-        <img src="images/pembuat-user/detail_user.png" alt="Petunjuk Visual">
+        <img src="{{ asset('images/pembuat-user/detail_user.png') }}" alt="Petunjuk Visual">
 
         <h3>4. Serahkan Form ke IT</h3>
         <br>
