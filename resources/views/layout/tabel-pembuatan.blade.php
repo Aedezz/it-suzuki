@@ -64,10 +64,20 @@
             transform: translateY(-2px);
         }
 
+        /* Menambahkan flexbox untuk men-center-kan tabel */
+        .table-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
         /* Styling untuk kontainer tabel */
         .table-container {
+            width: 90%; /* Atur lebar tabel agar tidak terlalu besar */
+            max-width: 1200px; /* Maksimal lebar tabel */
             overflow-x: auto;
-            margin-top: 2rem;
             background: linear-gradient(135deg, #e2e8f0, #f3f4f6);
             border-radius: 10px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -105,35 +115,46 @@
             pointer-events: none;
         }
 
-        /* Styling untuk Search Box */
-        .search-box {
-            max-width: 400px;
-            width: 100%;
+        /* Styling untuk form container */
+        .form-container {
+            background-color: #f9fafb;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            width: 90%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Styling untuk Tab Navigation */
+        .tabs {
             display: flex;
-            align-items: center;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            margin-bottom: 16px;
-            background-color: white;
+            gap: 20px;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #ddd;
         }
 
-        .search-box input {
-            border: none;
-            outline: none;
-            padding: 8px;
-            width: 100%;
-            font-size: 14px;
-            border-radius: 6px;
+        .tab {
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #f3f4f6;
+            transition: background-color 0.3s;
         }
 
-        .search-box i {
-            color: #4b5563;
-            font-size: 18px;
-            margin-right: 8px;
+        .tab.active-tab {
+            background-color: #ddd;
+            font-weight: bold;
         }
 
-        /* Pagination */
+        /* Menyembunyikan konten tab yang tidak aktif */
+        .tab-content.hidden {
+            display: none;
+        }
+
+        /* Styling untuk pagination */
         .pagination {
             display: flex;
             justify-content: center;
@@ -152,9 +173,7 @@
         .pagination a:hover {
             background-color: #ddd;
         }
-
     </style>
-    @yield('style')
 </head>
 <body class="bg-gray-100">
 
@@ -163,90 +182,158 @@
 
     <!-- Content Area -->
     <div class="container mx-auto mt-16 px-4">
-        <!-- Search Box -->
-        <div class="search-box mb-4">
-            <input type="text" placeholder="Search..." id="searchInput">
-            <i class="bi bi-search"></i>
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <div class="tab active-tab" onclick="switchTab(1)">Data</div>
+            <div class="tab" onclick="switchTab(2)">Laporan</div>
+            <div class="tab" onclick="switchTab(3)">Ceklist</div> <!-- Tab ke-3 -->
         </div>
 
-        <!-- Table -->
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>NIK</th>
-                        <th>Nomor</th>
-                        <th>Tanggal</th>
-                        <th>Nama Lengkap</th>
-                        <th>Jabatan</th>
-                        <th>Divisi Cabang</th>
-                        <th>Keterangan</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($formUser as $data)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $data->nik }}</td>
-                            <td>{{ $data->nomor }}</td>
-                            <td>{{ $data->tanggal }}</td>
-                            <td>{{ $data->nama_lengkap }}</td>
-                            <td>{{ $data->jabatan }}</td>
-                            <td>{{ $data->divisi_cabang }}</td>
-                            <td>{{ $data->keterangan }}</td>
-                            <td>
-                                @if ($data->cek == 0)
-                                    <span>Belum Selesai</span>
-                                @else
-                                    <span>Selesai</span>
-                                @endif
-                            </td>
-                            <td class="actions">
-                                @if ($data->cek == 0)
-                                    <form action="{{ route('form-pembuatan.updateStatus', $data->id) }}" method="POST" style="display:inline-block;">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-green">
-                                            <i class="bi bi-check-circle"></i> Status
-                                        </button>
-                                    </form>
-                                @endif
+        <!-- Form Tabel (Tab 1) -->
+        <div class="tab-content" id="tab-1">
+            <!-- Search Box -->
+            <div class="search-box mb-4">
+                <input type="text" placeholder="Search..." id="searchInput">
+                <i class="bi bi-search"></i>
+            </div>
 
-                                <form action="{{ route('form-pembuatan.destroy', $data->id) }}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-red" onclick="return confirm('Are you sure you want to delete this item?')">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </button>
-                                </form>
+            <!-- Table -->
+            <div class="table-wrapper">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>NIK</th>
+                                <th>Nomor</th>
+                                <th>Tanggal</th>
+                                <th>Nama Lengkap</th>
+                                <th>Jabatan</th>
+                                <th>Divisi Cabang</th>
+                                <th>Keterangan</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($formUser as $data)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->nik }}</td>
+                                    <td>{{ $data->nomor }}</td>
+                                    <td>{{ $data->tanggal }}</td>
+                                    <td>{{ $data->nama_lengkap }}</td>
+                                    <td>{{ $data->jabatan }}</td>
+                                    <td>{{ $data->divisi_cabang }}</td>
+                                    <td>{{ $data->keterangan }}</td>
+                                    <td>{{ $data->cek == 0 ? 'Belum Selesai' : 'Selesai' }}</td>
+                                    <td>
+                                        @if ($data->cek == 0)
+                                            <form action="{{ route('form-pembuatan.updateStatus', $data->id) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-green">
+                                                    <i class="bi bi-check-circle"></i> Status
+                                                </button>
+                                            </form>
+                                        @endif
 
-                                <a href="#" class="btn btn-teal"><i class="bi bi-printer"></i> Print</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                        <form action="{{ route('form-pembuatan.destroy', $data->id) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-red" onclick="return confirm('Are you sure you want to delete this item?')">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
+
+                                        <a href="#" class="btn btn-teal"><i class="bi bi-printer"></i> Print</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pagination Links -->
+            <div class="pagination">
+                {{ $formUser->links() }}
+            </div>
         </div>
 
-        <!-- Pagination Links -->
-        <div class="pagination">
-            {{ $formUser->links() }}
+        <!-- Form Tambah Data (Tab 2) -->
+        <div class="form-container">
+            <form action="{{ route('form-pembuatan.updateStatusByYear') }}" method="POST">
+                @csrf
+                <!-- Pilih Tahun -->
+                <div class="mb-4">
+                    <label for="year" class="block text-sm font-medium text-gray-700">Pilih Tahun</label>
+                    <select name="year" id="year" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md" required>
+                        @for ($i = 2024; $i <= 2033; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+
+                <!-- Pilih Status -->
+                <div class="mb-4">
+                    <label for="status" class="block text-sm font-medium text-gray-700">Pilih Status</label>
+                    <select name="status" id="status" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md" required>
+                        <option value="0">Belum Selesai</option>
+                        <option value="1">Selesai</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-blue mt-4 w-auto px-4 py-2 text-sm">Pending</button>
+<a href="#" class="btn btn-teal w-auto px-4 py-2 text-sm">Print</a>
+
+            </form>
         </div>
     </div>
-@yield('content')
-    <!-- SweetAlert Script -->
-    @if (session('statusUpdate'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Status Updated!',
-                text: '{{ session('statusUpdate') }}',
-                confirmButtonText: 'Okay'
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to switch between tabs
+        function switchTab(tabNumber) {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach((tab, index) => {
+                if (index === tabNumber - 1) {
+                    tab.classList.add('active-tab');
+                    tabContents[index].classList.remove('hidden');
+                } else {
+                    tab.classList.remove('active-tab');
+                    tabContents[index].classList.add('hidden');
+                }
             });
-        </script>
-    @endif
+        }
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const year = form.year.value;
+            const status = form.status.value;
+            
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: `Status untuk tahun ${year} akan diubah menjadi ${status == 1 ? 'Selesai' : 'Belum Selesai'}.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Ubah Status!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
