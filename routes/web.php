@@ -31,6 +31,7 @@ Route::get('/table-perbaikan', function () {
 Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
 Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
 Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
+Route::get('/view/{id}', [Cpembuatan::class, 'viewdata'])->name('viewdata');
 
 // Route Data Installasi
 Route::view('/installasi-pc', 'form-db/pc')->name('installasi-pc');
@@ -63,4 +64,5 @@ Route::get('/edit/{id}', [FormPembuatanController::class, 'edit'])->name('form-p
 Route::put('/update/{id}', [FormPembuatanController::class, 'update'])->name('form-pembuatan.update');
 Route::delete('/destroy/{id}', [FormPembuatanController::class, 'destroy'])->name('form-pembuatan.destroy');
 Route::put('/form-pembuatan/{id}/update-status', [FormPembuatanController::class, 'updateStatus'])->name('form-pembuatan.updateStatus');
+Route::post('/form-pembuatan/update-status-by-year', [FormPembuatanController::class, 'updateStatusByYear'])->name('form-pembuatan.updateStatusByYear');
 });
