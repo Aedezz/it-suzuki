@@ -1,4 +1,28 @@
 @include('layout.navbar')
+<style>
+    /* CSS tambahan untuk menghilangkan ruang paling bawah */
+    .slide-down {
+        animation: slideDown 0.5s ease forwards;
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Mengatur margin bawah pada seluruh elemen */
+    form,
+    .slide-down {
+        margin-bottom: 0 !important;
+    }
+</style>
 
 <div>
     <div style="display: flex; justify-content: center; padding: 20px; min-height: 50vh;">
@@ -178,30 +202,7 @@
          </div>
     </div>
 
-<style>
-    /* CSS tambahan untuk menghilangkan ruang paling bawah */
-    .slide-down {
-        animation: slideDown 0.5s ease forwards;
-    }
 
-    @keyframes slideDown {
-        from {
-            transform: translateY(-20px);
-            opacity: 0;
-        }
-
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-
-    /* Mengatur margin bawah pada seluruh elemen */
-    form,
-    .slide-down {
-        margin-bottom: 0 !important;
-    }
-</style>
 
 <!-- JavaScript for toggling images -->
 <script>
