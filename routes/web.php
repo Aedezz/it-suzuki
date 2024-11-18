@@ -6,7 +6,7 @@ use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\Branch;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -54,3 +54,10 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 
+//Route Branch
+Route::get('form-branch', [Branch::class, 'index'])->name('branch');
+Route::delete('/delete-branch/{id}', [Branch::class, 'destroy'])->name('branch.destroy');
+Route::get('/edit-branch/{id}', [Branch::class, 'edit'])->name('branch.edit');
+Route::put('/update-branch/{id}', [Branch::class, 'update'])->name('branch.update');
+Route::get('/add-branch', [Branch::class, 'create'])->name('branch.create');
+Route::post('/store-branch', [Branch::class, 'store'])->name('branch.store');
