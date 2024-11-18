@@ -11,27 +11,33 @@ class FormPerbaikanController extends Controller
     public function index()
     {
         // Mengambil semua data dari tabel form_perangkat
-        $modul = DB::table('form_perangkat')->get();
+        $form = DB::table('form_perangkat')->get();
         
         // Mengirim data ke view
-        return view('perbaikan.modul.modul', compact('modul'));
+        return view('perbaikan.form.form', compact('form'));
     }
 
-    // Fungsi untuk memperbarui status
-    public function updateStatus($id)
-    {
-        // Mengambil data status (cek) berdasarkan id
-        $data = DB::table('form_perangkat')->where('id', $id)->first();
-        
-        // Cek status saat ini, jika 0 (Belum) ubah menjadi 1 (Selesai), jika 1 (Selesai) ubah menjadi 0 (Belum)
-        $newStatus = ($data->cek == 0) ? 1 : 0;
+   // Fungsi untuk memperbarui status
+public function updateStatus($id)
+{
+    // Mengambil data status (cek) berdasarkan id
+    $data = DB::table('form_perangkat')->where('id', $id)->first();
+    
+    // Cek status saat ini, jika 0 (Belum) ubah menjadi 1 (Selesai), jika 1 (Selesai) ubah menjadi 0 (Belum)
+    $newStatus = ($data->cek == 0) ? 1 : 0;
 
-        // Update status di database
-        DB::table('form_perangkat')->where('id', $id)->update(['cek' => $newStatus]);
+    // Update status di database
+    DB::table('form_perangkat')->where('id', $id)->update(['cek' => $newStatus]);
 
-        // Redirect kembali ke halaman index dengan pesan sukses
-        return redirect()->route('modul.index')->with('success', 'Status berhasil diperbarui.');
-    }
+    // Redirect kembali ke halaman index dengan pesan sukses dan status aksi
+    return redirect()->route('form.index')->with('status', [
+        'judul' => 'Berhasil',
+        'pesan' => 'Status Berhasil Diubah!',
+        'icon' => 'success',
+        'aksi' => 'updateStatus' // Menambahkan informasi aksi
+    ]);
+}
+
 
     // Menampilkan form untuk mengedit form yang sudah ada
     public function edit($id)
@@ -67,16 +73,23 @@ class FormPerbaikanController extends Controller
         DB::table('form_perangkat')->where('id', $id)->update($validated);
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('form-pembuatan.index')->with('success', 'Form User berhasil diperbarui.');
+        return redirect()->route('form-pembuatan.index')->with('status', ['judul' => 'Berhasil', 'pesan' => 'Data Berhasil Di Perbarui!', 'icon' => 'success']);
     }
 
     // Menghapus data form
-    public function destroy($id)
-    {
-        // Menghapus data form berdasarkan id menggunakan Query Builder
-        DB::table('form_perangkat')->where('id', $id)->delete();
+   // Menghapus data form
+public function destroy($id)
+{
+    // Menghapus data form berdasarkan id menggunakan Query Builder
+    DB::table('form_perangkat')->where('id', $id)->delete();
     
-        // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('modul.index')->with('success', 'Form User berhasil dihapus.');
-    }
+    // Redirect ke halaman index dengan pesan sukses dan status aksi
+    return redirect()->route('form.index')->with('status', [
+        'judul' => 'Berhasil',
+        'pesan' => 'Data Berhasil Di Hapus!',
+        'icon' => 'success',
+        'aksi' => 'delete' // Menambahkan informasi aksi
+    ]);
+}
+
 }

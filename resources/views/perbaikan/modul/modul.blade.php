@@ -1,15 +1,6 @@
-@extends('../dalam/main2')
+@extends('../dalam/layout')
 
     @section('style')
-      <!--Regular Datatables CSS-->
-      <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-      <!--Responsive Extension Datatables CSS-->
-      <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
-      <!--Regular Datatables CSS-->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-      <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
         <style>
             /*Overrides for Tailwind CSS */
 
@@ -114,9 +105,9 @@
     
     @section('content')
     <!--Container-->
-    <div class="container w-full md:w-4/5 xl:w-3/5 mx-auto px-2" sty>
+    <div class="container w-full md:w-4/5 xl:w-3/5 mx-auto px-2">
         <!--Card-->
-        <div id='recipients' class="p-3 mt-6 lg:mt-0 rounded shadow bg-white" style="width:165%; margin-left: -265px; margin-top: 22px;">
+        <div id='recipients' class="p-3 mt-6 lg:mt-0 rounded shadow bg-white" style="width:165%; margin-left: -240px; margin-top: 22px;">
             <!--Title-->
             <h2 class="flex items-center font-sans font-bold break-normal px-2 py-8 text-lg md:text-2xl" style="margin-top: -25px; font-size: 20px;">
                 FORM PERBAIKAN PERANGKAT
