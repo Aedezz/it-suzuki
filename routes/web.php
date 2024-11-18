@@ -6,7 +6,9 @@ use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
+use App\Http\Controllers\Laporan;
 
 //Dashboard depan
 Route::get('/', function () {
@@ -61,10 +63,10 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
 Route::get('form-pc', [FormPc::class, 'form'])->name('table');
 Route::delete('/delete-form/{id}', [FormPc::class, 'destroy'])->name('pc.destroy');
 Route::post('/pc/check/{id}', [FormPc::class, 'check'])->name('pc.check');
-// Route::get('/pc/print/{id}', [FormPc::class, 'print'])->name('print');
+Route::get('/pc/print/{id}', [FormPc::class, 'print'])->name('form_pc.print');
 
 //Route Laporan Installasi Pc
-Route::get('form-laporan', [FormPc::class, 'laporan'])->name('laporan');
+Route::get('form-laporan', [Laporan::class, 'index'])->name('laporan');
 
 //Route Ceklist Installasi Pc
-Route::get('form-ceklist', [FormPc::class, 'ceklist'])->name('ceklist');
+Route::get('form-ceklist', [Ceklist::class, 'index'])->name('ceklist');

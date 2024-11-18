@@ -1,101 +1,101 @@
-@include('layout.menu-navbar')
+@extends('form-instalasi.layout.form')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@push('style')
+<!-- DataTables and jQuery Libraries -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-<div class="flex justify-center items-center mt-10">
-    <div class="form-it-container w-full sm:w-11/12 lg:w-9/12 xl:w-2/3 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-hidden">
-        <!-- Title in the top left corner of the rectangle, responsive font size -->
-        <h2 class="font-sans text-xl sm:text-2xl font-bold absolute top-6 left-7" style="color: rgb(45, 45, 45)">
-            Form Install Komputer/Laptop
-        </h2>
+<style>
+    .rectangle-container {
+        width: 100%;
+        padding: 16px;
+    }
+    
+    /* No scrolling, just ensure it stays within the layout */
+    #tableContainer {
+        width: 100%;
+        overflow: hidden; /* Prevent horizontal scrolling */
+    }
+</style>
+@endpush
 
-        <!-- Links and Create Button in the left section, side by side -->
-        <div class="mt-16 flex justify-start items-center">
-            <!-- Navigation Links -->
-            <a href="{{ route('table') }}" class="data-link text-sm sm:text-base text-blue-500 relative group mx-2">Data</a>
-            <a href="{{ route('laporan') }}" class="laporan-link text-sm sm:text-base text-blue-500 relative group mx-2">Laporan</a>
-            <a href="{{ route('ceklist') }}" class="ceklist-link text-sm sm:text-base text-blue-500 relative group mx-2">Ceklist</a>
-        </div>
 
-        <!-- The bottom line that will move based on active link -->
-        <div class="link-bottom-line absolute h-1 bg-blue-500" style="width: 0;"></div>
+@section('body')
+<div class="mt-10 w-full">
+    <div id="tableContainer" class="transition-all duration-500 ease-in-out">
+        <table id="example" class="display w-full table-auto border-collapse">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">No Reg</th>
+                    <th class="px-4 py-2 text-left">Tanggal</th>
+                    <th class="px-4 py-2 text-left">NIK</th>
+                    <th class="px-4 py-2 text-left">Nama</th>
+                    <th class="px-4 py-2 text-left">Divisi/Cabang</th>
+                    <th class="px-4 py-2 text-left">Kode Asset</th>
+                    <th class="px-4 py-2 text-left">Status</th>
+                    <th class="px-4 py-2 text-left">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{-- $viewForm berada di FormPc dengan variable sama dan digantikan oleh $d --}}
+                @foreach ($viewForm as $d)
+                <tr>
+                    <td class="px-4 py-2">{{$d->nomor}}</td>
+                    <td class="px-4 py-2">{{$d->tanggal}}</td>
+                    <td class="px-4 py-2">{{$d->nik}}</td>
+                    <td class="px-4 py-2">{{$d->nama_lengkap}}</td>
+                    <td class="px-4 py-2">{{$d->divisi_cabang}}</td>
+                    <td class="px-4 py-2">{{$d->kode_asset}}</td>
+                    <td class="px-4 py-2">{{ $d->cek == 1 ? 'Sudah' : 'Belum' }}</td>
+                    <td class="px-4 py-2">
+                        <div class="flex items-center justify-center space-x-1">
 
-        {{-- Data Table --}}
-        @include('form-instalasi.layout.datatable')
+                            @if ($d->cek == 0)
+                            <form action="{{ route('pc.check', $d->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="bg-green-500 text-white p-1 w-8 rounded-md hover:bg-green-600 transition duration-300" title="Check">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            </form>
+                            @endif
+
+                            <form action="{{ route('form_pc.print', $d->id) }}" method="GET" target="_blank">
+                                <button class="bg-yellow-500 text-white p-1 w-8 rounded-md hover:bg-yellow-600 transition duration-300" title="Print">
+                                    <i class="bi bi-printer"></i>
+                                </button>
+                            </form>                            
+
+                            @if ($d->cek == 0)
+                            <form onsubmit="return confirm('Yakin hapus data?');" method="POST" action="{{ route('pc.destroy', $d->id) }}" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 text-white p-1 w-8 rounded-md hover:bg-red-600 transition duration-300" title="Hapus Data">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                            @endif
+
+                        </div>                                                         
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
+@endsection
 
+@push('script')
 <script>
-    const links = document.querySelectorAll('.data-link, .laporan-link, .ceklist-link');
-    const bottomLine = document.querySelector('.link-bottom-line');
-
-    function setActiveLink() {
-        const currentUrl = window.location.href;
-        links.forEach(link => {
-            const linkUrl = link.getAttribute('href');
-            if (currentUrl.includes(linkUrl)) {
-                link.classList.add('active');
-                const linkWidth = link.offsetWidth;
-                const linkLeft = link.offsetLeft;
-                bottomLine.style.width = `${linkWidth}px`;
-                bottomLine.style.left = `${linkLeft}px`;
-            } else {
-                link.classList.remove('active');
-            }
-        });
-    }
-
-    links.forEach(link => {
-        link.addEventListener('click', function() {
-            links.forEach(link => link.classList.remove('active'));
-            this.classList.add('active');
-            const linkWidth = this.offsetWidth;
-            const linkLeft = this.offsetLeft;
-            bottomLine.style.transition = 'none';
-            bottomLine.style.width = '0';
-            void bottomLine.offsetWidth;
-            bottomLine.style.transition = 'all 0.3s ease';
-            bottomLine.style.width = `${linkWidth}px`;
-            bottomLine.style.left = `${linkLeft}px`;
+    $(document).ready(function() {
+        $('#example').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            responsive: true
         });
     });
-
-    window.addEventListener('load', setActiveLink);
 </script>
-
-<script>
-function confirmDelete(id) {
-    Swal.fire({
-        title: 'Yakin hapus data?',
-        text: "Data ini tidak dapat dikembalikan!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            document.getElementById('delete-form-' + id).submit();
-        }
-    });
-}
-
-@if (session('success'))
-    Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: '{{ session('success') }}',
-        confirmButtonColor: '#3085d6'
-    });
-@endif
-
-@if ($errors->any())
-    Swal.fire({
-        icon: 'error',
-        title: 'Terjadi Kesalahan!',
-        text: 'Silakan periksa form Anda.',
-        confirmButtonColor: '#3085d6'
-    });
-@endif
-</script>
+@endpush

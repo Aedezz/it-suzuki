@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,27 +16,38 @@ class FormPc extends Controller
 
     public function destroy($id)
     {
+        // Retrieve the record to get the 'nik' value
+        $record = DB::table('form_install')->where('id', $id)->first();
+
         // Delete the record from the database
         DB::table('form_install')->where('id', $id)->delete();
 
-        return redirect()->route('table')->with('success', 'Form deleted successfully!');
+        // Redirect with a success message including the 'nik'
+        return redirect()->route('table')->with('success', "Form dengan NIK = {$record->nik},  berhasil dihapus!");
     }
 
     public function check($id)
     {
-        // Update status to 'Sudah' when "Check" is clicked (set cek to 1)
+        // Retrieve the record to get the 'nik' value
+        $record = DB::table('form_install')->where('id', $id)->first();
+
+        // Update status to 'Sudah' (set cek to 1)
         DB::table('form_install')->where('id', $id)->update(['cek' => 1]);
 
-        return redirect()->route('table')->with('success', 'Status updated to Sudah!');
+        // Redirect with a success message including the 'nik'
+        return redirect()->route('table')->with('success', "Status untuk NIK = {$record->nik}, berhasil diubah!");
     }
 
     public function print($id)
     {
-        // You can generate the PDF or print view here
+        // Retrieve the record to print
         $data = DB::table('form_install')->where('id', $id)->first();
-        // Implement your print logic or PDF generation here
 
-        return view('print_page', compact('data')); // Return a view for the print page
+        // Load the 'print_page' view and pass the data to it
+        $pdf = Pdf::loadView('form-instalasi.print_page', compact('data'));
+
+        // Return the generated PDF file as a download or display in the browser
+        return $pdf->stream('Form_Details.pdf'); // To display in browser
+        // return $pdf->download('Form_Details.pdf'); // To force download  
     }
-
 }

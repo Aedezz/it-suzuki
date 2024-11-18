@@ -52,7 +52,7 @@
                         <td class="border border-gray-300 px-4 py-2 font-medium text-gray-700">Actions:</td>
                         <td class="border border-gray-300 px-4 py-2 text-gray-600">
                             <div class="flex justify-start gap-4">
-                                <form action="#" method="GET">
+                                <form action="{{ route('form_pc.print', $data->id) }}" method="GET" target="_blank">
                                     <button type="submit" class="text-white py-1 px-3 rounded-md hover:bg-gray-600 transition duration-300 border border-gray-600 text-sm" style="background-color: #6A1E55">
                                         Print
                                     </button>
