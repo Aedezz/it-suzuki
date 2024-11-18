@@ -1,4 +1,4 @@
-@include('layout.navbar-after')
+@include('layout.menu-navbar')
 
 @yield('style')
 @yield('content')
