@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Mperbaikan;
 use Illuminate\Http\Request;
 
-class perbaikanController extends Controller
+class PerbaikanController extends Controller
 {
     public function create()
     {
