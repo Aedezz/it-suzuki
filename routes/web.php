@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormGrup;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
@@ -13,7 +14,11 @@ use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
 use App\Http\Controllers\Laporan;
 
+<<<<<<< Updated upstream
 //Dashboard depan
+=======
+
+>>>>>>> Stashed changes
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -69,6 +74,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 
+<<<<<<< Updated upstream
 // Route Form Dalam Installasi Pc
 Route::get('form-pc', [FormPc::class, 'form'])->name('table');
 Route::delete('/delete-form/{id}', [FormPc::class, 'destroy'])->name('pc.destroy');
@@ -80,3 +86,26 @@ Route::get('form-laporan', [Laporan::class, 'index'])->name('laporan');
 
 //Route Ceklist Installasi Pc
 Route::get('form-ceklist', [Ceklist::class, 'index'])->name('ceklist');
+=======
+Route::prefix('/form-pembuatan')->group(function() {
+Route::get('/create', [FormPembuatanController::class, 'create'])->name('form-pembuatan.create');
+Route::post('/store', [FormPembuatanController::class, 'store'])->name('form-pembuatan.store');
+Route::get('/index', [FormPembuatanController::class, 'index'])->name('form-pembuatan.index');
+Route::get('/edit/{id}', [FormPembuatanController::class, 'edit'])->name('form-pembuatan.edit');
+Route::put('/update/{id}', [FormPembuatanController::class, 'update'])->name('form-pembuatan.update');
+Route::delete('/destroy/{id}', [FormPembuatanController::class, 'destroy'])->name('form-pembuatan.destroy');
+Route::put('/update-status/{id}', [FormPembuatanController::class, 'updateStatus'])->name('update-status');
+Route::post('/update-status-by-year', [FormPembuatanController::class, 'updateStatusByYear'])->name('update.status.by.year');
+});
+
+
+Route::prefix('group')->name('group.')->group(function () {
+    Route::get('/', [FormGrup::class, 'index'])->name('index');
+    Route::get('/create', [FormGrup::class, 'create'])->name('create');
+    Route::post('/store', [FormGrup::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [FormGrup::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [FormGrup::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [FormGrup::class, 'destroy'])->name('destroy');
+});
+
+>>>>>>> Stashed changes
