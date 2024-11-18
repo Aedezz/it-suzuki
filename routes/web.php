@@ -5,6 +5,8 @@ use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\Cpembuatan;
 use App\Http\Controllers\PerbaikanController;
+use App\Http\Controllers\FormPerbaikanController;
+use App\Http\Controllers\ChecklistPerbaikanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
@@ -28,6 +30,15 @@ Route::get('/view/{id}', [PerbaikanController::class, 'show'])->name('perbaikan.
 Route::get('/table-perbaikan', function () {
     return view('table_perbaikan');
 })->name('table_perbaikan');
+// Modul Perbaikan
+Route::get('/modul', [FormPerbaikanController::class, 'index'])->name('modul.index');
+// Route::post('/perbaikan', [perbaikanController::class, 'store'])->name('modul.store');
+Route::delete('/perbaikan/{id}', [FormPerbaikanController::class, 'destroy'])->name('modul.destroy');
+Route::post('/perbaikan/{id}/update-status', [FormPerbaikanController::class, 'updateStatus'])->name('modul.updateStatus');
+Route::get('/perbaikan/laporan', [LaporanPerbaikanController::class, 'index'])->name('perbaikan.laporan');
+
+// ROUTE FORM CHECKLIST PERBAIKAN CONTROLLER
+Route::get('/perbaikan/checklist', [ChecklistPerbaikanController::class, 'index'])->name('checklist.index');
 
 // Route pembuatan
 Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
