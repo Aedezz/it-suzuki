@@ -31,12 +31,7 @@ Route::get('/view/{id}', [PerbaikanController::class, 'show'])->name('perbaikan.
 Route::get('/table-perbaikan', function () {
     return view('table_perbaikan');
 })->name('table_perbaikan');
-// Modul Perbaikan
-Route::get('/modul', [FormPerbaikanController::class, 'index'])->name('modul.index');
-// Route::post('/perbaikan', [perbaikanController::class, 'store'])->name('modul.store');
-Route::delete('/perbaikan/{id}', [FormPerbaikanController::class, 'destroy'])->name('modul.destroy');
-Route::post('/perbaikan/{id}/update-status', [FormPerbaikanController::class, 'updateStatus'])->name('modul.updateStatus');
-Route::get('/perbaikan/laporan', [LaporanPerbaikanController::class, 'index'])->name('perbaikan.laporan');
+
 // ROUTE FORM CHECKLIST PERBAIKAN CONTROLLER
 Route::get('/perbaikan/checklist', [ChecklistPerbaikanController::class, 'index'])->name('checklist.index');
 // ROUTE FORM DATA PERBAIKAN CONTROLLER
@@ -73,7 +68,6 @@ Route::post('regi', [AuthController::class, 'register']);
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
-
 
 // Route Form Dalam Installasi Pc
 Route::get('form-pc', [FormPc::class, 'form'])->name('table');
