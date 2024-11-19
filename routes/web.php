@@ -63,6 +63,6 @@ Route::get('/index', [FormPembuatanController::class, 'index'])->name('form-pemb
 Route::get('/edit/{id}', [FormPembuatanController::class, 'edit'])->name('form-pembuatan.edit');
 Route::put('/update/{id}', [FormPembuatanController::class, 'update'])->name('form-pembuatan.update');
 Route::delete('/destroy/{id}', [FormPembuatanController::class, 'destroy'])->name('form-pembuatan.destroy');
-Route::put('/form-pembuatan/{id}/update-status', [FormPembuatanController::class, 'updateStatus'])->name('form-pembuatan.updateStatus');
-Route::post('/form-pembuatan/update-status-by-year', [FormPembuatanController::class, 'updateStatusByYear'])->name('form-pembuatan.updateStatusByYear');
+Route::put('/form-pembuatan/update-status/{id}', [FormPembuatanController::class, 'updateStatus'])->name('form-pembuatan.updateStatus');
+Route::post('/update-status-batch', [FormPembuatanController::class, 'updateStatusBatch'])->name('form-pembuatan.updateStatusBatch');
 });
