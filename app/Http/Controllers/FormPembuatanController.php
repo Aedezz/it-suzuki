@@ -12,10 +12,12 @@ class FormPembuatanController extends Controller
     public function index()
     {
     // Menggunakan Query Builder untuk pagination
-    $formUser = DB::table('form_user')->paginate(10);
+    $formUser = DB::table('form_user')->paginate(9000); // Menampilkan semua data dari tabel `form_user`
+    $ceklistData = DB::table('form_user')->paginate(9000); // Menampilkan semua data dari tabel `ceklist`
 
+    return view('form-pembuatan.index', compact('formUser', 'ceklistData'));
     // Mengirimkan data ke view
-    return view('form-pembuatan.index', compact('formUser'));
+    // return view('form-pembuatan.index', compact('formUser'));
     }
     
     // Menampilkan form untuk membuat form baru
@@ -91,29 +93,38 @@ class FormPembuatanController extends Controller
         return redirect()->route('form-pembuatan.index')->with('success', 'Form User berhasil dihapus.');
     }
 
-public function updateStatus(Request $request, $id)
-{
-    // Menggunakan Query Builder untuk memperbarui kolom 'cek' menjadi 1 (selesai)
-    DB::table('form_user')
-        ->where('id', $id)
-        ->update(['cek' => 1]); // 1 menandakan status selesai
+    public function updateStatus(Request $request, $id)
+    {
+        // Menggunakan Query Builder untuk memperbarui kolom 'cek' menjadi 1 (selesai)
+        DB::table('form_user')
+            ->where('id', $id) // Pastikan 'id' adalah kolom utama pada tabel 'form_user'
+            ->update(['cek' => 1]); // 1 menandakan status selesai
+    
+        // Mengirim pesan ke session untuk SweetAlert
+        return redirect()->route('form-pembuatan.index')->with('success', 'Status berhasil diubah menjadi Selesai!');
+    }
+    
 
-    // Mengirim pesan ke session untuk ditampilkan di SweetAlert
-    return redirect()->route('form-pembuatan.index')->with('statusUpdate', 'Status telah diperbarui menjadi Selesai.');
-}
-
-public function updateStatusByYear(Request $request)
-{
-    $year = $request->input('year');
-    $status = $request->input('status');
-
-    // Update status untuk semua data yang sesuai dengan tahun
-    DB::table('form_user')
-        ->whereYear('tanggal', $year)
-        ->update(['cek' => $status]);
-
-    return redirect()->back()->with('success', 'Status berhasil diperbarui untuk tahun ' . $year);
-}
-
+    public function updateStatusBatch(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'year' => 'required|integer',
+            'status' => 'required|in:selesai,belum',
+        ]);
+    
+        $year = $request->input('year');
+        $status = $request->input('status') == 'selesai' ? 1 : 0; // Mengonversi status ke 1 (selesai) atau 0 (belum)
+    
+        // Mengupdate status untuk semua data pada tahun yang dipilih
+        DB::table('form_user')
+            ->whereYear('tanggal', $year)  // Menggunakan kolom tanggal untuk memfilter berdasarkan tahun
+            ->update(['cek' => $status]);
+    
+        // Memberikan feedback kepada user
+        return redirect()->route('form-pembuatan.index')
+                         ->with('statusUpdate', 'Status untuk tahun ' . $year . ' telah diperbarui menjadi ' . ($status == 1 ? 'Selesai' : 'Belum'));
+    }
+    
 
 }
