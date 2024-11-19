@@ -4,336 +4,263 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>IT System | Dashboard</title>
+    <title>@yield('title', 'Dashboard')</title>
     <link rel="icon" href="{{ asset('images/logo-tab.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- SweetAlert CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+
     <style>
-        /* Styling untuk tombol */
-        .btn {
-            padding: 6px 12px;
-            font-size: 12px;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
         }
-
-        /* Tombol Biru */
-        .btn-blue {
-            background-color: #3b82f6;
-            color: white;
-        }
-        .btn-blue:hover {
-            background-color: #2563eb;
-            transform: translateY(-2px);
-        }
-
-        /* Tombol Hijau */
-        .btn-green {
-            background-color: #10b981;
-            color: white;
-        }
-        .btn-green:hover {
-            background-color: #059669;
-            transform: translateY(-2px);
-        }
-
-        /* Tombol Merah */
-        .btn-red {
-            background-color: #ef4444;
-            color: white;
-        }
-        .btn-red:hover {
-            background-color: #dc2626;
-            transform: translateY(-2px);
-        }
-
-        /* Tombol Teal */
-        .btn-teal {
-            background-color: #14b8a6;
-            color: white;
-        }
-        .btn-teal:hover {
-            background-color: #0d9488;
-            transform: translateY(-2px);
-        }
-
-        /* Menambahkan flexbox untuk men-center-kan tabel */
-        .table-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Styling untuk kontainer tabel */
-        .table-container {
-            width: 90%; /* Atur lebar tabel agar tidak terlalu besar */
-            max-width: 1200px; /* Maksimal lebar tabel */
-            overflow-x: auto;
-            background: linear-gradient(135deg, #e2e8f0, #f3f4f6);
-            border-radius: 10px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 1;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        thead {
-            background-color: #4CAF50;
-            color: white;
-            z-index: 10;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            position: relative;
-            z-index: 1;
-        }
-
-        tr:hover {
-            background-color: #f1f5f9;
-        }
-
-        /* Menangani pointer events agar tidak terpengaruh */
-        thead {
-            pointer-events: none;
-        }
-
-        /* Styling untuk form container */
-        .form-container {
-            background-color: #f9fafb;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
-            width: 90%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Styling untuk Tab Navigation */
         .tabs {
             display: flex;
             gap: 20px;
             margin-bottom: 1.5rem;
             border-bottom: 2px solid #ddd;
+            padding: 0 1rem;
         }
-
         .tab {
-            cursor: pointer;
-            padding: 10px 20px;
-            border-radius: 8px;
-            background-color: #f3f4f6;
-            transition: background-color 0.3s;
-        }
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        .tab.active-tab {
-            background-color: #ddd;
+.tab.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.tab:hover {
+    background-color: #ddd;
+}
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        /* Styling untuk Tab Content */
+.tab-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    display: none; /* Secara default tab lainnya disembunyikan */
+}
+
+/* Styling untuk Form Container */
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Styling untuk form-select dan form-label */
+.form-label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.form-select:focus {
+    border-color: #5c9ded;
+    outline: none;
+}
+
+/* Tombol untuk Pending dan Print */
+.btn-warning, .btn-success {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #e67e22;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+}
+
+/* Layout untuk tombol Pending dan Print */
+.d-flex {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        thead th {
+            background-color: #2563eb;
+            color: white;
             font-weight: bold;
         }
-
-        /* Menyembunyikan konten tab yang tidak aktif */
-        .tab-content.hidden {
-            display: none;
+        tbody tr:hover {
+            background-color: #f9fafb;
         }
+        .btn-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f3f4f6;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
 
-        /* Styling untuk pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            margin-top: 20px;
-        }
+.btn-icon:hover {
+    background-color: #e5e7eb;
+}
 
-        .pagination a {
-            padding: 8px 12px;
-            background-color: #f3f4f6;
-            border-radius: 6px;
-            color: #4b5563;
-            text-decoration: none;
-        }
+.btn-icon i {
+    font-size: 18px;
+    color: #4b5563;
+}
 
-        .pagination a:hover {
-            background-color: #ddd;
-        }
+.btn-icon.btn-delete:hover i {
+    color: #ef4444;
+}
+
+.btn-icon.btn-complete:hover i {
+    color: #10b981;
+}
+
+.btn-icon.btn-print:hover i {
+    color: #3b82f6;
+}
+
     </style>
 </head>
-<body class="bg-gray-100">
-
-    <!-- Navbar or Header -->
+<body>
+    <!-- Navbar -->
     @include('layout.menu-navbar')
 
-    <!-- Content Area -->
+    <!-- Main Content -->
     <div class="container mx-auto mt-16 px-4">
-        <!-- Tab Navigation -->
-        <div class="tabs">
-            <div class="tab active-tab" onclick="switchTab(1)">Data</div>
-            <div class="tab" onclick="switchTab(2)">Laporan</div>
-            <div class="tab" onclick="switchTab(3)">Ceklist</div> <!-- Tab ke-3 -->
-        </div>
-
-        <!-- Form Tabel (Tab 1) -->
-        <div class="tab-content" id="tab-1">
-            <!-- Search Box -->
-            <div class="search-box mb-4">
-                <input type="text" placeholder="Search..." id="searchInput">
-                <i class="bi bi-search"></i>
-            </div>
-
-            <!-- Table -->
-            <div class="table-wrapper">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>NIK</th>
-                                <th>Nomor</th>
-                                <th>Tanggal</th>
-                                <th>Nama Lengkap</th>
-                                <th>Jabatan</th>
-                                <th>Divisi Cabang</th>
-                                <th>Keterangan</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($formUser as $data)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->nik }}</td>
-                                    <td>{{ $data->nomor }}</td>
-                                    <td>{{ $data->tanggal }}</td>
-                                    <td>{{ $data->nama_lengkap }}</td>
-                                    <td>{{ $data->jabatan }}</td>
-                                    <td>{{ $data->divisi_cabang }}</td>
-                                    <td>{{ $data->keterangan }}</td>
-                                    <td>{{ $data->cek == 0 ? 'Belum Selesai' : 'Selesai' }}</td>
-                                    <td>
-                                        @if ($data->cek == 0)
-                                            <form action="{{ route('form-pembuatan.updateStatus', $data->id) }}" method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-green">
-                                                    <i class="bi bi-check-circle"></i> Status
-                                                </button>
-                                            </form>
-                                        @endif
-
-                                        <form action="{{ route('form-pembuatan.destroy', $data->id) }}" method="POST" style="display:inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-red" onclick="return confirm('Are you sure you want to delete this item?')">
-                                                <i class="bi bi-trash"></i> Delete
-                                            </button>
-                                        </form>
-
-                                        <a href="#" class="btn btn-teal"><i class="bi bi-printer"></i> Print</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Pagination Links -->
-            <div class="pagination">
-                {{ $formUser->links() }}
-            </div>
-        </div>
-
-        <!-- Form Tambah Data (Tab 2) -->
-        <div class="form-container">
-            <form action="{{ route('form-pembuatan.updateStatusByYear') }}" method="POST">
-                @csrf
-                <!-- Pilih Tahun -->
-                <div class="mb-4">
-                    <label for="year" class="block text-sm font-medium text-gray-700">Pilih Tahun</label>
-                    <select name="year" id="year" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md" required>
-                        @for ($i = 2024; $i <= 2033; $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </select>
-                </div>
-
-                <!-- Pilih Status -->
-                <div class="mb-4">
-                    <label for="status" class="block text-sm font-medium text-gray-700">Pilih Status</label>
-                    <select name="status" id="status" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md" required>
-                        <option value="0">Belum Selesai</option>
-                        <option value="1">Selesai</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-blue mt-4 w-auto px-4 py-2 text-sm">Pending</button>
-<a href="#" class="btn btn-teal w-auto px-4 py-2 text-sm">Print</a>
-
-            </form>
-        </div>
-    </div>
-            </div>
-        </div>
-
+        @yield('content')
     </div>
 
-    <script>
-        // Function to switch between tabs
-        function switchTab(tabNumber) {
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
+    <!-- Mengimpor Library yang Diperlukan -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-            tabs.forEach((tab, index) => {
-                if (index === tabNumber - 1) {
-                    tab.classList.add('active-tab');
-                    tabContents[index].classList.remove('hidden');
-                } else {
-                    tab.classList.remove('active-tab');
-                    tabContents[index].classList.add('hidden');
-                }
-            });
-        }
+<script>
+    $(document).ready(function() {
+        $('.datatable').DataTable({
+            pageLength: 10,
+            lengthMenu: [10, 25, 50, 100]
+        });
 
-        document.querySelector('form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const form = event.target;
-            const year = form.year.value;
-            const status = form.status.value;
-            
-            Swal.fire({
-                title: 'Apakah Anda Yakin?',
-                text: `Status untuk tahun ${year} akan diubah menjadi ${status == 1 ? 'Selesai' : 'Belum Selesai'}.`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Ubah Status!',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
+        // Switching tabs
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.style.display = 'none');
+                tab.classList.add('active');
+                contents[index].style.display = 'block';
             });
         });
-    </script>
+    });
+    
+    // Konfirmasi Update Status
+    function confirmUpdateStatus(button) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Status akan diubah menjadi selesai.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Ubah Status!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit form otomatis setelah konfirmasi
+                button.closest('form').submit();
+            }
+        });
+    }
+
+    // Konfirmasi Hapus Data
+    function confirmDelete(button) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Data ini akan dihapus secara permanen.',
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit form otomatis setelah konfirmasi
+                button.closest('form').submit();
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.checkbox-hide').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            var row = this.closest('tr'); // Menemukan baris yang berisi checkbox
+            if (this.checked) {
+                row.style.display = 'none'; // Sembunyikan baris jika checkbox dicentang
+            } else {
+                row.style.display = ''; // Tampilkan kembali baris jika checkbox tidak dicentang
+            }
+        });
+    });
+});
+</script>
+
 
 </body>
 </html>
