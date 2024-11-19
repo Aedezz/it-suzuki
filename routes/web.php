@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Activity;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\CobaController;
@@ -54,3 +55,11 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 
+
+//Route Activity
+Route::get('activity-page', [Activity::class, 'index'])->name('home-activity');
+Route::delete('/delete-activity/{id}', [Activity::class, 'destroy'])->name('activity.destroy');
+Route::get('/edit-activity/{id}', [Activity::class, 'edit'])->name('activity.edit');
+Route::put('/update-activity/{id}', [Activity::class, 'update'])->name('activity.update');
+Route::get('/add-activity', [Activity::class, 'create'])->name('activity.create');
+Route::post('/store-activity', [Activity::class, 'store'])->name('activity.store');
