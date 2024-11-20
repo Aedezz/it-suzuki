@@ -15,11 +15,6 @@ use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
 use App\Http\Controllers\Laporan;
 
-<<<<<<< Updated upstream
-//Dashboard depan
-=======
-
->>>>>>> Stashed changes
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -76,7 +71,6 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 
-<<<<<<< Updated upstream
 Route::prefix('/form-pembuatan')->group(function() {
 Route::get('/create', [FormPembuatanController::class, 'create'])->name('form-pembuatan.create');
 Route::post('/store', [FormPembuatanController::class, 'store'])->name('form-pembuatan.store');
@@ -97,7 +91,7 @@ Route::get('form-laporan', [Laporan::class, 'index'])->name('laporan');
 
 //Route Ceklist Installasi Pc
 Route::get('form-ceklist', [Ceklist::class, 'index'])->name('ceklist');
-=======
+
 Route::prefix('/form-pembuatan')->group(function() {
 Route::get('/create', [FormPembuatanController::class, 'create'])->name('form-pembuatan.create');
 Route::post('/store', [FormPembuatanController::class, 'store'])->name('form-pembuatan.store');
@@ -119,4 +113,3 @@ Route::prefix('group')->name('group.')->group(function () {
     Route::delete('/destroy/{id}', [FormGrup::class, 'destroy'])->name('destroy');
 });
 
->>>>>>> Stashed changes
