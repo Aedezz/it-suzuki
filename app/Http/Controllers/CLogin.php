@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class Clogin extends Controller
+class CLogin extends Controller
 {
     // Show the login form or redirect if authenticated
     public function index()

@@ -1,316 +1,199 @@
 @include('layout.navbar')
 
-<div class="container">
-    <!-- Left Section - Form -->
-    <div class="form-container">
-        @if(session('data') == null)
-        <h2 class="form-title">Form Pembuatan User Baru/Reset Password</h2>
-
-        <form method="POST" action="{{ route('pembuatan.store') }}">
-            @csrf
-            <div class="form-card">
-                <!-- Form Input Fields -->
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="nik"><i class="fas fa-id-card"></i> Nomor Induk Karyawan</label>
-                        <input type="text" id="nik" name="nik" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nama_lengkap"><i class="fas fa-user"></i> Nama Lengkap</label>
-                        <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="jabatan"><i class="fas fa-briefcase"></i> Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="divisi_cabang"><i class="fas fa-building"></i> Divisi/Cabang</label>
-                        <input type="text" id="divisi_cabang" name="divisi_cabang" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="keterangan"><i class="fas fa-info-circle"></i> Keterangan</label>
-                        <input type="text" id="keterangan" name="keterangan" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-cogs"></i> Aplikasi</label><br>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="aplikasi[]" value="EMAIL"> EMAIL</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="SDMS"> SDMS</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="ITS"> ITS</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="HRIS"> HRIS</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="PURCHASE"> PURCHASE</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="ASET"> ASET</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="ATT"> ATT</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="INDENT"> INDENT</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="AUDIT"> AUDIT</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="E-PART"> E-PART</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="ACCESS DOOR"> ACCESS DOOR</label>
-                            <label><input type="checkbox" name="aplikasi[]" value="INTERNET"> INTERNET</label>
-                        </div>
-                        <input type="text" class="form-control" name="aplikasi_lainnya" placeholder="Lainnya">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="modul"><i class="fas fa-cogs"></i> Modul</label>
-                        <textarea id="modul" name="modul" class="form-control"></textarea>
-                    </div>
-                </div>
-
-                <div class="button-container">
-                    <button type="submit" class="submit-btn">Save</button>
-                </div>
-            </div>
-        </form>
-        @else
-        <h2 class="form-title">Data yang Baru Disimpan</h2>
-
-        <div class="table-container">
-            <table class="styled-table">
-                <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Nomor</td>
-                        <td>{{ session('data')->nomor }}</td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal</td>
-                        <td>{{ session('data')->tanggal }}</td>
-                    </tr>
-                    <tr>
-                        <td>NIK</td>
-                        <td>{{ session('data')->nik }}</td>
-                    </tr>
-                    <tr>
-                        <td>Nama Lengkap</td>
-                        <td>{{ session('data')->nama_lengkap }}</td>
-                    </tr>
-                    <tr>
-                        <td>Jabatan</td>
-                        <td>{{ session('data')->jabatan }}</td>
-                    </tr>
-                    <tr>
-                        <td>Divisi/Cabang</td>
-                        <td>{{ session('data')->divisi_cabang }}</td>
-                    </tr>
-                    <tr>
-                        <td>Keterangan</td>
-                        <td>{{ session('data')->keterangan }}</td>
-                    </tr>
-                    <tr>
-                        <td>Aplikasi</td>
-                        <td>{{ session('data')->aplikasi }}</td>
-                    </tr>
-                    <tr>
-                        <td>Modul</td>
-                        <td>{{ session('data')->modul }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="action-buttons">
-            <a href="#" class="print-btn">Print</a>
-            <a href="{{ route('dashboard') }}" class="finish-btn">Finish</a>
-        </div>
-        @endif
-    </div>
-
-    <!-- Right Section for Sidebar - Only visible in Form Section -->
-    @if(session('data') == null)
-    <div class="sidebar">
-        <h3>Cara Pengajuan Install Komputer/Laptop :</h3>
-        
-        <h3>1. Lengkapi <b>Form</b> dan klik tombol <b>Save</b></h3>
-        <img src="images/pembuat-user/form_user.png" alt="Petunjuk Visual">
-
-        <h3>2. Setelah berhasil, klik tombol <b>Print</b> dan <b>Cetak Dokumen</b></h3>
-        <img src="images/pembuat-user/cetak_user.png" alt="Petunjuk Visual">
-
-        <h3>3. Tanda tangan <b>Pemohon</b> dan <b>Atasan</b></h3>
-        <img src="images/pembuat-user/detail_user.png" alt="Petunjuk Visual">
-
-        <h3>4. Serahkan Form ke IT</h3>
-        <br>
-
-        <p style="font-size: 14px; color: #555; margin-top: 10px;">
-            Gambar ini menunjukkan langkah-langkah yang perlu diikuti untuk mengajukan instalasi komputer atau laptop.
-        </p>
-    </div>
-    @endif
-</div>
-
 <style>
-/* General Container */
-.container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 20px;
-    flex-wrap: wrap;
-}
+    /* CSS tambahan untuk menghilangkan ruang paling bawah */
+    .slide-down {
+        animation: slideDown 0.5s ease forwards;
+    }
 
-/* Form Section */
-.form-container {
-    flex: 1;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 30px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-}
+    @keyframes slideDown {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
 
-.form-title {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-    font-family: 'Arial', sans-serif;
-}
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
 
-/* Form Card */
-.form-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
+    /* Mengatur margin bawah pada seluruh elemen */
+    form,
+    .slide-down {
+        margin-bottom: 0 !important;
+    }
 
-/* Form Grid */
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
+    /* Memindahkan container dan mengatur flexbox */
+    .container {
+        display: flex;
+        justify-content: flex-start; /* Menjaga form tetap di kanan */
+        align-items: flex-start; /* Menjaga elemen-elemen di bagian atas */
+        min-height: 100vh;
+        padding: 30px;
+        gap: 30px; /* Memberi jarak antara form dan instruksi */
+    }
 
-/* Form Group */
-.form-group {
-    margin-bottom: 20px;
-}
+    .form-container {
+        width: 100%;
+        max-width: 900px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center; /* Memusatkan teks dalam form */
+    }
 
-.form-group label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-}
+    .form-grid,
+    .form-grid-modul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
 
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    background-color: #f8f8f8;
-    font-size: 14px;
-    margin-top: 8px;
-}
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Memusatkan input dan label */
+    }
 
-.form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-/* Checkbox */
-.checkbox-group label {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 15px;
-}
-
-.checkbox-group input {
-    margin-right: 5px;
-}
-
-/* Submit Button */
-.submit-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 6px;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-}
-
-.submit-btn:hover {
-    background-color: #218838;
-}
-
-/* Sidebar Section */
-.sidebar {
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .sidebar {
-        display: block;
-        flex: 0.3;
-        background-color: #fff;
-        padding: 20px;
+    input[type="text"],
+    textarea {
+        padding: 12px;
+        font-size: 14px;
         border-radius: 8px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+        width: 100%;
+        text-align: center; /* Memusatkan teks di dalam input */
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    .instruction-section {
+        flex: 1;
+        max-width: 350px;
+        background-color: #f8f8f8;
+        padding: 20px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
         text-align: center;
     }
 
-    .sidebar img {
+    h3 {
+        cursor: pointer;
+        margin: 10px 0;
+    }
+
+    .instruction-section img {
+        display: none;
         width: 100%;
         height: auto;
-        border-radius: 6px;
-        margin-top: 20px;
-    }
-
-    .sidebar h3 {
-        font-size: 16px;
+        border-radius: 4px;
         margin-bottom: 10px;
     }
-}
-
-/* Table Styles */
-.styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.styled-table th, .styled-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-.styled-table th {
-    background-color: #6A1E55;
-    color: white;
-}
-
-.styled-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.styled-table tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Action Buttons */
-.print-btn, .finish-btn {
-    padding: 12px 20px;
-    background-color: #28a745;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.print-btn:hover, .finish-btn:hover {
-    background-color: #218838;
-}
 </style>
+
+<div class="container">
+    <!-- Main Form Section -->
+    <div class="form-container">
+        @if(session('data') == null)
+            <h2 class="form-title" style="font-size: 26px; color: #333; font-weight: 600; margin-bottom: 30px;">
+                Form Pembuatan User Baru/Reset Password
+            </h2>
+
+            <form method="POST" action="{{ route('pembuatan.store') }}">
+                @csrf
+                <div class="form-card">
+                    <!-- Data Model Section -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nik" style="font-size: 14px; font-weight: 600; color: #333;">Nomor Induk Karyawan</label>
+                            <input type="text" id="nik" name="nik" class="form-control" placeholder="Masukkan Nomor Induk Karyawan" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nama_lengkap" style="font-size: 14px; font-weight: 600; color: #333;">Nama Lengkap</label>
+                            <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" placeholder="Masukkan Nama Lengkap" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jabatan" style="font-size: 14px; font-weight: 600; color: #333;">Jabatan</label>
+                            <input type="text" id="jabatan" name="jabatan" class="form-control" placeholder="Masukkan Jabatan" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="divisi_cabang" style="font-size: 14px; font-weight: 600; color: #333;">Divisi/Cabang</label>
+                            <input type="text" id="divisi_cabang" name="divisi_cabang" class="form-control" placeholder="Masukkan Divisi atau Cabang" required>
+                        </div>
+                    </div>
+
+                    <!-- Modul & Keterangan Side by Side -->
+                    <div class="form-grid-modul">
+                        <div class="form-group">
+                            <label for="modul" style="font-size: 14px; font-weight: 600; color: #333;">Modul</label>
+                            <textarea id="modul" name="modul" class="form-control" placeholder="Deskripsikan modul yang dibutuhkan"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="keterangan" style="font-size: 14px; font-weight: 600; color: #333;">Keterangan</label>
+                            <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Masukkan Keterangan (optional)">
+                        </div>
+                    </div>
+
+                    <!-- Aplikasi Section -->
+                    <div class="form-group" style="margin-bottom: 30px;">
+                        <label style="font-size: 14px; font-weight: 600; color: #333;">Aplikasi</label>
+                        <div class="checkbox-group" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                            @foreach(['EMAIL', 'SDMS', 'ITS', 'HRIS', 'PURCHASE', 'ASET', 'ATT', 'INDENT', 'AUDIT', 'E-PART', 'ACCESS DOOR', 'INTERNET'] as $aplikasi)
+                                <label><input type="checkbox" name="aplikasi[]" value="{{ $aplikasi }}" style="width: 16px; height: 16px;"> {{ $aplikasi }}</label>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn" style="padding: 12px 25px; background-color: #6A1E55; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; width: 200px; transition: background-color 0.3s;">
+                            Simpan
+                        </button>
+                    </div>
+                </div>
+            </form>
+        @endif
+    </div>
+
+    <!-- Instruction Section -->
+    <div class="instruction-section">
+        <h3 style="font-size: 16px; margin-bottom: 15px;">Cara Pengajuan Perbaikan Perangkat <b>Silahkan Tekan Setiap Nomor Untuk Melihat Instruksi</b>:</h3>
+
+        <!-- Instruction with clickable text -->
+        <h3 onclick="toggleImage('image1')">1. Minta form disposisi dengan Purchasing. Isi, tanda tangan <b>Pemohon dan Atasan</b></h3>
+        <img id="image1" src="../images/pembuat-user/detail_user.png" alt="Petunjuk Visual" style="display: none;">
+
+        <h3 onclick="toggleImage('image2')">2. Lengkapi <b>Form</b> dan klik tombol <b>Save</b></h3>
+        <img id="image2" src="../images/pembuat-user/form_user.png" alt="Petunjuk Visual" style="display: none;">
+
+        <h3 onclick="toggleImage('image4')">4. Tanda tangan <b>Pemohon</b></h3>
+        <img id="image4" src="../images/pembuat-user/cetak_user.png" alt="Petunjuk Visual" style="display: none;">
+
+        <h3 onclick="toggleImage('image5')">5. Serahkan <b>Form Disposisi dan Tanda Terima ke IT</b></h3>
+    </div>
+</div>
+
+<script>
+    function toggleImage(imageId) {
+        const img = document.getElementById(imageId);
+        if (img.style.display === "none" || img.style.display === "") {
+            img.style.display = "block";
+            img.classList.add("slide-down");
+        } else {
+            img.style.display = "none";
+            img.classList.remove("slide-down");
+        }
+    }
+</script>

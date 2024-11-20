@@ -9,6 +9,7 @@ use App\Http\Controllers\FormPerbaikanController;
 use App\Http\Controllers\ChecklistPerbaikanController;
 use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormPembuatanController;
 use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
 use App\Http\Controllers\Laporan;
@@ -44,6 +45,7 @@ Route::get('/perbaikan/laporan', [LaporanPerbaikanController::class, 'index'])->
 Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
 Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
 Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
+Route::get('/view/{id}', [Cpembuatan::class, 'viewdata'])->name('viewdata');
 
 // Route Data Installasi Pc
 Route::view('/installasi-pc', 'form-db/pc')->name('installasi-pc');
@@ -69,7 +71,16 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 
-// Route Form Dalam Installasi Pc
+Route::prefix('/form-pembuatan')->group(function() {
+Route::get('/create', [FormPembuatanController::class, 'create'])->name('form-pembuatan.create');
+Route::post('/store', [FormPembuatanController::class, 'store'])->name('form-pembuatan.store');
+Route::get('/index', [FormPembuatanController::class, 'index'])->name('form-pembuatan.index');
+Route::get('/edit/{id}', [FormPembuatanController::class, 'edit'])->name('form-pembuatan.edit');
+Route::put('/update/{id}', [FormPembuatanController::class, 'update'])->name('form-pembuatan.update');
+Route::delete('/destroy/{id}', [FormPembuatanController::class, 'destroy'])->name('form-pembuatan.destroy');
+Route::put('/form-pembuatan/update-status/{id}', [FormPembuatanController::class, 'updateStatus'])->name('form-pembuatan.updateStatus');
+Route::post('/update-status-batch', [FormPembuatanController::class, 'updateStatusBatch'])->name('form-pembuatan.updateStatusBatch');
+});// Route Form Dalam Installasi Pc
 Route::get('form-pc', [FormPc::class, 'form'])->name('table');
 Route::delete('/delete-form/{id}', [FormPc::class, 'destroy'])->name('pc.destroy');
 Route::post('/pc/check/{id}', [FormPc::class, 'check'])->name('pc.check');

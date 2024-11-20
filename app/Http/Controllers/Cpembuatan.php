@@ -62,4 +62,9 @@ class Cpembuatan extends Controller
             ->with('success', 'Data berhasil disimpan')
             ->with('data', $pembuatan);
     }
+
+    public function viewdata(Mpembuatan $data)
+    {
+        return view('form-db.pembuatan-show', compact('data'));
+    }
 }
