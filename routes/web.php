@@ -14,6 +14,7 @@ use App\Http\Controllers\FormPembuatanController;
 use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
 use App\Http\Controllers\Laporan;
+use App\Http\Controllers\ModulController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -113,3 +114,11 @@ Route::prefix('group')->name('group.')->group(function () {
     Route::delete('/destroy/{id}', [FormGrup::class, 'destroy'])->name('destroy');
 });
 
+Route::prefix('modul')->name('modul.')->group(function () {
+    Route::get('/', [ModulController::class, 'index'])->name('index'); // Menampilkan daftar modul
+    Route::get('/create', [ModulController::class, 'create'])->name('create'); // Form tambah modul
+    Route::post('/', [ModulController::class, 'store'])->name('store'); // Proses tambah modul
+    Route::get('/{id_modul}/edit', [ModulController::class, 'edit'])->name('edit'); // Form edit modul
+    Route::put('/{id_modul}', [ModulController::class, 'update'])->name('update'); // Proses update modul
+    Route::delete('/{id_modul}', [ModulController::class, 'destroy'])->name('destroy'); // Proses hapus modul
+});
