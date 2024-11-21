@@ -10,7 +10,7 @@ use App\Http\Controllers\FormPerbaikanController;
 use App\Http\Controllers\ChecklistPerbaikanController;
 use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\FormPembuatanController;
+use App\Http\Controllers\Branch;use App\Http\Controllers\FormPembuatanController;
 use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
 use App\Http\Controllers\Laporan;
@@ -113,3 +113,10 @@ Route::prefix('group')->name('group.')->group(function () {
     Route::delete('/destroy/{id}', [FormGrup::class, 'destroy'])->name('destroy');
 });
 
+//Route Branch
+Route::get('form-branch', [Branch::class, 'index'])->name('branch');
+Route::delete('/delete-branch/{id}', [Branch::class, 'destroy'])->name('branch.destroy');
+Route::get('/edit-branch/{id}', [Branch::class, 'edit'])->name('branch.edit');
+Route::put('/update-branch/{id}', [Branch::class, 'update'])->name('branch.update');
+Route::get('/add-branch', [Branch::class, 'create'])->name('branch.create');
+Route::post('/store-branch', [Branch::class, 'store'])->name('branch.store');
