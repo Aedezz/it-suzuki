@@ -10,7 +10,7 @@ class PeriodePerbaikanController extends Controller
         public function index()
         {
             $periode = DB::table('periode')->get();
-            return view('perbaikan.general.periode', compact('periode'));
+            return view('perbaikan.general.periode.periode', compact('periode'));
         }
     
         public function create()
@@ -20,7 +20,7 @@ class PeriodePerbaikanController extends Controller
             $lastNamaPeriode = $lastPeriode ? $lastPeriode->nama_periode : ''; // Jika tidak ada data, set ke string kosong
         
             // Kirim nama_periode terakhir ke view
-            return view('perbaikan.general.create', compact('lastNamaPeriode'));
+            return view('perbaikan.general.periode.create', compact('lastNamaPeriode'));
         }
         
         
@@ -70,7 +70,7 @@ class PeriodePerbaikanController extends Controller
            $lastNamaPeriode = DB::table('periode')->orderBy('id_periode', 'desc')->value('nama_periode');
        
            // Kirim data periode dan nama periode terakhir ke view
-           return view('perbaikan.general.edit', compact('periode', 'lastNamaPeriode'));
+           return view('perbaikan.general.periode.edit', compact('periode', 'lastNamaPeriode'));
        }
        
        

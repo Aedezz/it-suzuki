@@ -9,6 +9,7 @@ use App\Http\Controllers\FormPerbaikanController;
 use App\Http\Controllers\ChecklistPerbaikanController;
 use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\PeriodePerbaikanController;
+use App\Http\Controllers\DeskripsiPerbaikanController;
 use App\Http\Controllers\AuthController;
 
 
@@ -56,6 +57,18 @@ Route::get('/general/periode/{id_periode}/edit', [PeriodePerbaikanController::cl
 Route::put('/general/periode/{id_periode}', [PeriodePerbaikanController::class, 'update'])->name('periode.update');
 // Menghapus periode perbaikan
 Route::delete('/general/periode/{id_periode}', [PeriodePerbaikanController::class, 'destroy'])->name('periode.destroy');
+
+// ROUTE GENERAL DESKRIPSI
+// Menampilkan daftar deskripsi perbaikan
+Route::get('/general/deskripsi', [DeskripsiPerbaikanController::class, 'index'])->name('deskripsi.index');
+Route::get('/general/deskripsi/filter', [DeskripsiPerbaikanController::class, 'filter'])->name('deskripsi.filter');
+// Menampilkan form untuk membuat periode perbaikan baru
+Route::get('/deskripsi/create', [DeskripsiPerbaikanController::class, 'create'])->name('deskripsi.create');
+// Menyimpan Deskripsi perbaikan baru
+Route::post('/general/deskripsi', [DeskripsiPerbaikanController::class, 'store'])->name('deskripsi.store');
+Route::get('/general/deskripsi/{id_deskripsi}/edit', [DeskripsiPerbaikanController::class, 'edit'])->name('deskripsi.edit');
+Route::put('/general/deskripsi/{id_deskripsi}', [DeskripsiPerbaikanController::class, 'update'])->name('deskripsi.update');
+Route::delete('/general/deskripsi/{id_deskripsi}', [DeskripsiPerbaikanController::class, 'destroy'])->name('deskripsi.destroy');
 ///////////////////////////
 
 
