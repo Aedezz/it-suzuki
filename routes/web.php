@@ -10,6 +10,7 @@ use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\FormPerbaikanController;
 use App\Http\Controllers\ChecklistPerbaikanController;
 use App\Http\Controllers\LaporanPerbaikanController;
+use App\Http\Controllers\PeriodePerbaikanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Branch;
 use App\Http\Controllers\FormPembuatanController;
@@ -42,7 +43,26 @@ Route::get('/perbaikan/form', [FormPerbaikanController::class, 'index'])->name('
 Route::delete('/perbaikan/{id}', [FormPerbaikanController::class, 'destroy'])->name('form.destroy');
 Route::post('/perbaikan/{id}/update-status', [FormPerbaikanController::class, 'updateStatus'])->name('form.updateStatus');
 Route::get('/perbaikan/laporan', [LaporanPerbaikanController::class, 'index'])->name('perbaikan.laporan');
+
+// ROUTE GENERAL PERIODE
+// Menampilkan daftar periode perbaikan
+Route::get('/general/periode', [PeriodePerbaikanController::class, 'index'])->name('periode.index');
+// Menampilkan form untuk membuat periode perbaikan baru
+Route::get('/general/periode/create', [PeriodePerbaikanController::class, 'create'])->name('periode.create');
+// Menyimpan periode perbaikan baru
+Route::post('/general/periode', [PeriodePerbaikanController::class, 'store'])->name('periode.store');
+// Menampilkan form untuk mengedit periode perbaikan yang sudah ada
+Route::get('/general/periode/{id_periode}/edit', [PeriodePerbaikanController::class, 'edit'])->name('periode.edit');
+// Memperbarui periode perbaikan yang sudah ada
+Route::put('/general/periode/{id_periode}', [PeriodePerbaikanController::class, 'update'])->name('periode.update');
+// Menghapus periode perbaikan
+Route::delete('/general/periode/{id_periode}', [PeriodePerbaikanController::class, 'destroy'])->name('periode.destroy');
 ///////////////////////////
+
+
+
+
+
 // Route pembuatan
 Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
 Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
