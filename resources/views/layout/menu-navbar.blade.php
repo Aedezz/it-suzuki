@@ -172,9 +172,9 @@
                     <a href="{{route('periode.index')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Period</a>
                     <a href="{{route('home-activity')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Activity</a>
                     <a href="{{route('branch')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Branch</a>
-                    <a href="{{ route('group.index')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Group</a>
+                    <a href="{{route('group.index')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Group</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Deskripsi</a>
-                    <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Modul</a>
+                    <a href="{{route('modul.index')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Modul</a>
                 </div>
             </div>
 

@@ -150,7 +150,9 @@ Route::prefix('modul')->name('modul.')->group(function () {
     Route::get('/{id_modul}/edit', [ModulController::class, 'edit'])->name('edit'); // Form edit modul
     Route::put('/{id_modul}', [ModulController::class, 'update'])->name('update'); // Proses update modul
     Route::delete('/{id_modul}', [ModulController::class, 'destroy'])->name('destroy'); // Proses hapus modul
-});//Route Branch
+});
+
+//Route Branch
 Route::get('form-branch', [Branch::class, 'index'])->name('branch');
 Route::delete('/delete-branch/{id}', [Branch::class, 'destroy'])->name('branch.destroy');
 Route::get('/edit-branch/{id}', [Branch::class, 'edit'])->name('branch.edit');
