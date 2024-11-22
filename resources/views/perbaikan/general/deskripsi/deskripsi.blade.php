@@ -276,19 +276,14 @@
                         TABLE DESKRIPSI
                     </h2>
 
-                    <!-- Menu -->
-                    <a id="create-button" href="{{ route('deskripsi.create') }}">
+                    <a id="create-button" href="{{ route('deskripsi.create') }}" style="display: none;">
                         <button style="font-size: 16px" title="Tambah Data" type="button"
                             class="relative w-auto px-4 py-2 rounded-lg bg-blue-500 text-white flex justify-center items-center gap-2 hover:bg-blue-600">
                             <i class="fa-solid fa-plus" style="margin-top: 4px;"></i>
                             Tambah
                         </button>
                     </a>
-
                 </div>
-
-
-
                 <hr style="margin-top: -25px"><br>
                 <form method="GET" action="{{ route('deskripsi.index') }}" class="form-inline" style="margin-left: 15px">
                     <div class="form-group mr-3">
@@ -302,65 +297,25 @@
                                 </option>
                             @endforeach
                         </select>
+
                     </div>
 
                     <div class="form-group mr-3">
-
-                        <select class="form-control input-sm" name="username" required="">
-                            <option value="0">All</option>
-                            <option value="11.11.259" {{ request('username') == '11.11.259' ? 'selected' : '' }}>Epayuda
-                                Purnama</option>
-                            <option value="21.06.2046" {{ request('username') == '21.06.2046' ? 'selected' : '' }}>Alfian
-                                Rizaldi</option>
-                            <option value="13.12.768" {{ request('username') == '13.12.768' ? 'selected' : '' }}>Yoyon Eka
-                                Wahyudi</option>
-                            <option value="12.07.471" {{ request('username') == '12.07.471' ? 'selected' : '' }}>Hendra
-                                Pramuda Wathani</option>
-                            <option value="12.01.326" {{ request('username') == '12.01.326' ? 'selected' : '' }}>Mardi
+                       <!-- Dropdown untuk memilih username -->
+                       <select name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option value="0">Pilih Username</option>
+                        @foreach ($users as $user)
+                            <option value="{{ $user->username }}" {{ request('username') == $user->username ? 'selected' : '' }}>
+                                {{ $user->nama }}
                             </option>
-                            <option value="15.11.1217" {{ request('username') == '15.11.1217' ? 'selected' : '' }}>Hendrik
-                                Wijaya</option>
-                            <option value="15.11.1219" {{ request('username') == '15.11.1219' ? 'selected' : '' }}>
-                                Fahlivius Paku Alamsyah</option>
-                            <option value="17.03.1423" {{ request('username') == '17.03.1423' ? 'selected' : '' }}>Erikson
-                                Simanungkalit</option>
-                            <option value="16.08.1334" {{ request('username') == '16.08.1334' ? 'selected' : '' }}>Muhammad
-                                Khairullah</option>
-                            <option value="17.03.1422" {{ request('username') == '17.03.1422' ? 'selected' : '' }}>Mohamad
-                                Fagi Adetera</option>
-                            <option value="11.04.184" {{ request('username') == '11.04.184' ? 'selected' : '' }}>Komang
-                                Dedy Suryanegara</option>
-                            <option value="18.03.1565" {{ request('username') == '18.03.1565' ? 'selected' : '' }}>Muhammad
-                                Zainal Fahmi</option>
-                            <option value="18.03.1566" {{ request('username') == '18.03.1566' ? 'selected' : '' }}>Nur
-                                Khalik</option>
-                            <option value="19.01.1696" {{ request('username') == '19.01.1696' ? 'selected' : '' }}>Azmi
-                                Pratama</option>
-                            <option value="19.04.1769" {{ request('username') == '19.04.1769' ? 'selected' : '' }}>Daniel
-                                Anre Pasaribu</option>
-                            <option value="22.02.2179" {{ request('username') == '22.02.2179' ? 'selected' : '' }}>Bagues
-                                Putra Tawaqqal</option>
-                            <option value="21.07.2048" {{ request('username') == '21.07.2048' ? 'selected' : '' }}>Kurnia
-                                Sandy</option>
-                            <option value="22.02.2183" {{ request('username') == '22.02.2183' ? 'selected' : '' }}>Agil
-                                Putra Desalwa</option>
-                            <option value="22.07.2281" {{ request('username') == '22.07.2281' ? 'selected' : '' }}>Ida
-                                Bagus Purwo</option>
-                            <option value="22.11.2376" {{ request('username') == '22.11.2376' ? 'selected' : '' }}>Rizqie
-                                Rahmatillah</option>
-                            <option value="24.01.2793" {{ request('username') == '24.01.2793' ? 'selected' : '' }}>Muhammad
-                                Alwi</option>
-                            <option value="24.01.2779" {{ request('username') == '24.01.2779' ? 'selected' : '' }}>Husein
-                                Abbas Rumaf</option>
-                            <option value="24.02.2827" {{ request('username') == '24.02.2827' ? 'selected' : '' }}>Brilian
-                                Syukri Ramadhan</option>
-                            <option value="24.09.3002" {{ request('username') == '24.09.3002' ? 'selected' : '' }}>Nugroho
-                                Oktarindo</option>
-                        </select>
+                        @endforeach
+                    </select>
+                    
+                        
                     </div>
 
                     <!-- Tombol Filter tanpa margin-top yang tidak diperlukan -->
-                    <button title="Tambah Data" type="submit"
+                    <button title="Filter" type="submit" id="filter-button"
                         class="px-3 py-2 rounded-md bg-blue-500 text-white text-sm hover:bg-blue-600 transition duration-300"
                         style="margin-top: -13px">
                         Filter
@@ -384,37 +339,37 @@
                                     <td colspan="6" class="text-center">Tidak ada data ditemukan</td>
                                 </tr>
                             @else
-                                @foreach ($deskripsi as $data)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td class="text-center">{{ $data->nama_cabang }}</td>
-                                        <td class="text-center">{{ $data->tipe }} - {{ $tipeAlias[$data->tipe] ?? 'Tipe Tidak Ditemukan' }}</td>
-                                        <td class="text-center">{{ $data->nama_deskripsi }}</td>
-                                        <td class="text-center">{{ $usernameToName[$data->username] ?? 'Nama Tidak Ditemukan' }}</td>
-                                        <td class="text-center">
-                                            <div class="flex justify-center space-x-2">
-                                                <a href="{{ route('deskripsi.edit', $data->id_cabang) }}" title="Perbarui"
-                                                    class="relative w-10 h-10 rounded-lg bg-green-500 text-white flex justify-center items-center hover:bg-green-600">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>
-                                                <button type="button" 
-                                                onclick="confirmDelete('{{ route('deskripsi.destroy', $data->id_deskripsi) }}')"
-                                                class="relative w-10 h-10 rounded-lg bg-red-500 text-white flex justify-center items-center hover:bg-red-600">
+                            @foreach ($deskripsi as $data)
+                            <tr>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $data->nama_cabang }}</td>
+                                <td class="text-center">
+                                    {{ $tipeAlias[$data->tipe] ?? 'Tipe Tidak Ditemukan' }}
+                                </td>
+                                <td class="text-center">{{ $data->nama_deskripsi }}</td>
+                                <td class="text-center">
+                                    {{ $data->nama ?? 'Nama Tidak Ditemukan' }}
+                                </td>
+                                <td class="text-center">
+                                    <div class="flex justify-center space-x-2">
+                                        <a href="{{ route('deskripsi.edit', $data->id_deskripsi) }}" title="Perbarui"
+                                            class="relative w-10 h-10 rounded-lg bg-green-500 text-white flex justify-center items-center hover:bg-green-600">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <button type="button"
+                                            onclick="confirmDelete('{{ route('deskripsi.destroy', $data->id_deskripsi) }}')"
+                                            class="relative w-10 h-10 rounded-lg bg-red-500 text-white flex justify-center items-center hover:bg-red-600">
                                             <i class="fa fa-trash-can"></i>
                                         </button>
-                                        
-                                            
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        
                             @endif
                         </tbody>
                     </table>
                 </div>
-                
-
-
             </div>
         </div>
     @endsection
@@ -433,43 +388,43 @@
                 });
             });
 
-          // Fungsi untuk konfirmasi Delete
-function confirmDelete(url) {
-    Swal.fire({
-        title: 'Apa Anda Yakin?',
-        text: "Data Tidak Dapat Dikembalikan Setelah Dihapus",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Hapus Data!',
-        cancelButtonText: 'Jangan Dihapus!',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Membuat form untuk submit DELETE ke URL
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = url;
+            // Fungsi untuk konfirmasi Delete
+            function confirmDelete(url) {
+                Swal.fire({
+                    title: 'Apa Anda Yakin?',
+                    text: "Data Tidak Dapat Dikembalikan Setelah Dihapus",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus Data!',
+                    cancelButtonText: 'Jangan Dihapus!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Membuat form untuk submit DELETE ke URL
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = url;
 
-            // Menambahkan CSRF Token
-            const csrfField = document.createElement('input');
-            csrfField.type = 'hidden';
-            csrfField.name = '_token';
-            csrfField.value = '{{ csrf_token() }}'; // Pastikan ini dapat dieksekusi dalam Blade template
-            form.appendChild(csrfField);
+                        // Menambahkan CSRF Token
+                        const csrfField = document.createElement('input');
+                        csrfField.type = 'hidden';
+                        csrfField.name = '_token';
+                        csrfField.value = '{{ csrf_token() }}'; // Pastikan ini dapat dieksekusi dalam Blade template
+                        form.appendChild(csrfField);
 
-            // Menambahkan Method DELETE
-            const methodField = document.createElement('input');
-            methodField.type = 'hidden';
-            methodField.name = '_method';
-            methodField.value = 'DELETE';
-            form.appendChild(methodField);
+                        // Menambahkan Method DELETE
+                        const methodField = document.createElement('input');
+                        methodField.type = 'hidden';
+                        methodField.name = '_method';
+                        methodField.value = 'DELETE';
+                        form.appendChild(methodField);
 
-            // Submit form untuk delete data
-            document.body.appendChild(form);
-            form.submit();
-        }
-    });
-}
+                        // Submit form untuk delete data
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            }
 
             // Menangkap elemen menu dan garis aktif
             const menuItems = document.querySelectorAll('.menu-item');
@@ -616,26 +571,55 @@ function confirmDelete(url) {
                 filterDropdown.addEventListener('change', updateCreateButtonHref);
             });
 
-            document.addEventListener("DOMContentLoaded", function () {
-    // Cek jika ada parameter di URL yang menunjukkan filter diterapkan
-    const urlParams = new URLSearchParams(window.location.search);
+            document.addEventListener("DOMContentLoaded", function() {
+                // Cek jika ada parameter di URL yang menunjukkan filter diterapkan
+                const urlParams = new URLSearchParams(window.location.search);
 
-    // Dapatkan elemen dataContainer
-    const dataContainer = document.getElementById("dataContainer");
+                // Dapatkan elemen dataContainer dan tombol Tambah
+                const dataContainer = document.getElementById("dataContainer");
+                const createButton = document.getElementById("create-button");
 
-    // Jika ada filter yang diterapkan, tampilkan data
-    if (urlParams.has('id_cabang') || urlParams.has('username')) {
-        dataContainer.style.display = "block";
-    }
+                // Jika ada filter yang diterapkan, tampilkan data dan tombol Tambah
+                if (urlParams.has('id_cabang') || urlParams.has('username')) {
+                    dataContainer.style.display = "block";
+                    createButton.style.display = "block";
+                }
 
-    // Tangani pengiriman form filter
-    const filterForm = document.querySelector('form');
-    filterForm.addEventListener('submit', function () {
-        // Tampilkan data setelah filter disubmit
-        dataContainer.style.display = "block";
-    });
-});
+                // Tangani pengiriman form filter
+                const filterForm = document.querySelector('form');
+                filterForm.addEventListener('submit', function() {
+                    // Tampilkan data dan tombol Tambah setelah filter disubmit
+                    dataContainer.style.display = "block";
+                    createButton.style.display = "block";
+                });
+            });
 
+            document.addEventListener("DOMContentLoaded", function() {
+                const filterButton = document.getElementById('filter-button');
+                const selectCabang = document.getElementById('id_cabang');
+                const optionSemuaCabang = selectCabang.options[0]; // Opsi "Semua Cabang"
+
+                // Event listener untuk tombol filter
+                filterButton.addEventListener('click', function() {
+                    // Nonaktifkan opsi "Semua Cabang" setelah tombol filter ditekan
+                    if (selectCabang.value !== "") {
+                        optionSemuaCabang.disabled = true;
+                    }
+                });
+
+                // Cek jika halaman dimuat dengan parameter filter
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('id_cabang') && urlParams.get('id_cabang') !== "") {
+                    optionSemuaCabang.disabled = true; // Nonaktifkan opsi jika filter diterapkan
+                }
+
+                // Reset opsi "Semua Cabang" jika filter dihapus
+                selectCabang.addEventListener('change', function() {
+                    if (selectCabang.value === "") {
+                        optionSemuaCabang.disabled = false; // Aktifkan kembali jika opsi dikosongkan
+                    }
+                });
+            });
         </script>
     @endpush
 </body>

@@ -141,83 +141,42 @@
                 <div class="flex justify-between items-center px-4 py-8">
                     <!-- Title -->
                     <h2 class="font-sans font-bold text-lg md:text-2xl" style="font-size: 20px; margin-top: -20px;">
-                        Buat Deskripsi
+                        EDIT ITEM SERVICE
                     </h2>
                 </div>
                 <hr style="margin-top: -25px"><br>
 
                 <!-- Form Section -->
-                <div class="container mt-4" style="margin-left: 25px">
+                <div class="container mt-4">
                     <div class="form-row flex flex-wrap -mx-2">
                         <!-- Pastikan form menggunakan metode POST dan memiliki CSRF token -->
-                        <form action="{{ route('deskripsi.update', $deskripsi->id_deskripsi) }}" method="POST"
-                            class="w-full">
+                        <form action="{{ route('item.update', $item->id) }}" method="POST" class="w-full">
                             @csrf
                             @method('PUT')
-
-                            <!-- ID Cabang -->
-                            <!-- ID Cabang -->
-                            <div class="flex flex-col">
-                                <label for="id_cabang" class="text-sm text-gray-700 font-medium mb-2">Nama Cabang</label>
-
-                                <!-- Input untuk menampilkan nama cabang (read-only) -->
-                                <input type="text" name="nama_cabang" id="nama_cabang"
-                                    class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                                    placeholder="Nama Cabang" readonly value="{{ $cabang ? $cabang->nama_cabang : '' }}" />
-
-                                <!-- Hidden input untuk mengirimkan id_cabang -->
-                                <input type="hidden" name="id_cabang" id="id_cabang"
-                                    value="{{ $cabang ? $cabang->id_cabang : '' }}" />
+                            <div class="mt-8 grid lg:grid-cols-2 gap-6">
+                                <!-- Nama Periode -->
+                                <div class="flex flex-col" style="margin-left: 20px">
+                                    <label for="nama" class="text-sm text-gray-700 font-medium mb-2">Nama item</label>
+                                    <input type="text" name="nama" id="nama"
+                                        class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                                        placeholder="Ketikan Nama Item"  value="{{ old('nama', $item->nama) }}">
+                                </div>
                             </div>
-                            <!-- Tipe -->
-                            <div class="flex flex-col mt-4">
-                                <label for="tipe" class="text-sm text-gray-700 font-medium mb-2">Tipe</label>
-                                <select id="tipe" name="tipe"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                @foreach ($tipeAlias as $tipe => $alias)
-                                    <option value="{{ $tipe }}" 
-                                        {{ old('tipe', $deskripsi->tipe) == $tipe ? 'selected' : '' }}>
-                                        {{ $alias }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            </div>
-
-                            <!-- Nama Deskripsi -->
-                            <div class="flex flex-col mt-4">
-                                <label for="nama_deskripsi" class="text-sm text-gray-700 font-medium mb-2">Nama
-                                    Deskripsi</label>
-                                <input type="text" name="nama_deskripsi" id="nama_deskripsi"
-                                    class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                                    value="{{ old('nama_deskripsi', $deskripsi->nama_deskripsi) }}">
-                            </div>
-
-
-                            <!-- Username -->
-                            <!-- Username Select -->
-                            <div class="flex flex-col">
-                                <label for="username" class="text-sm text-gray-700 font-medium mb-2">Username</label>
-                                <select id="username" name="username"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->username }}" 
-                                        {{ old('username', $deskripsi->username) == $user->username ? 'selected' : '' }}>
-                                        {{ $user->nama }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            </div>
-
-                            <!-- Tombol Simpan -->
-                            <div class="flex justify-end mt-6 space-x-4">
+                        
+                            <!-- Tombol simpan dan kembali dipindahkan ke kiri -->
+                            <div class="space-x-4 mt-8 flex justify-start" style="margin-left: 25px">
+                                <!-- Simpan Button -->
                                 <button type="submit"
-                                    class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700">Simpan</button>
-                                <a href="{{ route('deskripsi.index') }}"
-                                    class="py-2 px-4 bg-gray-200 text-gray-600 rounded hover:bg-gray-300 active:bg-gray-400">Kembali</a>
+                                    class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50">
+                                    Simpan
+                                </button>
+                                <!-- Kembali Button -->
+                                <a href="{{ route('item.index') }}"  class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">
+                                        Kembali
+                                </a>
                             </div>
                         </form>
-
-
+                        
                     </div>
                 </div>
             </div>
@@ -254,5 +213,6 @@
                 @endif
             </script>
         @endpush
+
     @endpush
 </body>
