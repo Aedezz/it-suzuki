@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\Activity;
 use App\Http\Controllers\FormGrup;
 use Illuminate\Support\Facades\Route;
@@ -163,6 +164,14 @@ Route::prefix('modul')->name('modul.')->group(function () {
     Route::get('/{id_modul}/edit', [ModulController::class, 'edit'])->name('edit'); // Form edit modul
     Route::put('/{id_modul}', [ModulController::class, 'update'])->name('update'); // Proses update modul
     Route::delete('/{id_modul}', [ModulController::class, 'destroy'])->name('destroy'); // Proses hapus modul
+});
+
+Route::prefix('barang')->name('barang.')->group(function () {
+    Route::get('/', [BarangController::class, 'index'])->name('index'); // Menampilkan daftar modul
+    Route::get('/create', [BarangController::class, 'create'])->name('create'); // Form tambah modul
+    Route::post('/store', [BarangController::class, 'store'])->name('store'); // Proses tambah modul
+    Route::get('/{id}/edit', [BarangController::class, 'edit'])->name('edit');
+    Route::put('/{id}/update', [BarangController::class, 'update'])->name('update'); // Proses update modul
 });
 
 //Route Branch
