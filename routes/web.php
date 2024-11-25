@@ -13,6 +13,7 @@ use App\Http\Controllers\ChecklistPerbaikanController;
 use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\PeriodePerbaikanController;
 use App\Http\Controllers\DeskripsiPerbaikanController;
+use App\Http\Controllers\ItemPerbaikanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Branch;
 use App\Http\Controllers\FormPembuatanController;
@@ -72,6 +73,15 @@ Route::post('/general/deskripsi', [DeskripsiPerbaikanController::class, 'store']
 Route::get('/general/deskripsi/{id_deskripsi}/edit', [DeskripsiPerbaikanController::class, 'edit'])->name('deskripsi.edit');
 Route::put('/general/deskripsi/{id_deskripsi}', [DeskripsiPerbaikanController::class, 'update'])->name('deskripsi.update');
 Route::delete('/general/deskripsi/{id_deskripsi}', [DeskripsiPerbaikanController::class, 'destroy'])->name('deskripsi.destroy');
+
+// Services Item
+Route::get('/services/item', [ItemPerbaikanController::class, 'index'])->name('item.index');
+// Menampilkan form untuk membuat periode perbaikan baru
+Route::get('/services/create', [ItemPerbaikanController::class, 'create'])->name('item.create');
+// Menyimpan Deskripsi perbaikan baru
+Route::post('/services/item', [ItemPerbaikanController::class, 'store'])->name('item.store');
+Route::get('/services/item/{id}/edit', [ItemPerbaikanController::class, 'edit'])->name('item.edit');
+Route::put('/services/item/{id}', [ItemPerbaikanController::class, 'update'])->name('item.update');
 ///////////////////////////
 
 

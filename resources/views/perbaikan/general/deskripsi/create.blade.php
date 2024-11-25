@@ -153,24 +153,18 @@
                         <form action="{{ route('deskripsi.store') }}" method="POST" class="w-full">
                             @csrf
                             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        
+                                <!-- Menampilkan Nama Cabang dengan Input Readonly -->
                                 <div class="flex flex-col">
                                     <label for="id_cabang" class="text-sm text-gray-700 font-medium mb-2">Nama Cabang</label>
-                                    <input type="text" name="id_cabang" id="id_cabang" 
-                                        class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                                        placeholder="Nama Cabang" readonly
-                                        value="{{ $cabang ? $cabang->nama_cabang : '' }}" />
-
-                                        <input type="hidden" name="id_cabang" id="id_cabang" value="{{ $cabang ? $cabang->id_cabang : '' }}" />
-
+                                    <input type="text" name="nama_cabang" id="nama_cabang" value="{{ $cabang ? $cabang->nama_cabang : '' }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                    <!-- Mengirimkan id_cabang melalui input hidden -->
+                                    <input type="hidden" name="id_cabang" value="{{ $cabang ? $cabang->id_cabang : '' }}" />
                                 </div>
                         
-                                <!-- Tipe Select -->
+                                <!-- Tipe -->
                                 <div class="flex flex-col">
                                     <label for="tipe" class="text-sm text-gray-700 font-medium mb-2">Tipe</label>
-                                    <select id="tipe" name="tipe"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        required>
+                                    <select id="tipe" name="tipe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                                         <option value="" disabled selected>Silahkan Pilih Terlebih Dahulu</option>
                                         <option value="1" {{ old('tipe') == '1' ? 'selected' : '' }}>Moni</option>
                                         <option value="2" {{ old('tipe') == '2' ? 'selected' : '' }}>Banu</option>
@@ -178,36 +172,32 @@
                                     </select>
                                 </div>
                         
-                                <!-- Nama Deskripsi Input -->
+                                <!-- Nama Deskripsi -->
                                 <div class="flex flex-col">
                                     <label for="nama_deskripsi" class="text-sm text-gray-700 font-medium mb-2">Nama Deskripsi</label>
-                                    <input type="text" name="nama_deskripsi" id="nama_deskripsi"
-                                        class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                                        placeholder="Masukan Nama Deskripsi" value="{{ old('nama_deskripsi') }}" />
+                                    <input type="text" name="nama_deskripsi" id="nama_deskripsi" class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Masukan Nama Deskripsi" value="{{ old('nama_deskripsi') }}" />
                                 </div>
                         
-                                <!-- Username Select -->
+                                <!-- Username -->
                                 <div class="flex flex-col">
                                     <label for="username" class="text-sm text-gray-700 font-medium mb-2">Username</label>
-                                    <select id="username" name="username"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        required>
-                                        <option value="" disabled selected>Silahkan Pilih Terlebih Dahulu</option>
-                                        @foreach (['11.11.259' => 'Epayuda Purnama', '21.06.2046' => 'Alfian Rizaldi', '13.12.768' => 'Yoyon Eka Wahyudi'] as $value => $label)
-                                            <option value="{{ $value }}" {{ old('username') == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    <select name="username" id="username" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        <option value="">Pilih User</option>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->username }}" {{ old('username') == $user->username ? 'selected' : '' }}>{{ $user->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                         
-                            <!-- Simpan & Kembali Buttons -->
-                            <div class="space-x-4 mt-8 flex justify-end">
+                            <div class="space-x-4 mt-8 flex justify-end" id="submitBtn">
                                 <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50">
                                     Simpan
                                 </button>
                                 <a href="{{ route('deskripsi.index') }}" class="py-2 px-4 bg-gray-200 text-gray-600 rounded hover:bg-gray-300 active:bg-gray-400">Kembali</a>
                             </div>
                         </form>
+                        
                         
                     </div>
                 </div>
@@ -223,6 +213,10 @@
 
         @push('script')
             <script>
+ document.getElementById('submitBtn').addEventListener('click', function() {
+        this.disabled = true; // Disable the button after click
+    });
+
                 @if (session('success'))
                     let timerInterval;
                     Swal.fire({
