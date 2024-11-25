@@ -155,7 +155,7 @@
                     <i id="serviceIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
                 </button>
                 <div id="serviceDropdown" class="menuDropdown absolute bg-white text-gray-800 left-0 mt-2 w-48 rounded-lg shadow-lg">
-                    <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Barang</a>
+                    <a href="{{route('barang.index')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Barang</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Item</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">History</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Komputer</a>
