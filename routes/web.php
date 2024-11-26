@@ -21,6 +21,7 @@ use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
 use App\Http\Controllers\Laporan;
 use App\Http\Controllers\ModulController;
+use App\Http\Controllers\ProblemController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -191,3 +192,9 @@ Route::get('/edit-branch/{id}', [Branch::class, 'edit'])->name('branch.edit');
 Route::put('/update-branch/{id}', [Branch::class, 'update'])->name('branch.update');
 Route::get('/add-branch', [Branch::class, 'create'])->name('branch.create');
 Route::post('/store-branch', [Branch::class, 'store'])->name('branch.store');
+
+Route::prefix('problem')->name('problem.')->group(function () {
+    Route::get('/', [ProblemController::class, 'index'])->name('index');
+    Route::get('create', [ProblemController::class, 'create'])->name('create');
+    Route::post('store', [ProblemController::class, 'store'])->name('store');
+});
