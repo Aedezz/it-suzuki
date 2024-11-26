@@ -14,6 +14,7 @@ use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\PeriodePerbaikanController;
 use App\Http\Controllers\DeskripsiPerbaikanController;
 use App\Http\Controllers\ItemPerbaikanController;
+use App\Http\Controllers\HistoryPerbaikanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Branch;
 use App\Http\Controllers\FormPembuatanController;
@@ -82,6 +83,15 @@ Route::get('/services/create', [ItemPerbaikanController::class, 'create'])->name
 Route::post('/services/item', [ItemPerbaikanController::class, 'store'])->name('item.store');
 Route::get('/services/item/{id}/edit', [ItemPerbaikanController::class, 'edit'])->name('item.edit');
 Route::put('/services/item/{id}', [ItemPerbaikanController::class, 'update'])->name('item.update');
+
+//HISTORI ROUTE PERBAIKAN
+Route::get('/services/history', [HistoryPerbaikanController::class, 'index'])->name('history.index');
+// Route untuk form create (GET)
+Route::get('/services/history/create', [HistoryPerbaikanController::class, 'create'])->name('services.history.create');
+
+// Route untuk menghandle POST (auto-live atau pengiriman data)
+Route::post('/services/history/store', [HistoryPerbaikanController::class, 'store'])->name('services.history.store');
+Route::get('/search-pegawai', [HistoryPerbaikanController::class, 'searchPegawai']);
 ///////////////////////////
 
 
