@@ -158,7 +158,7 @@
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Barang</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Item</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">History</a>
-                    <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Komputer</a>
+                    <a href="{{route('komputer')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Komputer</a>
                 </div>
             </div>
 
