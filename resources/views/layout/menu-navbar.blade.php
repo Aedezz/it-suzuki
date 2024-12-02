@@ -143,7 +143,7 @@
                     <i id="networkIcon" class="bi bi-caret-down-fill text-2xl caret-hover"></i>
                 </button>
                 <div id="networkDropdown" class="menuDropdown absolute bg-white text-gray-800 left-0 mt-2 w-48 rounded-lg shadow-lg">
-                    <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Problem</a>
+                    <a href="problem.index" class="menu-link block px-4 py-2 hover:bg-gray-200">Problem</a>
                     <a href="#" class="menu-link block px-4 py-2 hover:bg-gray-200">Bandwidth</a>
                 </div>
             </div>
