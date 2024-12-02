@@ -8,31 +8,31 @@ class PerbaikanController extends Controller
 {
     public function create()
     {
-        return view('perbaikan.perbaikan');
+        return view('form-db.perbaikan');
     }
     public function store(Request $request)
     {
+
         $currentMonth = date('m');  // Bulan saat ini
         $currentYear = date('y');   // Tahun saat ini
-    
+
         // Ambil entri terakhir berdasarkan nomor terbesar
         $lastEntry = Mperbaikan::orderByDesc('nomor')->first();
-    
+
         // Menentukan nomor berikutnya
         if ($lastEntry) {
             // Ambil 4 digit terakhir dari nomor
-            $lastNumber = (int) substr($lastEntry->nomor, -4);
+            $lastNumber = (int) substr($lastEntry->nomor, -6);
             $nextNumber = $lastNumber + 1;
         } else {
             // Jika belum ada entri, mulai dari nomor 1
             $nextNumber = 1;
         }
-    
+
         // Format nomor baru (SPP/11/24/0001)
         $formattedNumber = sprintf('SPP/%s/%s/%04d', $currentMonth, $currentYear, $nextNumber);
-    
-        // Simpan data ke database
-        $data = Mperbaikan::create([
+
+        Mperbaikan::create([
             'nomor' => $formattedNumber,
             'tanggal' => now()->format('Y-m-d'),
             'nik' => $request->nik,
@@ -45,17 +45,13 @@ class PerbaikanController extends Controller
             'jumlah' => $request->jumlah,
             'spesifikasi' => $request->spesifikasi,
             'keluhan' => $request->keluhan,
-            'cek' => 0,
+            // 'it' => $request->it,
+            // 'date_it' =>1,
+            'cek' => 1,
         ]);
-    
-        // Redirect ke route 'table_perbaikan' dengan data yang baru disimpan
-        return redirect()->route('perbaikan.show', ['id' => $data->id])->with('success', 'Data berhasil disimpan');
-    }
 
-    public function show($id)
-    {
-        $data = Mperbaikan::findOrFail($id);
-        return view('table_perbaikan', compact('data'));
+        // dd($request->all());
+
+        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan.');
     }
-    
 }
