@@ -10,17 +10,37 @@ class HistoryPerbaikanController extends Controller
     // Menampilkan semua data formUser menggunakan Query Builder
     public function index()
     {
-        // Pastikan id_barang bertipe integer
+        // Mengambil data dari tabel service dan mengurutkannya berdasarkan id (terbaru di atas)
         $history = DB::table('service')
             ->join('pegawai', 'service.kode_pegawai', '=', 'pegawai.kode_pegawai')
-            ->select('service.*', 'pegawai.nik', 'pegawai.nama')
+            ->select(
+                'service.id', 
+                'service.nomor', 
+                'service.tanggal', 
+                'service.id_barang', 
+                'service.id_item', 
+                'service.sn', 
+                'service.keterangan',
+                'pegawai.nik as pegawai_nik', 
+                'pegawai.nama as pegawai_nama'
+            )
+            ->orderBy('service.id', 'desc') // Mengurutkan berdasarkan ID secara menurun
             ->get();
-
+        
+        // Mengubah koleksi perangkat menjadi array dengan 'id' sebagai kunci
+        $perangkat = DB::table('barang')->select('id', 'nama')->get()->keyBy('id');
+        
+        // Mengubah koleksi item menjadi array dengan 'id' sebagai kunci
+        $item = DB::table('item')->select('id', 'nama')->get()->keyBy('id');
+        
         // Mengirim data ke view
-        return view('perbaikan.services.history.history', compact('history'));
-
+        return view('perbaikan.services.history.history', compact('history', 'perangkat', 'item'));
     }
+    
 
+    
+    
+    
     public function searchPegawai(Request $request)
     {
         $query = $request->get('query');
@@ -56,12 +76,8 @@ class HistoryPerbaikanController extends Controller
         // Mengirimkan data ke view
         return view('perbaikan.services.history.create', compact('serviceData', 'pegawaiData', 'perangkat', 'item'));
     }
-
-
-
     public function store(Request $request)
     {
-    
     
         // Simpan data ke tabel service
         DB::table('service')->insert([

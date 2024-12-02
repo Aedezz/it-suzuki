@@ -133,21 +133,20 @@
 <body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-@if (session('status'))
-    <script>
-        Swal.fire({
-            title: '{{ session('status')['judul'] }}',
-            text: '{{ session('status')['pesan'] }}',
-            icon: '{{ session('status')['icon'] }}',
-            confirmButtonText: 'OK'
-        });
+        @if (session('status'))
+            <
+            script >
+                Swal.fire({
+                    title: '{{ session('status')['judul'] }}',
+                    text: '{{ session('status')['pesan'] }}',
+                    icon: '{{ session('status')['icon'] }}',
+                    confirmButtonText: 'OK'
+                });
+    </>
+    @endif
+
     </script>
-@endif
 
-
-
-    </script>
-    
     @section('content')
         <!--Container-->
         <div class="container w-full md:w-4/5 xl:w-3/5 mx-auto px-2">
@@ -158,7 +157,7 @@
                 <div class="flex justify-between items-center px-4 py-8">
                     <!-- Title -->
                     <h2 class="font-sans font-bold text-lg md:text-2xl" style="font-size: 20px; margin-top: -20px;">
-                TABLE HISTORY SERVICE
+                        TABLE HISTORY SERVICE
                     </h2>
 
                     <!-- Menu -->
@@ -190,41 +189,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($history as $data)
+                        @foreach ($history as $key => $data)
                             <tr>
-                                <td class="text-center">{{ $data->id }}</td>
+                                <!-- Menampilkan urutan ID -->
+                                <td class="text-center">{{ $key + 1 }}</td>
                                 <td class="text-center">{{ $data->nomor }}</td>
-                                <td class="text-center">{{ $data->nik }}</td>
                                 <td class="text-center">{{ $data->tanggal }}</td>
-                                <td class="text-center">{{ $data->nama}}</td>
+                                <td class="text-center">{{ $data->pegawai_nik }}</td> <!-- Perbaiki pegawi_nik menjadi pegawai_nik -->
+                                <td class="text-center">{{ $data->pegawai_nama }}</td> <!-- Perbaiki pegawai_nama -->
                                 <td class="text-center">
-                                    {{ $perangkat[$data->id_barang] ?? 'Perangkat Tidak Ditemukan' }}
-                                   </td>
-                                   <td class="text-center">
-                                    {{ $item[$data->id_item] ?? 'Perangkat Tidak Ditemukan' }}
+                                    {{ $perangkat[$data->id_barang]->nama ?? 'Perangkat Tidak Ditemukan' }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $item[$data->id_item]->nama ?? 'Item Tidak Ditemukan' }}
                                 </td>
                                 <td class="text-center">{{ $data->sn }}</td>
                                 <td class="text-center">{{ $data->keterangan }}</td>
                                 <td class="p-4 border-b border-blue-gray-50 text-center">
                                     <div class="flex justify-center space-x-2">
-                                          <!-- Button Edit -->
-                                          <a href="#" title="Print" onclick="confirmDelete('#')"
-                                          class="relative w-10 h-10 rounded-lg text-white flex justify-center items-center" style="background-color: orange; color: white;">
-                                          <i class="fa-solid fa-print"></i>
-                                       </a>                
-                                         <!-- Tombol Hapus (Delete) -->
-                                         {{-- <button type="button" 
-                                         onclick="confirmDelete('#')"
-                                         class="relative w-10 h-10 rounded-lg bg-red-500 text-white flex justify-center items-center hover:bg-red-600">
-                                         <i class="fa-regular fa-trash-can"></i>
-                                     </button> --}}
+                                        <!-- Button Edit -->
+                                        <a href="#" title="Print" onclick="confirmDelete('#')"
+                                            class="relative w-10 h-10 rounded-lg text-white flex justify-center items-center"
+                                            style="background-color: orange; color: white;">
+                                            <i class="fa-solid fa-print"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
+                    
+                    
                 </table>
-                
+
             </div>
         </div>
     @endsection
@@ -289,75 +286,75 @@
                 menuItems[0].classList.add('text-blue-500');
             }
 
- // Fungsi untuk konfirmasi Update Status
-function confirmUpdateStatus(url) {
-    Swal.fire({
-        title: 'Apa Anda Yakin?',
-        text: "Ini Akan Menandai Status Selesai.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Perbarui Data!',
-        cancelButtonText: 'Batal Perbarui',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Membuat form untuk submit POST ke URL
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = url;
+            // Fungsi untuk konfirmasi Update Status
+            function confirmUpdateStatus(url) {
+                Swal.fire({
+                    title: 'Apa Anda Yakin?',
+                    text: "Ini Akan Menandai Status Selesai.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Perbarui Data!',
+                    cancelButtonText: 'Batal Perbarui',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Membuat form untuk submit POST ke URL
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = url;
 
-            // Menambahkan CSRF Token
-            const csrfField = document.createElement('input');
-            csrfField.type = 'hidden';5
-            csrfField.name = '_token';
-            csrfField.value = '{{ csrf_token() }}'; // Pastikan ini dapat dieksekusi dalam Blade template
-            form.appendChild(csrfField);
+                        // Menambahkan CSRF Token
+                        const csrfField = document.createElement('input');
+                        csrfField.type = 'hidden';
+                        5
+                        csrfField.name = '_token';
+                        csrfField.value = '{{ csrf_token() }}'; // Pastikan ini dapat dieksekusi dalam Blade template
+                        form.appendChild(csrfField);
 
-            // Submit form untuk update status
-            document.body.appendChild(form);
-            form.submit();
-        }
-    });
-}
+                        // Submit form untuk update status
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            }
 
-// Fungsi untuk konfirmasi Delete
-function confirmDelete(url) {
-    Swal.fire({
-        title: 'Apa Anda Yakin?',
-        text: "Data Tidak Dapat Dikembalikan Setelah Dihapus",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Hapus Data!',
-        cancelButtonText: 'Jangan Dihapus!',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Membuat form untuk submit DELETE ke URL
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = url;
+            // Fungsi untuk konfirmasi Delete
+            function confirmDelete(url) {
+                Swal.fire({
+                    title: 'Apa Anda Yakin?',
+                    text: "Data Tidak Dapat Dikembalikan Setelah Dihapus",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus Data!',
+                    cancelButtonText: 'Jangan Dihapus!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Membuat form untuk submit DELETE ke URL
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = url;
 
-            // Menambahkan CSRF Token
-            const csrfField = document.createElement('input');
-            csrfField.type = 'hidden';
-            csrfField.name = '_token';
-            csrfField.value = '{{ csrf_token() }}'; // Pastikan ini dapat dieksekusi dalam Blade template
-            form.appendChild(csrfField);
+                        // Menambahkan CSRF Token
+                        const csrfField = document.createElement('input');
+                        csrfField.type = 'hidden';
+                        csrfField.name = '_token';
+                        csrfField.value = '{{ csrf_token() }}'; // Pastikan ini dapat dieksekusi dalam Blade template
+                        form.appendChild(csrfField);
 
-            // Menambahkan Method DELETE
-            const methodField = document.createElement('input');
-            methodField.type = 'hidden';
-            methodField.name = '_method';
-            methodField.value = 'DELETE';
-            form.appendChild(methodField);
+                        // Menambahkan Method DELETE
+                        const methodField = document.createElement('input');
+                        methodField.type = 'hidden';
+                        methodField.name = '_method';
+                        methodField.value = 'DELETE';
+                        form.appendChild(methodField);
 
-            // Submit form untuk delete data
-            document.body.appendChild(form);
-            form.submit();
-        }
-    });
-}
-
+                        // Submit form untuk delete data
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            }
         </script>
     @endpush
 </body>
