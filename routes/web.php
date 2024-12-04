@@ -20,6 +20,7 @@ use App\Http\Controllers\Branch;
 use App\Http\Controllers\FormPembuatanController;
 use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
+use App\Http\Controllers\Komputer;
 use App\Http\Controllers\Laporan;
 use App\Http\Controllers\ModulController;
 use App\Http\Controllers\ProblemController;
@@ -202,6 +203,16 @@ Route::get('/edit-branch/{id}', [Branch::class, 'edit'])->name('branch.edit');
 Route::put('/update-branch/{id}', [Branch::class, 'update'])->name('branch.update');
 Route::get('/add-branch', [Branch::class, 'create'])->name('branch.create');
 Route::post('/store-branch', [Branch::class, 'store'])->name('branch.store');
+
+//Route Service Komputer
+Route::get('form-komputer', [Komputer::class, 'index'])->name('komputer');
+Route::get('form-detail', [Komputer::class, 'detail'])->name('komputer.detail');
+Route::get('/add-komputer', [Komputer::class, 'create'])->name('komputer.create');
+Route::post('/store-komputer', [Komputer::class, 'store'])->name('komputer.store');
+Route::get('/detail-komputer/{id}', [Komputer::class, 'detail'])->name('komputer.detail');
+Route::put('/update-komputer/{id}', [Komputer::class, 'update'])->name('komputer.update');
+Route::delete('/delete-komputer/{id}', [Komputer::class, 'destroy'])->name('komputer.destroy');
+Route::get('/search-users', [Komputer::class, 'search']);
 
 Route::prefix('problem')->name('problem.')->group(function () {
     Route::get('/', [ProblemController::class, 'index'])->name('index');
