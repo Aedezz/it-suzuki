@@ -20,6 +20,7 @@ use App\Http\Controllers\Branch;
 use App\Http\Controllers\FormPembuatanController;
 use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
+use App\Http\Controllers\InformationController;
 use App\Http\Controllers\Komputer;
 use App\Http\Controllers\Laporan;
 use App\Http\Controllers\ModulController;
@@ -219,3 +220,5 @@ Route::prefix('problem')->name('problem.')->group(function () {
     Route::get('create', [ProblemController::class, 'create'])->name('create');
     Route::post('store', [ProblemController::class, 'store'])->name('store');
 });
+
+Route::get('/information',[InformationController::class,'show'])->name('branch-info');

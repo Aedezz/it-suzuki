@@ -132,7 +132,7 @@
             <!-- Other menu links -->
             <a href="#" class="menu-link text-base font-medium">Log Book</a>
             <a href="#" class="menu-link text-base font-medium">OutStanding</a>
-            <a href="#" class="menu-link text-base font-medium">Branch Information</a>
+            <a href="{{route('branch-info')}}" class="menu-link text-base font-medium">Branch Information</a>
             <a href="#" class="menu-link text-base font-medium">Help</a>
             <a href="#" class="menu-link text-base font-medium">Report</a>
     
