@@ -14,7 +14,7 @@ class ItemPerbaikanController extends Controller
         $item = DB::table('item')->get();
         
         // Mengirim data ke view
-        return view('perbaikan.services.item', compact('item'));
+        return view('perbaikan.services.item.item', compact('item'));
     }
 
     // Menampilkan form untuk menambah data
