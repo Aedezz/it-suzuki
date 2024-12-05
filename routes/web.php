@@ -22,7 +22,8 @@ use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
 use App\Http\Controllers\Laporan;
 use App\Http\Controllers\ModulController;
-
+use App\Http\Controllers\ReportAktifitasController;
+use App\Http\Controllers\ReportCeklisController;
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -92,11 +93,10 @@ Route::get('/services/history/create', [HistoryPerbaikanController::class, 'crea
 // Route untuk menghandle POST (auto-live atau pengiriman data)
 Route::post('/services/history/store', [HistoryPerbaikanController::class, 'store'])->name('services.history.store');
 Route::get('/search-pegawai', [HistoryPerbaikanController::class, 'searchPegawai']);
+
+Route::get('/report/aktifitas', [ReportAktifitasController::class, 'index'])->name('aktifitas.index');
+Route::get('/report/aktifitas', [ReportAktifitasController::class, 'previewReport'])->name('aktifitas.preview');
 ///////////////////////////
-
-
-
-
 
 // Route pembuatan
 Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
