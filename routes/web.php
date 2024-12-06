@@ -23,6 +23,7 @@ use App\Http\Controllers\FormPc;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\Komputer;
 use App\Http\Controllers\Laporan;
+use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\ModulController;
 use App\Http\Controllers\ReportAktifitasController;
 use App\Http\Controllers\ReportCeklisController;use App\Http\Controllers\ProblemController;
@@ -222,3 +223,10 @@ Route::prefix('problem')->name('problem.')->group(function () {
 });
 
 Route::get('/information',[InformationController::class,'show'])->name('branch-info');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
+    Route::get('/logbook/create', [LogbookController::class, 'create'])->name('logbook.create');
+    Route::post('/logbook', [LogbookController::class, 'store'])->name('logbook.store');
+    Route::delete('/logbook/{id}', [LogbookController::class, 'destroy'])->name('logbook.destroy');
+});
