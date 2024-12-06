@@ -97,7 +97,7 @@ Route::get('/services/history/create', [HistoryPerbaikanController::class, 'crea
 Route::post('/services/history/store', [HistoryPerbaikanController::class, 'store'])->name('services.history.store');
 Route::get('/search-pegawai', [HistoryPerbaikanController::class, 'searchPegawai']);
 
-Route::get('/report/aktifitas', [ReportAktifitasController::class, 'index'])->name('aktifitas.index');
+Route::get('/report/aktifitas/v', [ReportAktifitasController::class, 'index'])->name('aktifitas.index');
 Route::get('/report/aktifitas', [ReportAktifitasController::class, 'previewReport'])->name('aktifitas.preview');
 ///////////////////////////
 
