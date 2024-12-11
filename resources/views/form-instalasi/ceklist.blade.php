@@ -23,12 +23,29 @@
                 @foreach ($cekForm as $d)
                 <tr>
                     <td class="px-4 py-2">{{$d->nomor}}</td>
-                    <td class="px-4 py-2">{{$d->tanggal}}</td>
+                    <td class="px-4 py-2" style="width: 100px; align-items: center">
+                        {{ $d->formatted_tanggal }}
+                    </td>
+                    
                     <td class="px-4 py-2">{{$d->nik}}</td>
                     <td class="px-4 py-2">{{$d->nama_lengkap}}</td>
                     <td class="px-4 py-2">{{$d->divisi_cabang}}</td>
                     <td class="px-4 py-2">{{$d->kode_asset}}</td>
-                    <td class="px-4 py-2">{{ $d->cek == 1 ? 'Sudah' : 'Belum' }}</td>
+                    <td>
+                        @if ($d->cek == 1)
+                            <div class="w-max">
+                                <div class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-green-500/20 text-green-600 py-1 px-2 text-xs rounded-md">
+                                    Sudah
+                                </div>
+                            </div>
+                        @else
+                            <div class="w-max">
+                                <div class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-red-500/20 text-red-600 py-1 px-2 text-xs rounded-md">
+                                    Belum
+                                </div>
+                            </div>
+                        @endif
+                    </td>
                     <td class="px-4 py-2">
                         <div class="flex items-center justify-center space-x-1">
                             @if ($d->cek == 0)
@@ -39,7 +56,7 @@
                                 </button>
                             </form>
                             @endif
-                            <button class="bg-yellow-500 text-white p-1 w-8 rounded-md hover:bg-yellow-600 transition duration-300" title="Print">
+                            <button class="bg-gray-500 text-white p-1 w-8 rounded-md hover:bg-gray-600 transition duration-300" title="Print">
                                 <i class="bi bi-printer"></i>
                             </button>
                             @if ($d->cek == 0)

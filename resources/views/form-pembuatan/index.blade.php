@@ -1,145 +1,128 @@
-@extends('layout.tabel-pembuatan')
+    @extends('form-pembuatan.layout.layout')
+    @section('body')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <!--Container-->
+        <div class="mt-10 w-full">
+            <div id="tableContainer" class="transition-all duration-500 ease-in-out">
+                <table id="example" class="display w-full table-auto border-collapse">
+                    <thead>
+                        <tr>
+                        <th  data-priority="1">No.</th>
+                        <th  data-priority="2" >NIK</th>
+                        <th  data-priority="3">Nomor</th>
+                        <th  data-priority="4">Tanggal</th>
+                        <th  data-priority="5">Nama Lengkap</th>
+                        <th  data-priority="6">Jabatan</th>
+                        <th  data-priority="7">Divisi Cabang</th>
+                        <th  data-priority="8">Keterangan</th>
+                        <th  data-priority="9">Status</th>
+                        <th  data-priority="10">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($formUser as $data)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $data->nik }}</td>
+                        <td>{{ $data->nomor }}</td>
+                        <td>{{ $data->tanggal }}</td>
+                        <td>{{ $data->nama_lengkap }}</td>
+                        <td>{{ $data->jabatan }}</td>
+                        <td>{{ $data->divisi_cabang }}</td>
+                        <td>{{ $data->keterangan }}</td>
+                        <td>
+                                    @if ($data->cek == 1)
+                                        <div class="w-max">
+                                            <div class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-green-500/20 text-green-600 py-1 px-2 text-xs rounded-md">
+                                                Sudah
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="w-max">
+                                            <div class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-red-500/20 text-red-600 py-1 px-2 text-xs rounded-md">
+                                                Belum
+                                            </div>
+                                        </div>
+                                    @endif
+                                </td>
+                        
+                        <td class="flex gap-2">
+                            <!-- Tombol Status (Update) -->
+                            @if ($data->cek == 0)
+                            {{-- <form action="{{ route('form-pembuatan.updateStatus', $data->id) }}" method="POST" class="form-update-status">
+                                @csrf
+                                @method('PUT')
+                                <button type="button" class="btn-icon btn-complete" title="Ubah Status" onclick="confirmUpdateStatus(this)">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            </form> --}}
 
-@section('title', 'Dashboard')
-
-@section('content')
-<div class="tabs">
-    <button class="tab active" data-tab="1">Data</button>
-    <button class="tab" data-tab="2">Laporan</button>
-    <button class="tab" data-tab="3">Ceklist</button>
-</div>
-
-<!-- Tab Content 1: Data -->
-<div class="tab-content" id="tab-1">
-    <div class="table-wrapper">
-        <table class="datatable">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>NIK</th>
-                    <th>Nomor</th>
-                    <th>Tanggal</th>
-                    <th>Nama Lengkap</th>
-                    <th>Jabatan</th>
-                    <th>Divisi Cabang</th>
-                    <th>Keterangan</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($formUser as $data)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nik }}</td>
-                    <td>{{ $data->nomor }}</td>
-                    <td>{{ $data->tanggal }}</td>
-                    <td>{{ $data->nama_lengkap }}</td>
-                    <td>{{ $data->jabatan }}</td>
-                    <td>{{ $data->divisi_cabang }}</td>
-                    <td>{{ $data->keterangan }}</td>
-                    <td>{{ $data->cek == 0 ? 'Belum Selesai' : 'Selesai' }}</td>
-                    <td class="flex gap-2">
-                        <!-- Tombol Status (Update) -->
-                        @if ($data->cek == 0)
-                        <form action="{{ route('form-pembuatan.updateStatus', $data->id) }}" method="POST" class="form-update-status">
-                            @csrf
-                            @method('PUT')
-                            <button type="button" class="btn-icon btn-complete" title="Ubah Status" onclick="confirmUpdateStatus(this)">
+                            <!-- Tombol Centang (Update Status) -->
+                            <button type="button" onclick="confirmUpdateStatus('{{ route('form-pembuatan.updateStatus', $data->id) }}')" 
+                                class="bg-green-500 text-white p-1 w-8 rounded-md hover:bg-green-600 transition duration-300" title="Check">
                                 <i class="bi bi-check-circle"></i>
+                            </button>
+                            
+                        
+                        
+                            <!-- Tombol Hapus -->
+                            {{-- <form action="{{ route('form-pembuatan.destroy', $data->id) }}" method="POST" class="form-delete">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn-icon btn-delete" title="Hapus Data" onclick="confirmDelete(this)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form> --}}
+
+                            <button type="button" onclick="confirmDelete('{{ route('form-pembuatan.destroy', $data->id) }}')" class="bg-red-500 text-white p-1 w-8 rounded-md hover:bg-red-600 transition duration-300" title="Hapus Data">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            @endif
+
+                            <!-- Tombol Print -->
+                            @if ($data->cek == 1)
+                            <form action="{{ route('form-pembuatan.print', $data->id) }}" method="GET" target="_blank">
+                                <button class="bg-gray-500 text-white p-1 w-8 h-8 rounded-md hover:bg-gray-600 transition duration-300"
+                                    title="Print">
+                                    <i class="bi bi-printer"></i>
+                                </button>
+                            </form>
+                        @else
+                        <form action="{{ route('form-pembuatan.print', $data->id) }}" method="GET" target="_blank">
+                            <button class="bg-gray-500 text-white p-1 w-8 h-8 rounded-md hover:bg-gray-600 transition duration-300"
+                                title="Print">
+                                <i class="bi bi-printer"></i>
                             </button>
                         </form>
                         @endif
-                    
-                        <!-- Tombol Hapus -->
-                        <form action="{{ route('form-pembuatan.destroy', $data->id) }}" method="POST" class="form-delete">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" class="btn-icon btn-delete" title="Hapus Data" onclick="confirmDelete(this)">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
-                    
-                        <!-- Tombol Print -->
-                        <a href="#" class="btn-icon btn-print" title="Cetak">
-                            <i class="bi bi-printer"></i>
-                        </a>
-                    </td>                                                                            
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+
+                        </td>                                                                            
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
 
-<div class="tab-content" id="tab-2" style="display: none;">
-    <div class="form-container">
-        <!-- Form untuk mengubah status berdasarkan tahun dan status -->
-        <form action="{{ route('form-pembuatan.updateStatusBatch') }}" method="POST">
-            @csrf
+    @push('script')
+    <script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "columnDefs": [
+                {
+                    "targets": 8,  // Mengatur agar kolom Aksi (kolom ke-9) tidak disembunyikan
+                    "visible": true,  // Pastikan kolom Aksi terlihat
+                }
+            ]
+        });
+    });
 
-            <!-- Pilihan Tahun -->
-            <div class="mb-3">
-                <label for="year" class="form-label">Pilih Tahun</label>
-                <select name="year" id="year" class="form-select">
-                    @php
-                        $currentYear = date('Y');
-                    @endphp
-                    @for ($i = 0; $i <= 8; $i++)
-                        <option value="{{ $currentYear + $i }}">{{ $currentYear + $i }}</option>
-                    @endfor
-                </select>
-            </div>
+    </script>
+    @endpush
 
-            <!-- Pilihan Status -->
-            <div class="mb-3">
-                <label for="status" class="form-label">Pilih Status</label>
-                <select name="status" id="status" class="form-select">
-                    <option value="selesai">Selesai</option>
-                    <option value="belum">Belum</option>
-                </select>
-            </div>
+    @endsection
 
-            <!-- Tombol Pending dan Print -->
-            <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-warning mt-4">Pending</button>
-                <button type="button" class="btn btn-success mt-4" onclick="window.open('#', '_blank')">Print</button>
-            </div>
-        </form>
-    </div>
-</div>
 
-<!-- Tab Content 3: Ceklist -->
-<div class="tab-content" id="tab-3" style="display: none;">
-    <div class="table-wrapper">
-        <table class="datatable">
-            <thead>
-                <tr>
-                    <th>Checkbox</th>
-                    <th>No Reg</th>
-                    <th>Tanggal</th>
-                    <th>NIK</th>
-                    <th>Nama Lengkap</th>
-                    <th>Divisi/Cabang</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($ceklistData as $data)
-                <tr id="data-{{ $data->id }}">
-                    <td>
-                        <input type="checkbox" class="checkbox-hide" data-id="{{ $data->id }}">
-                    </td>
-                    <td>{{ $data->nomor }}</td>
-                    <td>{{ $data->tanggal }}</td>
-                    <td>{{ $data->nik }}</td>
-                    <td>{{ $data->nama_lengkap }}</td>
-                    <td>{{ $data->divisi_cabang }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-
-@endsection

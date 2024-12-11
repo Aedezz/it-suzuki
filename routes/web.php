@@ -10,6 +10,7 @@ use App\Http\Controllers\Cpembuatan;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\FormPerbaikanController;
 use App\Http\Controllers\ChecklistPerbaikanController;
+use App\Http\Controllers\ChecklistPembuatanController;
 use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\PeriodePerbaikanController;
 use App\Http\Controllers\DeskripsiPerbaikanController;
@@ -101,6 +102,11 @@ Route::get('/search-pegawai', [HistoryPerbaikanController::class, 'searchPegawai
 
 // Route::get('/report/aktifitas/v', [ReportAktifitasController::class, 'index'])->name('aktifitas.index');
 Route::get('/report/aktifitas', [ReportAktifitasController::class, 'previewReport'])->name('aktifitas.preview');
+
+Route::get('/perbaikan-perangkat/print/{id}', [FormPerbaikanController::class, 'print'])->name('perbaikan.print');
+// Route untuk update status
+Route::post('/update-status/{id}', [ChecklistPerbaikanController::class, 'updateStatus'])->name('updateStatus');
+
 ///////////////////////////
 
 // Route pembuatan
@@ -140,6 +146,7 @@ Route::delete('/delete-activity/{id}', [Activity::class, 'destroy'])->name('acti
 Route::get('/edit-activity/{id}', [Activity::class, 'edit'])->name('activity.edit');
 Route::put('/update-activity/{id}', [Activity::class, 'update'])->name('activity.update');
 Route::get('/add-activity', [Activity::class, 'create'])->name('activity.create');
+
 Route::post('/store-activity', [Activity::class, 'store'])->name('activity.store');Route::prefix('/form-pembuatan')->group(function() {
 Route::get('/create', [FormPembuatanController::class, 'create'])->name('form-pembuatan.create');
 Route::post('/store', [FormPembuatanController::class, 'store'])->name('form-pembuatan.store');
@@ -147,9 +154,14 @@ Route::get('/index', [FormPembuatanController::class, 'index'])->name('form-pemb
 Route::get('/edit/{id}', [FormPembuatanController::class, 'edit'])->name('form-pembuatan.edit');
 Route::put('/update/{id}', [FormPembuatanController::class, 'update'])->name('form-pembuatan.update');
 Route::delete('/destroy/{id}', [FormPembuatanController::class, 'destroy'])->name('form-pembuatan.destroy');
-Route::put('/form-pembuatan/update-status/{id}', [FormPembuatanController::class, 'updateStatus'])->name('form-pembuatan.updateStatus');
+Route::post('/form-pembuatan/update-status/{id}', [FormPembuatanController::class, 'updateStatus'])->name('form-pembuatan.updateStatus');
 Route::post('/update-status-batch', [FormPembuatanController::class, 'updateStatusBatch'])->name('form-pembuatan.updateStatusBatch');
+Route::get('/form-pembuatan/checklist', [ChecklistPembuatanController::class, 'index'])->name('form-pembuatan.checklist');
+Route::get('/form-pembuatan/print/{id}', [FormPembuatanController::class, 'print'])->name('form-pembuatan.print');
+Route::post('/update-status/{id}', [ChecklistPembuatanController::class, 'updateStatus'])->name('updateStatus');
+
 });// Route Form Dalam Installasi Pc
+
 Route::get('form-pc', [FormPc::class, 'form'])->name('table');
 Route::delete('/delete-form/{id}', [FormPc::class, 'destroy'])->name('pc.destroy');
 Route::post('/pc/check/{id}', [FormPc::class, 'check'])->name('pc.check');

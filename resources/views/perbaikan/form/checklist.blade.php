@@ -1,4 +1,4 @@
-@extends('../dalam/layout')
+@extends('perbaikan.layout.layout-table')
 
 @section('style')
     <style>
@@ -128,113 +128,118 @@
         }
     </style>
 @endsection
-<link rel="icon" href="../images/perbaikan/logo-tab.png">
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+@section('body')
 
-    @section('content')
-        <!--Container-->
-        <div class="container w-full md:w-4/5 xl:w-3/5 mx-auto px-2">
-            <!--Card-->
-            <div id='recipients' class="p-3 mt-6 lg:mt-0 rounded shadow bg-white"
-                style="width:165%; margin-left: -260px; margin-top: 22px;">
-                <!-- Title and Menu Container -->
-                <div class="flex justify-between items-center px-4 py-8">
-                    <!-- Title -->
-                    <h2 class="font-sans font-bold text-lg md:text-2xl" style="font-size: 20px; margin-top: -20px;">
-                        FORM PERBAIKAN PERANGKAT
-                    </h2>
-
-                    <!-- Menu -->
-                    <div class="flex space-x-6">
-                        <a href="{{ route('form.index') }}"
-                            class="text-gray-700 hover:text-indigo-500 transition-all duration-300">Data</a>
-                        <a href="{{ route('perbaikan.laporan') }}"
-                            class="text-gray-700 hover:text-indigo-500 transition-all duration-300">Laporan</a>
-                        <a href="{{ route('checklist.index') }}"
-                            class="text-gray-700 hover:text-indigo-500 transition-all duration-300">Checklist</a>
-                    </div>
-                </div>
-
-
-
-                <hr style="margin-top: -25px"><br>
-                <table id="example" class="stripe hover" style="width:100%; padding-top: 1em; padding-bottom: 1em;">
-                    <thead>
-                        <tr><th>Check</th>
-                            <th data-priority="1">No Reg</th>
-                            <th data-priority="2">Tanggal</th>
-                            <th data-priority="3">NIK</th>
-                            <th data-priority="4">Nama</th>
-                            <th data-priority="5">Divisi</th>
-                            <th data-priority="6">Kode Asset</th>
-                            <th data-priority="7">Nama Barang</th>
+    <link rel="icon" href="../images/perbaikan/logo-tab.png">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <div class="mt-10 w-full">
+        <div id="tableContainer" class="transition-all duration-500 ease-in-out">
+            <table id="example" class="display w-full table-auto border-collapse">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th data-priority="1">No Reg</th>
+                        <th data-priority="2">Tanggal</th>
+                        <th data-priority="3">NIK</th>
+                        <th data-priority="4">Nama</th>
+                        <th data-priority="5">Divisi</th>
+                        <th data-priority="6">Kode Asset</th>
+                        <th data-priority="7">Nama Barang</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($form as $data)
+                        <tr>
+                            <td><input type="checkbox" class="data-checkbox" value="{{ $data->id }}"></td>
+                            <!-- Checkbox untuk setiap baris -->
+                            <td>{{ $data->nomor }}</td>
+                            <td>{{ $data->tanggal }}</td>
+                            <td>{{ $data->nik }}</td>
+                            <td>{{ $data->nama_lengkap }}</td>
+                            <td>{{ $data->divisi_cabang }}</td>
+                            <td>{{ $data->kode_asset }}</td>
+                            <td>{{ $data->nama_barang }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($form as $data)
-                 
-                            <tr>
-                                <td><input type="checkbox" class="data-checkbox" value="{{ $data->id }}"></td>  <!-- Checkbox untuk setiap baris -->
-                                <td>{{ $data->nomor }}</td>
-                                <td>{{ $data->tanggal }}</td>
-                                <td>{{ $data->nik }}</td>
-                                <td>{{ $data->nama_lengkap }}</td>
-                                <td>{{ $data->divisi_cabang }}</td>
-                                <td>{{ $data->kode_asset }}</td>
-                                <td>{{ $data->nama_barang }}</td>
-                            </tr>
-                  
                     @endforeach
-                    </tbody>
+                </tbody>
 
-                </table>
-            </div>
+            </table>
         </div>
-    @endsection
-
+    </div>
     @push('script')
-        <!--DataTables JS-->
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+     $(document).ready(function() {
+    $('#example').DataTable({
+        "lengthMenu": [ 10, 25, 50, 100 ],  // Menentukan jumlah data yang ditampilkan per halaman
+        "searching": true,  // Memastikan pencarian aktif
+        "paging": true,  // Memastikan paginasi aktif
+        "info": true  // Menampilkan informasi jumlah data
+    });
+});
 
-        <script>
-            $(document).ready(function() {
-                $('#example').DataTable({
-                    "responsive": true
-                });
+    
+    </script>
+
+<script>
+    $(document).ready(function() {
+        // Menggunakan event change pada checkbox
+        $('.data-checkbox').on('change', function() {
+            // Mendapatkan ID dari checkbox yang dicentang
+            var id = $(this).val();
+
+            // Mengirim request Ajax untuk memperbarui status
+            $.ajax({
+                url: '{{ route('updateStatus', ['id' => ':id']) }}'.replace(':id', id), // Route untuk update status
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    // Hapus baris tabel setelah status diperbarui
+                    $('tr').has('input[value="' + id + '"]').remove();
+
+                    // Tampilkan SweetAlert notifikasi sukses
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: response.message,
+                        icon: 'success',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                        willClose: () => {
+                            // Do nothing
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Tampilkan SweetAlert notifikasi error
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Terjadi kesalahan saat memperbarui status.',
+                        icon: 'error',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                        willClose: () => {
+                            // Do nothing
+                        }
+                    });
+                }
             });
+        });
+    });
+</script>
 
-            // Menangkap elemen menu dan garis aktif
-            const menuItems = document.querySelectorAll('.menu-item');
-            const activeLine = document.getElementById('active-line');
 
-            // Fungsi untuk memindahkan garis aktif
-            function setActiveLine(target) {
-                const rect = target.getBoundingClientRect();
-                const containerRect = target.parentNode.getBoundingClientRect();
-                activeLine.style.width = `${rect.width}px`;
-                activeLine.style.left = `${rect.left - containerRect.left}px`;
-            }
 
-            // Menambahkan event listener ke setiap menu item
-            menuItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    setActiveLine(item);
-
-                    // Mengubah warna menu yang aktif
-                    menuItems.forEach(menu => menu.classList.remove('text-blue-500'));
-                    item.classList.add('text-blue-500');
-                });
-            });
-
-            // Inisialisasi garis aktif pada menu pertama
-            if (menuItems.length > 0) {
-                setActiveLine(menuItems[0]);
-                menuItems[0].classList.add('text-blue-500');
-            }
-        </script>
     @endpush
-</body>
+@endsection
+
+

@@ -1,5 +1,4 @@
-@extends('perbaikan.layout.layout-table')
-
+@extends('form-pembuatan.layout.layout')
 @section('style')
     <style>
         /*Overrides for Tailwind CSS */
@@ -128,49 +127,40 @@
         }
     </style>
 @endsection
-
 @section('body')
-    <!-- Form Section -->
-    <div class="container mt-4">
-        <div class="form-row flex flex-wrap -mx-2">
+
+<div class="container mt-4">
+    <div class="form-row flex flex-wrap -mx-2">
+        <!-- Form untuk mengubah status berdasarkan tahun dan status -->
+        <form action="{{ route('form-pembuatan.updateStatusBatch') }}" method="POST">
+            @csrf
             <!-- Input Tahun -->
             <div class="form-group col-md-6 px-2 w-full md:w-1/2">
-                <label for="tahun" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun</label>
-                <input type="number"
-                    class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    id="tahun" name="tahun" value="2024" required>
-            </div>
-
-            <!-- Select IT -->
-            <div class="form-group col-md-6 px-2 w-full md:w-1/2">
-                <label for="it" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">IT</label>
-                <select id="it" name="it"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required>
-                    <option value="" disabled selected>Silahkan Pilih Terlebih Dahulu</option>
-                    <option value="11.11.259">EPA YUDA PURNAMA</option>
-                    <option value="22.02.2179">BAGUES PUTRA TAWAQQAL</option>
-                    <option value="22.02.2183">AGIL PUTRA DESALWA</option>
-                    <option value="22.11.2376">RIZQIE RAHMATILLAH</option>
-                    <option value="24.01.2779">HUSEIN ABBAS RUMAF</option>
-                    <option value="24.01.2793">MUHAMMAD ALWI</option>
-                    <option value="24.02.2827">BRILIAN SYUKRI RAMADHAN</option>
-                    <option value="24.09.3002">NUGROHO OKTARINDO</option>
+                <label for="tahun" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">Tahun</label>
+                <select name="year" id="year" class="form-select">
+                    @php
+                        $currentYear = date('Y');
+                    @endphp
+                    @for ($i = 0; $i <= 8; $i++)
+                        <option value="{{ $currentYear + $i }}">{{ $currentYear + $i }}</option>
+                    @endfor
                 </select>
             </div>
-        </div>
 
-        <!-- Buttons -->
-        <div class="flex justify-end space-x-4 mt-4">
-            <button type="submit" class="simpan bg-purple-500 text-white font-bold py-2 px-4 rounded">Print</button>
-            <button type="reset" class="reset bg-red-500 text-white font-bold py-2 px-4 rounded">Pending</button>
-        </div>
+            <!-- Pilihan Status -->
+            <div class="form-group col-md-6 px-2 w-full md:w-1/2">
+                <label for="status"class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Status</label>
+                <select name="status" id="status"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="selesai">Selesai</option>
+                    <option value="belum">Belum</option>
+                </select>
+            </div>
+
+            <!-- Tombol Pending dan Print -->
+            <div class="flex justify-end space-x-4 mt-4">
+                <button type="submit" class="btn bg-red-500 text-white font-bold py-2 px-4 rounded">Pending</button>
+                <button type="button" class="btn bg-purple-500 text-white font-bold py-2 px-4 rounded" onclick="window.open('#', '_blank')">Print</button>
+            </div>
+        </form>
     </div>
-
-
-
-
-    </div>
-    </div>
-@endsection
-</body>
+</div>

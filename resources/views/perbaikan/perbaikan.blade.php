@@ -127,7 +127,7 @@
             Form Perbaikan Perangkat
         </h2>
 
-        <form method="POST" action="{{ route('perbaikan.store') }}">
+        <form action="{{ route('perbaikan.store') }}" method="POST">
             @csrf
             <div class="form-left">
                 <div style="margin-bottom: 20px; padding-top: 20px;">

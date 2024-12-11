@@ -1,4 +1,4 @@
-@extends('perbaikan.layout.layout-table')
+@extends('form-pembuatan.layout.layout')
 
 @section('style')
     <style>
@@ -130,47 +130,106 @@
 @endsection
 
 @section('body')
-    <!-- Form Section -->
-    <div class="container mt-4">
-        <div class="form-row flex flex-wrap -mx-2">
-            <!-- Input Tahun -->
-            <div class="form-group col-md-6 px-2 w-full md:w-1/2">
-                <label for="tahun" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun</label>
-                <input type="number"
-                    class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    id="tahun" name="tahun" value="2024" required>
-            </div>
-
-            <!-- Select IT -->
-            <div class="form-group col-md-6 px-2 w-full md:w-1/2">
-                <label for="it" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">IT</label>
-                <select id="it" name="it"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required>
-                    <option value="" disabled selected>Silahkan Pilih Terlebih Dahulu</option>
-                    <option value="11.11.259">EPA YUDA PURNAMA</option>
-                    <option value="22.02.2179">BAGUES PUTRA TAWAQQAL</option>
-                    <option value="22.02.2183">AGIL PUTRA DESALWA</option>
-                    <option value="22.11.2376">RIZQIE RAHMATILLAH</option>
-                    <option value="24.01.2779">HUSEIN ABBAS RUMAF</option>
-                    <option value="24.01.2793">MUHAMMAD ALWI</option>
-                    <option value="24.02.2827">BRILIAN SYUKRI RAMADHAN</option>
-                    <option value="24.09.3002">NUGROHO OKTARINDO</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Buttons -->
-        <div class="flex justify-end space-x-4 mt-4">
-            <button type="submit" class="simpan bg-purple-500 text-white font-bold py-2 px-4 rounded">Print</button>
-            <button type="reset" class="reset bg-red-500 text-white font-bold py-2 px-4 rounded">Pending</button>
-        </div>
+<!-- Tab Content 3: Ceklist -->
+<link rel="icon" href="../images/perbaikan/logo-tab.png">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<div class="mt-10 w-full">
+    <div id="tableContainer" class="transition-all duration-500 ease-in-out">
+        <table id="example" class="display w-full table-auto border-collapse">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>No Reg</th>
+                    <th>Tanggal</th>
+                    <th>NIK</th>
+                    <th>Nama Lengkap</th>
+                    <th>Divisi/Cabang</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($ceklistData as $data)
+                <tr id="data-{{ $data->id }}">
+                    <td><input type="checkbox" class="data-checkbox" value="{{ $data->id }}"></td>
+                    <td>{{ $data->nomor }}</td>
+                    <td>{{ $data->tanggal }}</td>
+                    <td>{{ $data->nik }}</td>
+                    <td>{{ $data->nama_lengkap }}</td>
+                    <td>{{ $data->divisi_cabang }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
+</div>
+
+@push('script')
+<script>
+ $(document).ready(function() {
+$('#example').DataTable({
+    "lengthMenu": [ 10, 25, 50, 100 ],  // Menentukan jumlah data yang ditampilkan per halaman
+    "searching": true,  // Memastikan pencarian aktif
+    "paging": true,  // Memastikan paginasi aktif
+    "info": true  // Menampilkan informasi jumlah data
+});
+});
 
 
+</script>
 
+<script>
+    $(document).ready(function() {
+        // Menggunakan event change pada checkbox
+        $('.data-checkbox').on('change', function() {
+            // Mendapatkan ID dari checkbox yang dicentang
+            var id = $(this).val();
 
-    </div>
-    </div>
+            // Mengirim request Ajax untuk memperbarui status
+            $.ajax({
+                url: '{{ route('updateStatus', ['id' => ':id']) }}'.replace(':id', id), // Route untuk update status
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    // Hapus baris tabel setelah status diperbarui
+                    $('tr').has('input[value="' + id + '"]').remove();
+
+                    // Tampilkan SweetAlert notifikasi sukses
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: response.message,
+                        icon: 'success',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                        willClose: () => {
+                            // Do nothing
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Tampilkan SweetAlert notifikasi error
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Terjadi kesalahan saat memperbarui status.',
+                        icon: 'error',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                        willClose: () => {
+                            // Do nothing
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+@endpush
 @endsection
-</body>
