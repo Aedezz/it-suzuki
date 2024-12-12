@@ -47,164 +47,320 @@
 
 @section('content')
 <div class="container mx-auto px-6 py-8">
-    <div class="border border-white-600 rounded-lg p-4" style="margin-top: -25px">
-    <h2 class="text-2xl font-bold text-gray-700 mb-6">BRANCH INFORMATION    </h2>
-    <div class="space-y-6">
-            <hr>
-            <!-- Head Office -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="head-office">
-                     Head Office
-                </p>
-                <div id="head-office" class="hidden mt-3 text-gray-700">
-                    <p>SERVER</p>
-                    <p>SDMS IP Local : 117.102.163.242, IP Public : 212.212.0.212</p>
-                </div>
-            </div>
-
-            <!-- Banjarmasin -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="banjarmasin">
-                     Banjarmasin
-                </p>
-                <div id="banjarmasin" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 117.102.163.242</p>
-                    <p>ISP : MIT</p>
-                </div>
-            </div>
-
-            <!-- Banjarmasin II -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="banjarmasin-ii">
-                     Banjarmasin II
-                </p>
-                <div id="banjarmasin-ii" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 117.102.161.170</p>
-                    <p>ISP : MIT</p>
-                </div>
-            </div>
-
-            <!-- Pelaihari -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="pelaihari">
-                     Pelaihari
-                </p>
-                <div id="pelaihari" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 114.6.51.50</p>
-                    <p>ISP : INDOSAT</p>
-                </div>
-            </div>
-
-            <!-- Batulicin -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="batulicin">
-                     Batulicin
-                </p>
-                <div id="batulicin" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 114.5.12.242</p>
-                    <p>ISP : INDOSAT</p>
-                </div>
-            </div>
-
-            <!-- Banjarbaru -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="banjarbaru">
-                     Banjarbaru
-                </p>
-                <div id="banjarbaru" class="hidden mt-3 text-gray-700">
-                    <p>IP Publik : 103.57.9.26</p>
-                    <p>ISP : MIT</p>
-                </div>
-            </div>
-
-            <!-- Barabai -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="barabai">
-                     Barabai
-                </p>
-                <div id="barabai" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 2f2c02e49521.sn.mynetname.net</p>
-                    <p>ISP : TELKOM SPEEDY</p>
-                    <p>INDOSAT : 114.5.12.145</p>
-                </div>
-            </div>
-
-            <!-- Tanjung -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="tanjung">
-                     Tanjung
-                </p>
-                <div id="tanjung" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 114.6.51.18</p>
-                    <p>ISP : INDOSAT</p>
-                </div>
-            </div>
-
-            <!-- Ampah -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="ampah">
-                     Ampah
-                </p>
-                <div id="ampah" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : muarateweh.freeddns.com</p>
-                    <p>ISP : TELKOM INDIHOME</p>
-                </div>
-            </div>
-
-            <!-- Kapuas -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="kapuas">
-                     Kapuas
-                </p>
-                <div id="kapuas" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 114.5.12.230</p>
-                    <p>ISP : INDOSAT</p>
-                </div>
-            </div>
-
-            <!-- Palangkaraya -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="palangkaraya">
-                     Palangkaraya
-                </p>
-                <div id="palangkaraya" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 114.5.11.162</p>
-                    <p>ISP : INDOSAT</p>
-                </div>
-            </div>
-
-            <!-- Sampit -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="sampit">
-                     Sampit
-                </p>
-                <div id="sampit" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 114.5.11.178</p>
-                    <p>ISP : INDOSAT</p>           
-                </div>
-            </div>
-
-            <!-- P. Bun -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="pbun">
-                     P. Bun
-                </p>
-                <div id="pbun" class="hidden mt-3 text-gray-700">
-                    <p>IP PUBLIK : 114.6.51.130</p>
-                    <p>ISP : INDOSAT</p> 
-                </div>
-            </div>
-
-            <!-- Part Depo -->
-            <div class="p-4 border border-gray-400 rounded-lg bg-gray-100">
-                <p class="text-gray-700 font-semibold cursor-pointer toggle" data-target="part-depo">
-                     Part Depo
-                </p>
-                <div id="part-depo" class="hidden mt-3 text-gray-700">
-                </div>
-            </div>
-        </div>
+    <div class="border border-white rounded-lg p-4" style="margin-top: -25px; background-color:rgb(255, 255, 255)">
+    <h2 class="text-2xl font-bold text-gray-700 mb-6">Branch Information    </h2>
+  <!-- Accordion Item 1 -->
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(1)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Head Office</span>
+      <span id="icon-1" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-1" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        SERVER
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        SDMS IP Local : 117.102.163.242, IP Public : 212.212.0.212
+      </div>
     </div>
+  </div>
+   
+  <!-- Accordion Item 2 -->
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(2)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Banjarmasin</span>
+      <span id="icon-2" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-2" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 117.102.163.242
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : MIT
+      </div>
+    </div>
+  </div>
+   
+  <!-- Accordion Item 3 -->
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Banjarmasin II</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 117.102.161.170
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : MIT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Pelaihari</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 114.6.51.50
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : INDOSAT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Batulicin</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 114.5.12.242
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : INDOSAT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Banjarbaru</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 103.57.9.26
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : MIT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Barabai</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 2f2c02e49521.sn.mynetname.net
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : TELKOM SPEEDY
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        INDOSAT : 114.5.12.145
+      </div>
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Tanjung</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 114.6.51.18
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : INDOSAT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Ampah</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : muarateweh.freeddns.com
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : TELKOM INDIHOME
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Kapuas</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 114.5.12.230
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : INDOSAT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Palangkaraya</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 114.5.11.162
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : INDOSAT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Sampit</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 114.5.11.178
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : INDOSAT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Pangkalan Bun</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+        IP PUBLIK : 114.6.51.130
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+        ISP : INDOSAT
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-b border-slate-200">
+    <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-5 text-slate-800">
+      <span>Part Depo</span>
+      <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <div class="pb-5 text-sm text-slate-500">
+      </div>
+      <div class="pb-5 text-sm text-slate-500">
+       
+      </div>
+
+    </div>
+  </div>
+
+   
+  <script>
+    function toggleAccordion(index) {
+      const content = document.getElementById(`content-${index}`);
+      const icon = document.getElementById(`icon-${index}`);
+   
+      // SVG for Down icon
+      const downSVG = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        </svg>
+      `;
+   
+      // SVG for Up icon
+      const upSVG = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+        </svg>
+      `;
+   
+      // Toggle the content's max-height for smooth opening and closing
+      if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        content.style.maxHeight = '0';
+        icon.innerHTML = upSVG;
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        icon.innerHTML = downSVG;
+      }
+    }
+  </script>
 </div>
 
 <script>
