@@ -18,16 +18,3 @@
 
 </body>
 </html>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggles = document.querySelectorAll('.toggle');
-        toggles.forEach(toggle => {
-            toggle.addEventListener('click', function () {
-                const target = document.querySelector(`#${this.dataset.target}`);
-                if (target) {
-                    target.classList.toggle('hidden');
-                }
-            });
-        });
-    });
-</script>
