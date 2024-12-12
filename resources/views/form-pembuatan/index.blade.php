@@ -48,34 +48,17 @@
                                     @endif
                                 </td>
                         
-                        <td class="flex gap-2">
+                                <td class="p-4 border-b border-gray-gray-50">
+                            <div class="flex justify-center space-x-2">
                             <!-- Tombol Status (Update) -->
                             @if ($data->cek == 0)
-                            {{-- <form action="{{ route('form-pembuatan.updateStatus', $data->id) }}" method="POST" class="form-update-status">
-                                @csrf
-                                @method('PUT')
-                                <button type="button" class="btn-icon btn-complete" title="Ubah Status" onclick="confirmUpdateStatus(this)">
-                                    <i class="bi bi-check-circle"></i>
-                                </button>
-                            </form> --}}
-
+                     
                             <!-- Tombol Centang (Update Status) -->
                             <button type="button" onclick="confirmUpdateStatus('{{ route('form-pembuatan.updateStatus', $data->id) }}')" 
                                 class="bg-green-500 text-white p-1 w-8 rounded-md hover:bg-green-600 transition duration-300" title="Check">
                                 <i class="bi bi-check-circle"></i>
                             </button>
-                            
                         
-                        
-                            <!-- Tombol Hapus -->
-                            {{-- <form action="{{ route('form-pembuatan.destroy', $data->id) }}" method="POST" class="form-delete">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" class="btn-icon btn-delete" title="Hapus Data" onclick="confirmDelete(this)">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form> --}}
-
                             <button type="button" onclick="confirmDelete('{{ route('form-pembuatan.destroy', $data->id) }}')" class="bg-red-500 text-white p-1 w-8 rounded-md hover:bg-red-600 transition duration-300" title="Hapus Data">
                                 <i class="bi bi-trash"></i>
                             </button>

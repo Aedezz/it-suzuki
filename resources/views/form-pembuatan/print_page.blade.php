@@ -218,22 +218,22 @@
         <div class="signature-section">
             <div class="signature-column">
                 <p>Pemohon (Pengguna)</p>
-                <p class="signature-line-2">________________________________</p>
+                <p class="signature-line-2">______________________</p>
                 <p class="date-line">TGL:</p>
             </div>
             <div class="signature-column">
                 <p>Atasan</p>
-                <p class="signature-line-2">________________________________</p>
+                <p class="signature-line-2">______________________</p>
                 <p class="date-line">TGL:</p>
             </div>
             <div class="signature-column">
                 <p>Diperiksa Oleh STAFF (IT)</p>
-                <p class="signature-line-2">________________________________</p>
+                <p class="signature-line-2">______________________</p>
                 <p class="date-line">TGL:</p>
             </div>
             <div class="signature-column">
                 <p>Disetujui Oleh IT ASS / MNGR</p>
-                <p class="signature-line-2">________________________________</p>
+                <p class="signature-line-2">______________________</p>
                 <p class="date-line">TGL:</p>
             </div>
         </div>

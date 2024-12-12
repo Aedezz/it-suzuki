@@ -14,16 +14,11 @@ class ReportAktifitasController extends Controller
         if (empty($tanggal) || $tanggal == '0000-00-00') {
             return '-';
         }
-
-        $bulan = [
-            1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei',
-            'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-        ];
     
-
         $pecahkan = explode('-', $tanggal);
-        return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
+        return $pecahkan[2] . '-' . $pecahkan[1] . '-' . $pecahkan[0]; // Format dd-mm-yyyy
     }
+    
 
     public function index()
     {
@@ -51,21 +46,26 @@ class ReportAktifitasController extends Controller
         
         // Query untuk mengambil data catatan
         $data = DB::table('catatan')
-            ->join('grup', 'catatan.id_grup', '=', 'grup.id_grup')
-            ->join('modul', 'catatan.id_modul', '=', 'modul.id_modul')
-            ->join('user', 'catatan.create_by', '=', 'user.username')
-            ->select(
-                'catatan.id_catatan',
-                'catatan.tgl_catatan',
-                'catatan.keterangan',
-                'catatan.solusi',
-                'grup.nama_grup as grup_nama',
-                'modul.nama_modul as modul_nama',
-                'user.nama'
-            )
-            ->whereBetween('catatan.tgl_catatan', [$tglawal, $tglakhir])
-            ->where('catatan.create_by', $nama)
-            ->get();
+        ->join('grup', 'catatan.id_grup', '=', 'grup.id_grup')
+        ->join('modul', 'catatan.id_modul', '=', 'modul.id_modul')
+        ->join('user', 'catatan.create_by', '=', 'user.username')
+        ->select(
+            'catatan.id_catatan',
+            'catatan.tgl_catatan',
+            'catatan.keterangan',
+            'catatan.solusi',
+            'grup.nama_grup as grup_nama',
+            'modul.nama_modul as modul_nama',
+            'user.nama'
+        )
+        ->whereBetween('catatan.tgl_catatan', [$tglawal, $tglakhir])
+        ->where('catatan.create_by', $nama)
+        ->get()
+        ->map(function ($item) {
+            $item->tgl_catatan = $this->dateID($item->tgl_catatan); // Format tanggal
+            return $item;
+        });
+    
         
         // Mengembalikan data ke tampilan
         return view('perbaikan.report.aktifitas.aktifitas', compact('data', 'tglawalFormatted', 'tglakhirFormatted', 'namapegawai', 'nama', 'users'));
