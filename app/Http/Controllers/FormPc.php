@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -11,8 +12,16 @@ class FormPc extends Controller
     {
         // Fetch records to display in the table view with the status
         $viewForm = DB::table('form_install')->get(); 
+    
+        // Format tanggal pada setiap record
+        foreach ($viewForm as $d) {
+            $d->formatted_tanggal = Carbon::parse($d->tanggal)->format('d-m-Y');
+        }
+    
         return view('form-instalasi.form_pc', compact('viewForm'));
     }
+    
+    
 
     public function destroy($id)
     {
@@ -42,12 +51,17 @@ class FormPc extends Controller
     {
         // Retrieve the record to print
         $data = DB::table('form_install')->where('id', $id)->first();
-
+    
+        // Format tanggal sebelum dikirim ke view
+        $data->formatted_tanggal = Carbon::parse($data->tanggal)->format('d-m-Y');
+    
         // Load the 'print_page' view and pass the data to it
         $pdf = Pdf::loadView('form-instalasi.print_page', compact('data'));
-
+    
         // Return the generated PDF file as a download or display in the browser
         return $pdf->stream('Form_Details.pdf'); // To display in browser
         // return $pdf->download('Form_Details.pdf'); // To force download  
     }
+    
+    
 }

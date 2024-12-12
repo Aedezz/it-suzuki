@@ -1,21 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class FormPerbaikanController extends Controller
 {
     // Menampilkan semua data formUser menggunakan Query Builder
     public function index()
-    {
-        // Mengambil semua data dari tabel form_perangkat
-        $form = DB::table('form_perangkat')->get();
-        
-        // Mengirim data ke view
-        return view('perbaikan.form.form', compact('form'));
+{
+    // Mengambil semua data dari tabel form_perangkat dan menggabungkannya dengan tabel user berdasarkan kolom 'it' dan 'username'
+    $form = DB::table('form_perangkat')
+    ->leftJoin('user', 'form_perangkat.it', '=', 'user.username') // Menggunakan leftJoin agar semua data ditampilkan
+    ->select('form_perangkat.*', 'user.nama', 'user.username')
+    ->get();
+    
+
+    // Format tanggal pada setiap record
+    foreach ($form as $d) {
+        $d->formatted_tanggal = Carbon::parse($d->tanggal)->format('d-m-Y');
     }
+
+    // Mengirim data ke view
+    return view('perbaikan.form.form', compact('form'));
+}
+    
 
    // Fungsi untuk memperbarui status
 public function updateStatus($id)
@@ -75,6 +86,23 @@ public function updateStatus($id)
         // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('form-pembuatan.index')->with('status', ['judul' => 'Berhasil', 'pesan' => 'Data Berhasil Di Perbarui!', 'icon' => 'success']);
     }
+
+    public function print($id)
+{
+    // Ambil data dari tabel form_perangkat berdasarkan ID dan gabungkan dengan data dari tabel user
+    $data = DB::table('form_perangkat')
+        ->join('user', 'form_perangkat.it', '=', 'user.username') // Menghubungkan berdasarkan 'it' (di form_perangkat) dan 'username' (di user)
+        ->select('form_perangkat.*', 'user.username', 'user.nama') // Memilih kolom yang dibutuhkan, termasuk 'username' dan 'nama' dari tabel user
+        ->where('form_perangkat.id', $id)
+        ->first(); // Mengambil hanya satu record berdasarkan ID
+
+    // Load view untuk cetak dan pass data ke dalam view
+    $pdf = Pdf::loadView('perbaikan.form.print_page', compact('data'));
+
+    // Return file PDF untuk ditampilkan atau didownload
+    return $pdf->stream('Form_Details.pdf'); // Menampilkan di browser
+    // return $pdf->download('Form_Details.pdf'); // Untuk mendownload
+}
 
     // Menghapus data form
    // Menghapus data form
