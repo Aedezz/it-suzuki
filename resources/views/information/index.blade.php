@@ -63,6 +63,7 @@
     <div class="container mx-auto px-6 py-8">
         <div class="border border-white rounded-lg p-4" style="margin-top: -25px; background-color:rgb(255, 255, 255)">
             <h2 class="text-2xl font-bold text-gray-700 mb-6">Branch Information </h2>
+            <hr>
             <!-- Accordion Item 1 -->
             <div class="border-b border-slate-200">
                 <button onclick="toggleAccordion(1)" class="w-full flex justify-between items-center py-5 text-slate-800">

@@ -9,9 +9,10 @@ class FormGrup extends Controller
 {
     public function index()
     {
-        $groups = DB::table('grup')->paginate(10); // Menambahkan pagination
+        $groups = DB::table('grup')->get(); // Mengambil semua data
         return view('group.index', compact('groups'));
     }
+    
 
     public function create()
     {

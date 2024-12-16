@@ -1,45 +1,182 @@
-@include('layout.modul')
+@extends('../dalam/layout')
 
-<div class="container mx-auto my-6 bg-white p-6 rounded-lg shadow-lg max-w-lg">
-    <h2 class="text-2xl font-semibold mb-6 text-center">Edit Modul</h2>
+@section('style')
+    <style>
+        /*Overrides for Tailwind CSS */
 
-    <form method="POST" action="{{ route('modul.update', $modul->id_modul) }}" class="space-y-6">
-        @csrf
-        @method('PUT')
-        
-        <!-- Nama Modul -->
-        <div>
-            <label for="nama_modul" class="block text-gray-700 font-medium">Nama Modul</label>
-            <input 
-                type="text" 
-                id="nama_modul" 
-                name="nama_modul" 
-                value="{{ old('nama_modul', $modul->nama_modul) }}" 
-                class="border w-full p-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600" 
-                required 
-                placeholder="Masukkan Nama Modul">
-            @error('nama_modul')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+        /*Form fields*/
+        .dataTables_wrapper {
+            margin-top: 20px
+        }
 
-        <!-- Kategori (Tidak Bisa Diubah) -->
-        <div>
-            <label for="kategori" class="block text-gray-700 font-medium">Kategori</label>
-            <p class="p-3 bg-gray-100 border rounded-md text-gray-600">{{ $modul->nama_kategori }}</p>
-        </div>
+        .dataTables_wrapper select,
+        .dataTables_wrapper .dataTables_filter input {
+            color: #4a5568;
+            /*text-gray-700*/
+            padding-left: 1rem;
+            /*pl-4*/
+            padding-right: 1rem;
+            /*pl-4*/
+            padding-top: 2px;
+            /*pl-2*/
+            padding-bottom: 2px;
+            /*pl-2*/
+            line-height: 1.25;
+            /*leading-tight*/
+            border-width: 2px;
+            /*border-2*/
+            border-radius: .25rem;
+            border-color: #ececec;
+            /*border-gray-200*/
+            background-color: rgb(255, 255, 255);
+            /*bg-gray-200*/
+        }
 
-        <!-- Tombol Simpan Perubahan dan Tombol Return -->
-        <div class="flex justify-end space-x-4">
-            <!-- Tombol Simpan -->
-            <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-md shadow-lg hover:bg-blue-500 transition duration-200">
-                Simpan Perubahan
-            </button>
+        /*Row Hover*/
+        table.dataTable.hover tbody tr:hover,
+        table.dataTable.display tbody tr:hover {
+            background-color: #ebf4ff;
+            /*bg-indigo-100*/
+        }
 
-            <!-- Tombol Kembali (Return) -->
-            <a href="{{ route('modul.index') }}" class="bg-gray-600 text-white py-3 px-6 rounded-md shadow-lg hover:bg-gray-500 transition duration-200">
-                Kembali
-            </a>
-        </div>
-    </form>
-</div>
+        /*Pagination Buttons*/
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            font-weight: 700;
+            /*font-bold*/
+            border-radius: .25rem;
+            /*rounded*/
+            border: 1px solid transparent;
+            /*border border-transparent*/
+        }
+
+        /*Pagination Buttons - Current selected */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            color: #fff !important;
+            /*text-white*/
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+            /*shadow*/
+            font-weight: 700;
+            /*font-bold*/
+            border-radius: .25rem;
+            /*rounded*/
+            background: #667eea !important;
+            /*bg-indigo-500*/
+            border: 1px solid transparent;
+            /*border border-transparent*/
+        }
+
+        /*Pagination Buttons - Hover */
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            color: #fff !important;
+            /*text-white*/
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+            /*shadow*/
+            font-weight: 700;
+            /*font-bold*/
+            border-radius: .25rem;
+            /*rounded*/
+            background: #667eea !important;
+            /*bg-indigo-500*/
+            border: 1px solid transparent;
+            /*border border-transparent*/
+        }
+
+        /*Add padding to bottom border */
+        table.dataTable.no-footer {
+            border-bottom: 1px solid #e2e8f0;
+            /*border-b-1 border-gray-300*/
+            margin-top: 0.75em;
+            margin-bottom: 0.75em;
+        }
+
+        /*Change colour of responsive icon*/
+        table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+        table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+            background-color: #667eea !important;
+            /*bg-indigo-500*/
+        }
+
+        /*  Make sure the table takes up the full available width */
+        #example {
+            width: 100% !important;
+            table-layout: auto;
+            /* Allow column widths to adjust based on content */
+        }
+
+        .menu-item {
+            position: relative;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a span {
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            /* Mengubah ketebalan garis */
+            background-color: #66cbea;
+            /* Warna garis */
+            transition: width 0.3s ease-in-out;
+        }
+
+        a:hover span {
+            width: 100%;
+            margin-top: 155px
+        }
+    </style>
+@endsection
+
+<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+
+    @section('content')
+        <div class="flex justify-center items-center mt-10">
+            <div
+                class="form-it-container w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-hidden">
+                <!-- Title in the top left corner -->
+                <h2 class="font-sans text-xl sm:text-2xl font-bold" style="color: rgb(45, 45, 45); margin-bottom: 20px;">
+                    Edit Modul
+                </h2>
+                <hr>
+                <hr>
+                <div class="container mt-2">
+                    <div class="form-row flex flex-wrap -mx-2">
+                        <!-- Pastikan form menggunakan metode POST dan memiliki CSRF token -->
+                        <form action="{{ route('modul.update', $modul->id_modul) }}" method="POST" class="w-full">
+                            @csrf
+                            @method('PUT')
+                            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Menampilkan Nama Cabang dengan Input Readonly -->
+                                <div class="flex flex-col">
+                                    <label for="nama_modul" class="text-sm text-gray-700 font-medium mb-2">Nama
+                                        Modul</label>
+                                    <input type="text" name="nama_modul" id="nama_modul" value="{{ old('nama_modul', $modul->nama_modul) }}"
+                                        required
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                        @error('nama_modul')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <label for="kategori" class="text-sm text-gray-700 font-medium mb-2">Kategori</label>
+                                        <input type="text" name="kategori" id="kategori"
+                                            value="{{ $modul->nama_kategori }}" readonly
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                    </div>
+                            </div>
+
+                            <div class="space-x-4 mt-8 flex justify-end" id="submitBtn">
+                                <button type="submit"
+                                    class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50">
+                                    Simpan
+                                </button>
+                                <a href="{{ route('modul.index') }}"
+                                    class="py-2 px-4 bg-gray-200 text-gray-600 rounded hover:bg-gray-300 active:bg-gray-400">Kembali</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>

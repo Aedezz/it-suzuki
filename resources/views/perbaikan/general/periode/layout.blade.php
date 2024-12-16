@@ -1,4 +1,3 @@
-
 @include('layout.menu-navbar')
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -10,7 +9,9 @@
     <div
         class="form-it-container w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-hidden">
         <!-- Title in the top left corner -->
-       
+        <h2 class="font-sans text-xl sm:text-2xl font-bold absolute top-6 left-7" style="color: rgb(45, 45, 45)">
+            Periode
+        </h2>
 
         <!-- The bottom line that will move based on active link -->
         <div class="link-bottom-line absolute h-1 bg-blue-500" style="width: 0;"></div>
@@ -188,6 +189,7 @@
 
     window.addEventListener('load', setActiveLink);
 </script>
+
 
 {{-- Stack berguna buat javascript --}}
 @stack('script')

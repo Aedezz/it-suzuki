@@ -25,13 +25,6 @@
             Form Install Komputer/Laptop
         </h2>
 
-        <!-- Links Section -->
-        {{-- <div class="mt-16 flex justify-start items-center">
-            <a href="{{ route('table') }}" class="data-link text-sm sm:text-base text-blue-500 relative group mx-2">Data</a>
-            <a href="{{ route('laporan') }}" class="laporan-link text-sm sm:text-base text-blue-500 relative group mx-2">Laporan</a>
-            <a href="{{ route('ceklist') }}" class="ceklist-link text-sm sm:text-base text-blue-500 relative group mx-2">Ceklist</a>
-        </div> --}}
-
         <ul class="mt-14 flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 space-x-4 border-b-2 border-gray-300">
             <li>
                 <a href="{{ route('table') }}" class="laporan-link inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-transparent dark:hover:text-gray-300 group">

@@ -19,7 +19,7 @@ class DeskripsiPerbaikanController extends Controller
         // Query utama untuk data deskripsi
         $query = DB::table('deskripsi')
             ->join('cabang', 'deskripsi.id_cabang', '=', 'cabang.id_cabang')
-            ->join('user', 'user.username', '=', 'user.username') // Pastikan relasi benar
+            ->join('user', 'deskripsi.username', '=', 'user.username') // Relasi diperbaiki
             ->select(
                 'deskripsi.id_deskripsi',
                 'deskripsi.id_cabang',
@@ -29,17 +29,23 @@ class DeskripsiPerbaikanController extends Controller
                 'cabang.nama_cabang',
                 'user.nama'
             )
-            ->distinct(); // Tambahkan untuk menghindari duplikasi
+            ->distinct();
     
-        // Filter berdasarkan id_cabang
+        // Cek apakah filter diterapkan
+        $filterApplied = false;
+    
         if ($request->has('id_cabang') && $request->id_cabang != '') {
             $query->where('deskripsi.id_cabang', $request->id_cabang);
+            $filterApplied = true;
         }
     
-        // Filter berdasarkan username
-        if ($request->has('username') && $request->username != '0') {
+        if ($request->has('username') && $request->username != '') {
             $query->where('user.username', $request->username);
+            $filterApplied = true;
         }
+    
+        // Jika filter diterapkan, ambil data, jika tidak tampilkan semua
+        $viewActivity = $filterApplied ? $query->get() : $query->get();
     
         // Eksekusi query
         $deskripsi = $query->get();
@@ -50,8 +56,10 @@ class DeskripsiPerbaikanController extends Controller
             '3' => 'QPage',
         ];
     
-        return view('perbaikan.general.deskripsi.deskripsi', compact('deskripsi', 'cabang', 'users', 'tipeAlias'));
+        return view('perbaikan.general.deskripsi.deskripsi', compact('deskripsi', 'viewActivity', 'cabang', 'users', 'tipeAlias', 'filterApplied'));
+
     }
+    
     
 
     // Menampilkan form tambah data (Create)
