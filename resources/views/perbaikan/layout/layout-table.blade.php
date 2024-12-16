@@ -13,7 +13,6 @@
             Form Perbaikan Perangkat
         </h2>
 
-
         <ul
             class="mt-14 flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 space-x-4 border-b-2 border-gray-300">
             <li>

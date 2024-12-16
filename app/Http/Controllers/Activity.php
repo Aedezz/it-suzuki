@@ -20,58 +20,73 @@ class Activity extends Controller
                 'grup.nama_grup',
                 'user.nama'
             );
-
-        // Apply filters if they are provided
+    
+        // Cek apakah filter diterapkan
+        $filterApplied = false;
+    
         if ($request->has('nama_cabang') && $request->nama_cabang != '') {
             $query->where('cabang.nama_cabang', $request->nama_cabang);
+            $filterApplied = true;
         }
-
+    
         if ($request->has('nama') && $request->nama != '') {
             $query->where('user.nama', $request->nama);
+            $filterApplied = true;
         }
-
-        // Get the filtered results
-        $viewActivity = $query->get();
-
-        // Pass cabangs and users for the filter dropdowns
+    
+        // Jika filter diterapkan, ambil data, jika tidak kosongkan
+        $viewActivity = $filterApplied ? $query->get() : collect();
+    
+        // Pass cabangs dan users untuk dropdown filter
         $cabangs = DB::table('cabang')->get();
         $users = DB::table('user')->get();
-
+    
         return view('activity.home', compact('viewActivity', 'cabangs', 'users'));
     }
+    
 
     // Display the create form
-    public function create()
+    public function create(Request $request)
     {
+        // Ambil data cabang, grup, dan users
         $cabang = DB::table('cabang')->get();
         $grup = DB::table('grup')->get();
         $users = DB::table('user')->get();
-
-        return view('activity.add', compact('cabang', 'grup', 'users'));
+    
+        // Ambil parameter dari URL (dikirim dari tombol filter)
+        $selectedCabang = $request->query('nama_cabang', '');
+        $selectedUser = $request->query('nama', '');
+    
+        return view('activity.add', compact('cabang', 'grup', 'users', 'selectedCabang', 'selectedUser'));
     }
+    
+    
 
     // Store the new Activity in the database
     public function store(Request $request)
     {
-        // Validate the input
+        // Validasi input
         $request->validate([
             'nama_kegiatan' => 'required|string|max:255',
             'id_cabang' => 'required|exists:cabang,id_cabang',
             'id_grup' => 'required|exists:grup,id_grup',
-            'username' => 'required|exists:user,username', // Ensure it checks the 'username' field in the 'user' table
+            'username' => 'required|exists:user,username',
         ]);
-
-        // Insert the new Activity into the database
+    
+        // Menyimpan data ke tabel kegiatan
         DB::table('kegiatan')->insert([
             'nama_kegiatan' => $request->input('nama_kegiatan'),
             'id_cabang' => $request->input('id_cabang'),
             'id_grup' => $request->input('id_grup'),
             'username' => $request->input('username'),
         ]);
-
-        // Redirect with a success message
+    
+        // Redirect dengan pesan sukses
         return redirect()->route('home-activity')->with('success', 'Activity berhasil ditambahkan!');
     }
+    
+    
+    
 
     // Display the edit form with current data
     public function edit($id_kegiatan)

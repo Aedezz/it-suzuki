@@ -9,9 +9,11 @@ class PeriodePerbaikanController extends Controller
         // Menampilkan semua data periode menggunakan Query Builder
         public function index()
         {
-            $periode = DB::table('periode')->get();
+            // Urutkan berdasarkan id_periode secara menurun
+            $periode = DB::table('periode')->orderBy('id_periode', 'desc')->get(); 
             return view('perbaikan.general.periode.periode', compact('periode'));
         }
+        
     
         public function create()
         {

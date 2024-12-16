@@ -9,21 +9,31 @@ class ModulController extends Controller
 {
     // Menampilkan data (Read)
     public function index(Request $request)
-{
-    $moduls = collect(); // Default data kosong
-    $kategoris = DB::table('kategori')->get(); // Ambil daftar kategori untuk dropdown
-
-    // Jika filter kategori diisi, jalankan query
-    if ($request->has('id_kategori') && $request->id_kategori != '') {
-        $moduls = DB::table('modul')
-            ->join('kategori', 'modul.id_kategori', '=', 'kategori.id_kategori')
-            ->select('modul.*', 'kategori.nama_kategori')
-            ->where('modul.id_kategori', $request->id_kategori)
-            ->get();
+    {
+        $moduls = collect(); // Default data kosong
+        $kategoris = DB::table('kategori')->get(); // Ambil daftar kategori untuk dropdown
+    
+        // Jika filter kategori diisi, jalankan moduls
+        if ($request->has('id_kategori') && $request->id_kategori != '') {
+            $moduls = DB::table('modul')
+                ->join('kategori', 'modul.id_kategori', '=', 'kategori.id_kategori')
+                ->select('modul.*', 'kategori.nama_kategori')
+                ->where('modul.id_kategori', $request->id_kategori)
+                ->get(); // Hasil get() adalah Collection
+        }
+    
+        // Cek apakah filter diterapkan
+        $filterApplied = $request->has('id_kategori') && $request->id_kategori != '';
+    
+        // Jika filter diterapkan, gunakan hasil filter
+        $viewActivity = $moduls; // Tidak perlu $moduls->get()
+    
+        // Tidak perlu memanggil get() lagi di deskripsi
+        $deskripsi = $moduls;
+    
+        return view('modul.index', compact('moduls', 'kategoris', 'viewActivity', 'filterApplied'));
     }
-
-    return view('modul.index', compact('moduls', 'kategoris'));
-}
+    
 
 
     public function create()
