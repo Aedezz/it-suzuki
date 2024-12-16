@@ -20,6 +20,7 @@ use App\Http\Controllers\Branch;
 use App\Http\Controllers\FormPembuatanController;
 use App\Http\Controllers\Ceklist;
 use App\Http\Controllers\FormPc;
+use App\Http\Controllers\Help;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\Komputer;
 use App\Http\Controllers\Laporan;
@@ -147,7 +148,9 @@ Route::put('/update/{id}', [FormPembuatanController::class, 'update'])->name('fo
 Route::delete('/destroy/{id}', [FormPembuatanController::class, 'destroy'])->name('form-pembuatan.destroy');
 Route::put('/form-pembuatan/update-status/{id}', [FormPembuatanController::class, 'updateStatus'])->name('form-pembuatan.updateStatus');
 Route::post('/update-status-batch', [FormPembuatanController::class, 'updateStatusBatch'])->name('form-pembuatan.updateStatusBatch');
-});// Route Form Dalam Installasi Pc
+});
+
+// Route Form Dalam Installasi Pc
 Route::get('form-pc', [FormPc::class, 'form'])->name('table');
 Route::delete('/delete-form/{id}', [FormPc::class, 'destroy'])->name('pc.destroy');
 Route::post('/pc/check/{id}', [FormPc::class, 'check'])->name('pc.check');
@@ -222,3 +225,23 @@ Route::prefix('problem')->name('problem.')->group(function () {
 });
 
 Route::get('/information',[InformationController::class,'show'])->name('branch-info');
+
+Route::prefix('help')->group(function () {
+    // CRUD TIAP KATEGORI
+    Route::get('/', [Help::class, 'index'])->name('help');
+    Route::get('kategori', [Help::class, 'kategori'])->name('kategori');
+    Route::get('eoffice', [Help::class, 'eoffice'])->name('eoffice');
+    Route::get('jaringan', [Help::class, 'jaringan'])->name('jaringan');
+    Route::get('cctv', [Help::class, 'cctv'])->name('cctv');
+    Route::get('its', [Help::class, 'its'])->name('its');
+    Route::get('cs', [Help::class, 'cs_aplly'])->name('cs');
+    Route::get('angket', [Help::class, 'angket'])->name('angket');
+    Route::get('email', [Help::class, 'email'])->name('email');
+
+    // CRUD ROUTE HELP
+    Route::get('/add', [Help::class, 'create'])->name('help.create');
+    Route::post('/store', [Help::class, 'store'])->name('help.store');
+    Route::delete('/delete/{id}', [Help::class, 'destroy'])->name('help.destroy');
+    Route::get('/edit/{id}', [Help::class, 'edit'])->name('help.edit');
+    Route::put('/update/{id}', [Help::class, 'update'])->name('help.update');
+});
