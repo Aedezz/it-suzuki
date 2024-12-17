@@ -201,7 +201,7 @@
             </a>
             {{-- Menu --}}
             <a href="{{ route('pc.create') }}" class="hover:text-gray-400 font-sans">Install Komputer & Laptop</a>
-            <a href="{{ route('pembuatan-user') }}" class="hover:text-gray-400 font-sans">Pembuatan User & Reset Password</a>
+            <a href="{{ route('pembuatan.create') }}" class="hover:text-gray-400 font-sans">Pembuatan User & Reset Password</a>
             <a href="{{ route('perbaikan') }}" class="hover:text-gray-400 font-sans">Perbaikan Perangkat</a>
             <a href="#" class="hover:text-gray-400 font-sans">Download Berita Acara</a>
         </div>
@@ -216,7 +216,7 @@
 
     <div id="sidebar" class="sidebar">
         <a href="{{ route('pc.create') }}" class="hover:text-gray-400 font-sans">Install Komputer/Laptop</a>
-        <a href="{{ route('pembuatan-user') }}" class="hover:text-gray-400 font-sans">Pembuatan User/Reset Password</a>
+        <a href="{{ route('pembuatan.create') }}" class="hover:text-gray-400 font-sans">Pembuatan User/Reset Password</a>
         <a href="{{ route('perbaikan') }}" class="hover:text-gray-400 font-sans">Perbaikan Perangkat</a>
         <a href="#" class="hover:text-gray-400 font-sans">Download Berita Acara</a>
     </div>
