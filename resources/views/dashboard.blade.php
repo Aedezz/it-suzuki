@@ -15,7 +15,7 @@
             
             <!-- Card 2 -->
             <div class="card w-full md:w-1/3 lg:w-1/3 h-64 bg-white rounded-lg shadow-md hover:bg-gray-50 transition duration-200 flex flex-col items-center justify-center relative">
-                <a href="pembuatan-user" class="absolute inset-0 z-10"></a>
+                <a href="{{ route('pembuatan.create') }}" class="absolute inset-0 z-10"></a>
                 <div class="icon-container">
                     <i class="bi bi-file-earmark-text text-green-500 text-4xl transition-opacity duration-300 ease-in-out icon-layer"></i>
                     <span class="text-lg text-gray-600 card-title">Pembuatan User & Reset Password</span>
