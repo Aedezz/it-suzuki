@@ -103,11 +103,10 @@ Route::get('/search-pegawai', [HistoryPerbaikanController::class, 'searchPegawai
 Route::get('/report/aktifitas', [ReportAktifitasController::class, 'previewReport'])->name('aktifitas.preview');
 ///////////////////////////
 
-// Route pembuatan
-Route::view('/pembuatan-user', 'form-db/pembuatan')->name('pembuatan-user');
-Route::get('/pembuatan/create', [Cpembuatan::class, 'create'])->name('pembuatan.create');
+
+Route::get('/pembuatan', [Cpembuatan::class, 'create'])->name('pembuatan.create');
 Route::post('/pembuatan/store', [Cpembuatan::class, 'store'])->name('pembuatan.store');
-Route::get('/view/{id}', [Cpembuatan::class, 'viewdata'])->name('viewdata');
+Route::get('/pembuatan/{data}', [Cpembuatan::class, 'viewdata'])->name('pembuatan.show');
 
 // Route Data Installasi Pc
 Route::view('/installasi-pc', 'form-db/pc')->name('installasi-pc');
