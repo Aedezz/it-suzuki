@@ -9,6 +9,14 @@ class LogbookController extends Controller
 {
     public function index(Request $request)
 {
+    // Ambil nama pengguna yang sedang login (auth())
+    $loggedInUserName = auth()->user()->username; // atau auth()->user()->username jika menggunakan username
+
+    // Cek apakah pengguna sudah login
+    if (!$loggedInUserName) {
+        return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
+    }
+
     // Ambil tahun sekarang
     $currentYear = date('Y');
 
@@ -21,7 +29,7 @@ class LogbookController extends Controller
     // Ambil ID periode dari request, jika ada
     $selectedPeriode = $request->input('nama_periode');
     
-    // Query catatan dengan urutan terbaru di atas (by date)
+    // Query catatan dengan filter berdasarkan nama pengguna yang login
     $query = DB::table('catatan')
         ->join('cabang2', 'catatan.id_cabang', '=', 'cabang2.kode')
         ->join('modul', 'modul.id_modul', '=', 'catatan.id_modul')
@@ -38,6 +46,7 @@ class LogbookController extends Controller
             'kategori.nama_kategori',
             'catatan.create_by'
         )
+        ->where('catatan.create_by', '=', $loggedInUserName) // Filter berdasarkan nama pengguna yang login
         ->orderBy('catatan.tgl_catatan', 'desc'); // Urutkan berdasarkan tanggal (desc)
 
     // Filter berdasarkan tanggal jika ada input search
@@ -68,9 +77,6 @@ class LogbookController extends Controller
     $modul = DB::table('modul')->select('id_modul', 'nama_modul', 'id_kategori')->get();
     $kategori = DB::table('kategori')->select('id_kategori', 'nama_kategori')->get();
     $cabang2 = DB::table('cabang2')->select('kode', 'nama')->get();
-    
-    // Ambil nama pengguna yang sedang login (auth())
-    $loggedInUserName = auth()->user()->name; // atau auth()->user()->username jika menggunakan username
 
     return view('logbook.index', [
         'catatan' => $catatan,
@@ -85,6 +91,7 @@ class LogbookController extends Controller
         'loggedInUserName' => $loggedInUserName // Kirimkan nama pengguna yang login
     ]);
 }
+
 
 
 
