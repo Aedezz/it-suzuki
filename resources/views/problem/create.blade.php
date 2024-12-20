@@ -1,3 +1,4 @@
+
 @extends('layout.problem')
 
 @section('content')
@@ -23,7 +24,7 @@
 
         <!-- Start Date & Time -->
         <div>
-            <label for="down" class="block text-lg font-medium text-gray-700 mb-2">Start Date & Time</label>
+            <label for="down" class="block text-lg font-medium text-gray-700 mb-2">Down Date & Time</label>
             <input type="datetime-local" id="down" name="down" value="{{ old('down') }}" class="w-full px-6 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500" required>
             @error('down')
                 <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
@@ -32,7 +33,7 @@
 
         <!-- End Date & Time -->
         <div>
-            <label for="up" class="block text-lg font-medium text-gray-700 mb-2">End Date & Time</label>
+            <label for="up" class="block text-lg font-medium text-gray-700 mb-2">Up Date & Time</label>
             <input type="datetime-local" id="up" name="up" value="{{ old('up') }}" class="w-full px-6 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500" required>
             @error('up')
                 <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
