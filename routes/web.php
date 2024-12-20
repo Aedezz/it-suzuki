@@ -232,11 +232,23 @@ Route::put('/update-komputer/{id}', [Komputer::class, 'update'])->name('komputer
 Route::delete('/delete-komputer/{id}', [Komputer::class, 'destroy'])->name('komputer.destroy');
 Route::get('/search-users', [Komputer::class, 'search']);
 
-Route::prefix('problem')->name('problem.')->group(function () {
-    Route::get('/', [ProblemController::class, 'index'])->name('index');
-    Route::get('create', [ProblemController::class, 'create'])->name('create');
-    Route::post('store', [ProblemController::class, 'store'])->name('store');
+Route::prefix('problem')->group(function () {
+    // Menampilkan halaman index (tabel data)
+    Route::get('/', [ProblemController::class, 'index'])->name('problem.index');
+    
+    // Menampilkan halaman chart
+    Route::get('/chart', [ProblemController::class, 'chart'])->name('problem.chart');
+    
+    // Menampilkan halaman create untuk menambah data baru
+    Route::get('/create', [ProblemController::class, 'create'])->name('problem.create');
+    
+    // Menyimpan data problem baru
+    Route::post('/store', [ProblemController::class, 'store'])->name('problem.store');
+    
+    // Endpoint AJAX untuk memuat ulang tabel (opsional, jika menggunakan AJAX)
+    Route::get('/table', [ProblemController::class, 'loadTable'])->name('problem.table');
 });
+
 
 Route::get('/information',[InformationController::class,'show'])->name('branch-info');
 
