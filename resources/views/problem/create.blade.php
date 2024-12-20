@@ -1,5 +1,5 @@
 
-@extends('layout.problem')
+@extends('problem.layout.problem')
 
 @section('content')
 <div class="bg-white shadow-lg rounded-xl p-10 max-w-4xl mx-auto my-8">
