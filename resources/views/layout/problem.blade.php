@@ -12,14 +12,11 @@
         @include('layout.menu-navbar')
 
         <!-- Main Content -->
-        <main class="flex-grow container mx-auto px-4 py-6">
             <div class="bg-white shadow-md rounded-lg p-6">
                 <div>
                     @yield('content')
                 </div>
             </div>
-        </main>
-
     
     <!-- Include Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
