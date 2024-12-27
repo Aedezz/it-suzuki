@@ -41,13 +41,20 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 // Route Perbaikan Perangkat
-Route::view('/perbaikan', 'form-db/perbaikan')->name('perbaikan');
-Route::get('/perbaikan/create', [PerbaikanController::class, 'create'])->name('perbaikan.create');
-Route::post('/perbaikan/store', [PerbaikanController::class, 'store'])->name('perbaikan.store');
-Route::get('/view/{id}', [PerbaikanController::class, 'show'])->name('perbaikan.show');
-Route::get('/table-perbaikan', function () {
-    return view('table_perbaikan');
-})->name('table_perbaikan');
+
+// Route::get('/perbaikan/create', [PerbaikanController::class, 'create'])->name('perbaikan.create');
+// Route::post('/perbaikan/store', [PerbaikanController::class, 'store'])->name('perbaikan.store');
+// Route::get('/view/{id}', [PerbaikanController::class, 'show'])->name('perbaikan.show');
+// Route::get('/table-perbaikan', function () {
+//     return view('table_perbaikan');
+// })->name('table_perbaikan');
+
+// Rute untuk halaman form dan menyimpan data
+Route::get('/perbaikan', [PerbaikanController::class, 'create'])->name('perbaikan');
+Route::post('/perbaikan', [PerbaikanController::class, 'store'])->name('perbaikan.store');
+// Rute untuk menampilkan data berdasarkan ID
+Route::get('/table-perbaikan/{id}', [PerbaikanController::class, 'show'])->name('table_perbaikan');
+
 
 // ROUTE FORM CHECKLIST PERBAIKAN CONTROLLER
 Route::get('/perbaikan/checklist', [ChecklistPerbaikanController::class, 'index'])->name('checklist.index');

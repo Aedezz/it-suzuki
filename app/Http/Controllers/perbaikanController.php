@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 use App\Models\Mperbaikan;
 use Illuminate\Http\Request;
 
-class PerbaikanController extends Controller
+class perbaikanController extends Controller
 {
     public function create()
     {
-        return view('perbaikan.perbaikan');
+        return view('form-db.perbaikan');
     }
     public function store(Request $request)
     {
@@ -49,13 +49,19 @@ class PerbaikanController extends Controller
         ]);
     
         // Redirect ke route 'table_perbaikan' dengan data yang baru disimpan
-        return redirect()->route('perbaikan.show', ['id' => $data->id])->with('success', 'Data berhasil disimpan');
+        return redirect()->route('table_perbaikan', ['id' => $data->id])->with('success', 'Data berhasil disimpan');
+
     }
 
     public function show($id)
-    {
-        $data = Mperbaikan::findOrFail($id);
-        return view('table_perbaikan', compact('data'));
-    }
+{
+    // Ambil data berdasarkan ID
+    $data = Mperbaikan::findOrFail($id);
+
+    // Kirim data ke view
+    return view('perbaikan.table_perbaikan', compact('data'));
+}
+
+    
     
 }
