@@ -90,12 +90,13 @@ public function updateStatus($id)
     public function print($id)
 {
     // Ambil data dari tabel form_perangkat berdasarkan ID dan gabungkan dengan data dari tabel user
-    $data = DB::table('form_perangkat')
-        ->join('user', 'form_perangkat.it', '=', 'user.username') // Menghubungkan berdasarkan 'it' (di form_perangkat) dan 'username' (di user)
-        ->select('form_perangkat.*', 'user.username', 'user.nama') // Memilih kolom yang dibutuhkan, termasuk 'username' dan 'nama' dari tabel user
-        ->where('form_perangkat.id', $id)
-        ->first(); // Mengambil hanya satu record berdasarkan ID
-
+    // $data = DB::table('form_perangkat')
+    //     ->join('user', 'form_perangkat.it', '=', 'user.username') // Menghubungkan berdasarkan 'it' (di form_perangkat) dan 'username' (di user)
+    //     ->select('form_perangkat.*', 'user.username', 'user.nama') // Memilih kolom yang dibutuhkan, termasuk 'username' dan 'nama' dari tabel user
+    //     ->where('form_perangkat.id', $id)
+    //     ->first(); // Mengambil hanya satu record berdasarkan ID
+    
+    $data = DB::table('form_perangkat')->where('id', $id)->first();
     // Load view untuk cetak dan pass data ke dalam view
     $pdf = Pdf::loadView('perbaikan.form.print_page', compact('data'));
 

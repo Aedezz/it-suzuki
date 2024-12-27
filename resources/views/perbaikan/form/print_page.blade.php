@@ -199,7 +199,8 @@
    
         <div class="signature-column">
             <p style="margin-bottom: 68px">Diterima STAFF (IT)</p>
-            <p>{{ $data->nama }}</p> <!-- Menampilkan nama user -->
+            <p></p>
+            {{-- <p>{{ $data->nama }}</p> <!-- Menampilkan nama user --> --}}
             <p class="signature-line" style="margin-top: -15px">________________________________</p>
             <p class="date-line">TGL:</p>
         </div>        
