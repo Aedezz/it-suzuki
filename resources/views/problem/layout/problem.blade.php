@@ -17,7 +17,6 @@
                 <h1 class="text-2xl font-bold text-gray-800 mb-6 ml-6"> <!-- Menambahkan ml-6 untuk bergeser ke kanan -->
                     @yield('title', 'Problem')
                 </h1>
-        
                 <!-- Navigation Buttons -->
                 <div class="flex justify-start items-center border-b-2 border-gray-200 pb-4 mb-6 mr-6">
                     <!-- Tabel Icon -->
@@ -39,8 +38,7 @@
                         </svg>
                         Chart                
                     </a>
-                </div>                                                               
-        
+                </div>        
                 <!-- Content -->
                     @yield('content')
             </div>

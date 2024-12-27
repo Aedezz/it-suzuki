@@ -15,14 +15,17 @@
         >
     </div>
     <div class="flex items-center space-x-4">
-        <a href="{{ route('problem.create') }}" 
-   class="px-3 py-2 border-2 border-gray-600 rounded-lg text-gray-800 hover:border-gray-800 hover:text-gray-600 transition" 
-   title="Create">
-    <!-- Ikon Plus -->
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-    </svg>
-</a>
+        
+        <div class="flex justify-end">
+            <a href="{{ route('problem.create') }}" 
+               class="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition" 
+               title="Tambah Data">
+                <!-- Ikon Plus dari Font Awesome -->
+                <i class="fas fa-plus"></i>
+                <!-- Teks Tambah Data -->
+                <span class="font-medium">Tambah Data</span>
+            </a>
+        </div>
 
         <form method="GET" action="{{ route('problem.index') }}">
             <select name="perPage" onchange="this.form.submit()" 
