@@ -1,342 +1,167 @@
 @extends('../dalam/layout')
 
 @section('style')
-    <style>
-        /*Overrides for Tailwind CSS */
+<style>
+    .rectangle-container {
+        width: 100%;
+        padding: 16px;
+    }
 
-        /*Form fields*/
-        .dataTables_wrapper {
-            margin-top: 20px
-        }
+    #tableContainer {
+        width: 100%;
+        overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
+    }
 
-        .dataTables_wrapper select,
-        .dataTables_wrapper .dataTables_filter input {
-            color: #4a5568;
-            /*text-gray-700*/
-            padding-left: 1rem;
-            /*pl-4*/
-            padding-right: 1rem;
-            /*pl-4*/
-            padding-top: 2px;
-            /*pl-2*/
-            padding-bottom: 2px;
-            /*pl-2*/
-            line-height: 1.25;
-            /*leading-tight*/
-            border-width: 2px;
-            /*border-2*/
-            border-radius: .25rem;
-            border-color: #ececec;
-            /*border-gray-200*/
-            background-color: rgb(255, 255, 255);
-            /*bg-gray-200*/
-        }
+    table.dataTable {
+        width: 100% !important;
+        table-layout: fixed; /* Fixed layout for more control over column width */
+    }
 
-        /*Row Hover*/
-        table.dataTable.hover tbody tr:hover,
-        table.dataTable.display tbody tr:hover {
-            background-color: #ebf4ff;
-            /*bg-indigo-100*/
-        }
+    table.dataTable th,
+    table.dataTable td {
+        white-space: normal; /* Allows text to wrap */
+        word-wrap: break-word; /* Breaks long words onto the next line */
+        text-align: center; /* Centers text for better alignment */
+        padding: 4px 8px; /* Reduced padding for tighter cells */
+        font-size: 14px; /* Optional: Reduce font size for tighter appearance */
+    }
 
-        /*Pagination Buttons*/
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            font-weight: 700;
-            /*font-bold*/
-            border-radius: .25rem;
-            /*rounded*/
-            border: 1px solid transparent;
-            /*border border-transparent*/
-        }
+    /* Adjust "No" column width */
+    table.dataTable th:first-child,
+    table.dataTable td:first-child {
+        width: 50px; /* Set a fixed width for the "No" column */
+    }
 
-        /*Pagination Buttons - Current selected */
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-            color: #fff !important;
-            /*text-white*/
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-            /*shadow*/
-            font-weight: 700;
-            /*font-bold*/
-            border-radius: .25rem;
-            /*rounded*/
-            background: #667eea !important;
-            /*bg-indigo-500*/
-            border: 1px solid transparent;
-            /*border border-transparent*/
-        }
+    /* Allow "Nama Item" to take remaining space */
+    table.dataTable th:nth-child(2),
+    table.dataTable td:nth-child(2) {
+        width: auto; /* Let it grow to take available space */
+    }
 
-        /*Pagination Buttons - Hover */
-        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-            color: #fff !important;
-            /*text-white*/
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-            /*shadow*/
-            font-weight: 700;
-            /*font-bold*/
-            border-radius: .25rem;
-            /*rounded*/
-            background: #667eea !important;
-            /*bg-indigo-500*/
-            border: 1px solid transparent;
-            /*border border-transparent*/
-        }
+    /* Adjust "Aksi" column width */
+    table.dataTable th:last-child,
+    table.dataTable td:last-child {
+        width: 130px; /* Set a fixed width for the "Aksi" column */
+    }
 
-        /*Add padding to bottom border */
-        table.dataTable.no-footer {
-            border-bottom: 1px solid #e2e8f0;
-            /*border-b-1 border-gray-300*/
-            margin-top: 0.75em;
-            margin-bottom: 0.75em;
-        }
+    /* Orange Aksi Buttons */
+    .aksi-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background-color: #e40a0a;
+        color: white;
+        transition: background-color 0.3s;
+    }
 
-        /*Change colour of responsive icon*/
-        table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
-        table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
-            background-color: #667eea !important;
-            /*bg-indigo-500*/
-        }
+    .aksi-button:hover {
+        background-color: #a70808;
+    }
 
-        /*  Make sure the table takes up the full available width */
-        #example {
-            width: 100% !important;
-            table-layout: auto;
-            /* Allow column widths to adjust based on content */
-        }
+    .add-button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px; /* Space between button and table */
+    }
 
-        .menu-item {
-            position: relative;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
+    .dataTables_length, .dataTables_filter {
+        padding: 8px;
+        border-radius: 8px;
+    }
 
-        a span {
-            display: block;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 1px;
-            /* Mengubah ketebalan garis */
-            background-color: #66cbea;
-            /* Warna garis */
-            transition: width 0.3s ease-in-out;
-        }
-
-        a:hover span {
-            width: 100%;
-            margin-top: 155px
-        }
-    </style>
+    .dataTables_length select, .dataTables_filter input {
+        border: 1px solid #e2e8f0;
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+</style>
 @endsection
+
 <link rel="icon" href="../images/perbaikan/logo-tab.png">
 
 <body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert Status Message -->
+    @if (session('status'))
     <script>
-        @if (session('status'))
-            <
-            script >
-                Swal.fire({
-                    title: '{{ session('status')['judul'] }}',
-                    text: '{{ session('status')['pesan'] }}',
-                    icon: '{{ session('status')['icon'] }}',
-                    confirmButtonText: 'OK'
-                }); <
-            />
-        @endif
+        Swal.fire({
+            title: '{{ session('status')['judul'] }}',
+            text: '{{ session('status')['pesan'] }}',
+            icon: '{{ session('status')['icon'] }}',
+            confirmButtonText: 'OK'
+        });
     </script>
+    @endif
 
-    @section('content')
-        <!--Container-->
-        <div class="container w-full md:w-4/5 xl:w-3/5 mx-auto px-2">
-            <!--Card-->
-            <div id='recipients' class="p-3 mt-6 lg:mt-0 rounded shadow bg-white"
-                style="width:155%; margin-left: -225px; margin-top: 22px; ">
-                <!-- Title and Menu Container -->
-                <div class="flex justify-between items-center px-4 py-8">
-                    <!-- Title -->
-                    <h2 class="font-sans font-bold text-lg md:text-2xl" style="font-size: 20px; margin-top: -20px;">
-                        DATA ITEM SERVICES
-                    </h2>
+    <!-- Main Container -->
+    <div class="flex justify-center items-center mt-10">
+        <div class="relative w-full lg:w-11/12 xl:w-10/12 bg-white rounded-lg shadow-md p-6">
+            
+            <!-- Title and Action Menu -->
+            <div class="flex justify-between items-center px-4 py-8">
+                <!-- Title -->
+                <h2 class="font-sans font-bold text-lg md:text-2xl" style="font-size: 20px; margin-top: -20px;">
+                    Daftar Item
+                </h2>
+            
+                <!-- Create Button -->
+                {{-- <a href="{{ route('item.create') }}"
+                    class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 flex items-center">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    Tambah
+                </a> --}}
+            </div>
 
-                    <a href="{{ route('item.create') }}">
-                        <button style="font-size: 16px" title="Tambah Data" type="button"
-                            class="relative w-auto px-4 py-2 rounded-lg bg-blue-500 text-white flex justify-center items-center gap-2 hover:bg-blue-600">
-                            <i class="fa-solid fa-plus" style="margin-top: 4px;"></i>
-                            Tambah
-                        </button>
-                    </a>
-                </div>
-
-
-
-                <hr style="margin-top: -25px"><br>
-                <table id="example" class="stripe hover" style="width:100%; padding-top: 1em; padding-bottom: 1em;">
+            <!-- Table Container -->
+            <div id="tableContainer" class="w-full">
+                <table id="example" class="display w-full table-auto border-collapse">
                     <thead>
                         <tr>
-                            <th data-priority="1">No</th>
-                            <th data-priority="2">Nama Item</th>
-                            <th data-priority="3">Aksi</th>
+                            <th class="px-4 py-2">No</th>
+                            <th class="px-4 py-2">Nama Item</th>
+                            <th class="px-4 py-2">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($item as $data)
                             <tr>
-                                <td style="text-align: center; vertical-align: middle;">{{ $data->id }}</td>
-                                <td style="text-align: center; vertical-align: middle;">{{ $data->nama }}</td>
-
+                                <td>{{ $data->id }}</td>
+                                <td>{{ $data->nama }}</td>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <div class="flex justify-center space-x-2">
-                                        <!-- Tombol Print -->
-
+                                        <!-- Edit Button -->
                                         <div class="flex justify-center w-full">
                                             <a href="{{ route('item.edit', $data->id) }}" title="Perbarui"
-                                                class="relative w-10 h-10 rounded-lg bg-green-500 text-white flex justify-center items-center hover:bg-green-600">
-                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                class="relative w-8 h-8 rounded-lg bg-blue-500 text-white flex justify-center items-center hover:bg-blue-600" title="Perbarui">
+                                                <i class="bi bi-pencil"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
             </div>
         </div>
-    @endsection
+    </div>
 
-    @push('script')
-        <!--DataTables JS-->
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-
-        <script>
-            $(document).ready(function() {
-                $('#example').DataTable({
-                    "responsive": true
-                });
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                responsive: true,
+                pageLength: 25,
+                lengthMenu: [10, 25, 50, 100]
             });
-
-
-
-            function confirmDelete(id) {
-                Swal.fire({
-                    title: 'Yakin hapus data?',
-                    text: "Data yang dihapus tidak dapat dikembalikan!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById('delete-form-' + id).submit();
-                    }
-                });
-            }
-
-            // Menangkap elemen menu dan garis aktif
-            const menuItems = document.querySelectorAll('.menu-item');
-            const activeLine = document.getElementById('active-line');
-
-            // Fungsi untuk memindahkan garis aktif
-            function setActiveLine(target) {
-                const rect = target.getBoundingClientRect();
-                const containerRect = target.parentNode.getBoundingClientRect();
-                activeLine.style.width = `${rect.width}px`;
-                activeLine.style.left = `${rect.left - containerRect.left}px`;
-            }
-
-            // Menambahkan event listener ke setiap menu item
-            menuItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    setActiveLine(item);
-
-                    // Mengubah warna menu yang aktif
-                    menuItems.forEach(menu => menu.classList.remove('text-blue-500'));
-                    item.classList.add('text-blue-500');
-                });
-            });
-
-            // Inisialisasi garis aktif pada menu pertama
-            if (menuItems.length > 0) {
-                setActiveLine(menuItems[0]);
-                menuItems[0].classList.add('text-blue-500');
-            }
-
-            // Fungsi untuk konfirmasi Update Status
-            function confirmUpdateStatus(url) {
-                Swal.fire({
-                    title: 'Apa Anda Yakin?',
-                    text: "Ini Akan Menandai Status Selesai.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Perbarui Data!',
-                    cancelButtonText: 'Batal Perbarui',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Membuat form untuk submit POST ke URL
-                        const form = document.createElement('form');
-                        form.method = 'POST';
-                        form.action = url;
-
-                        // Menambahkan CSRF Token
-                        const csrfField = document.createElement('input');
-                        csrfField.type = 'hidden';
-                        csrfField.name = '_token';
-                        csrfField.value = '{{ csrf_token() }}'; // Pastikan ini dapat dieksekusi dalam Blade template
-                        form.appendChild(csrfField);
-
-                        // Submit form untuk update status
-                        document.body.appendChild(form);
-                        form.submit();
-                    }
-                });
-            }
-
-            // Fungsi untuk konfirmasi Delete
-            function confirmDelete(url) {
-                Swal.fire({
-                    title: 'Apa Anda Yakin?',
-                    text: "Data Tidak Dapat Dikembalikan Setelah Dihapus",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Hapus Data!',
-                    cancelButtonText: 'Jangan Dihapus!',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Membuat form untuk submit DELETE ke URL
-                        const form = document.createElement('form');
-                        form.method = 'POST';
-                        form.action = url;
-
-                        // Menambahkan CSRF Token
-                        const csrfField = document.createElement('input');
-                        csrfField.type = 'hidden';
-                        csrfField.name = '_token';
-                        csrfField.value = '{{ csrf_token() }}'; // Pastikan ini dapat dieksekusi dalam Blade template
-                        form.appendChild(csrfField);
-
-                        // Menambahkan Method DELETE
-                        const methodField = document.createElement('input');
-                        methodField.type = 'hidden';
-                        methodField.name = '_method';
-                        methodField.value = 'DELETE';
-                        form.appendChild(methodField);
-
-                        // Submit form untuk delete data
-                        document.body.appendChild(form);
-                        form.submit();
-                    }
-                });
-            }
-        </script>
-    @endpush
+        });
+    </script>
 </body>

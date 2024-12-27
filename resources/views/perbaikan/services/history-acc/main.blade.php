@@ -8,8 +8,7 @@
     }
 
     #tableContainer {
-        width: 100%;
-        overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
+        max-height: 70vh; /* Atur tinggi maksimal agar tidak terlalu panjang */
     }
 
     table.dataTable {
@@ -29,6 +28,16 @@
     table.dataTable th:last-child,
     table.dataTable td:last-child {
         width: 130px; /* Adjust width of the "Aksi" column */
+    }
+    
+    table.dataTable td div {
+        display: inline-block;
+        text-align: left;
+        word-break: break-word;
+    }
+    table.dataTable td span.text-sm {
+        font-size: 12px;
+        color: #6b7280; /* Tailwind Gray-500 */
     }
 
     .add-button-container {
@@ -73,15 +82,9 @@
             <!-- Title -->
             <div class="flex justify-between items-center">
                 <h2 class="font-sans text-xl sm:text-2xl font-bold text-gray-800">
-                    History
+                    History - Approve
                 </h2>
                 <hr>
-                <!-- Create Button (positioned to the right) -->
-                <a href="{{ route('history.create') }}"
-                    class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 flex items-center">
-                    <i class="fa-solid fa-plus mr-2"></i>
-                    Tambah
-                </a>
             </div>
 
             <!-- Data Table -->
@@ -112,36 +115,28 @@
                                 <td>{{ $perangkat[$data->id_barang]->nama ?? 'Perangkat Tidak Ditemukan' }}</td>
                                 <td>{{ $item[$data->id_item]->nama ?? 'Item Tidak Ditemukan' }}</td>
                                 <td>{{ $data->sn }}</td>
-                                <td>{{ $data->keterangan }}</td>
-                                <td class="flex justify-center space-x-1">
-                                    <a href="#" title="Delete" onclick="confirmDelete('#')" class="relative w-8 h-8 rounded-lg bg-red-500 text-white flex justify-center items-center hover:bg-red-600" title="Delete">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
+                                <td>
+                                    <div>
+                                        {{ $data->keterangan }}
+                                        <br>
+                                        <span class="text-sm text-gray-500 block">Approve by STAFF IT </span>
+                                    </div>
+                                </td>
 
+                                <td class="flex justify-center space-x-1">
                                     <!-- Tombol Print (tetap di kanan) -->
-                                    <form action="{{ route('history.print', $data->id) }}" method="GET" target="_blank">
+                                    <form action="{{ route('history.print2', $data->id) }}" method="GET" target="_blank">
                                         <button class="bg-gray-500 text-white w-8 h-8 rounded-md hover:bg-gray-600 transition duration-300 ml-auto" title="Print">
                                             <i class="bi bi-printer"></i>
                                         </button>
                                     </form>
 
-                                    <!-- Tombol Check -->
-                                    @if ($data->status == 0)
-                                    <form action="{{ route('history.check', $data->id) }}" method="POST">
+                                    @if ($data->spv_status == 0)
+                                    <form action="{{ route('history.full-acc', $data->id) }}" method="POST">
                                         @csrf
-                                        @if (Auth::user()->username == 'rawr')
-                                            <button type="submit" class="bg-green-500 text-white w-8 h-8 rounded-md hover:bg-blue-600 transition duration-300 ml-auto" title="Approve (Wafi)">
-                                                <i class="bi bi-check-circle"></i>
-                                            </button>
-                                        @elseif (Auth::user()->username == 'rawr1')
-                                            <button type="submit" class="bg-green-500 text-white w-8 h-8 rounded-md hover:bg-green-600 transition duration-300 ml-auto" title="Approve (Awli)">
-                                                <i class="bi bi-check-circle"></i>
-                                            </button>
-                                        @else
-                                            <button type="submit" class="bg-green-500 text-white w-8 h-8 rounded-md hover:bg-gray-600 transition duration-300 ml-auto" title="Approve (Default)">
-                                                <i class="bi bi-check-circle"></i>
-                                            </button>
-                                        @endif
+                                        <button type="submit" class="bg-green-500 text-white w-8 h-8 rounded-md hover:bg-green-600 transition duration-300 ml-auto" title="Approve">
+                                            <i class="bi bi-check-circle"></i>
+                                        </button>
                                     </form>
                                     @endif
                                 </td>
@@ -167,7 +162,7 @@
                     paging: true,
                     searching: true,
                     ordering: true,
-                    responsive: true,
+                    responsive: true, 
                     pageLength: 25,
                     lengthMenu: [10, 25, 50, 100]
                 });

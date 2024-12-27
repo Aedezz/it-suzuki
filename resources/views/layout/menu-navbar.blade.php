@@ -160,6 +160,9 @@
                     <a href="{{route('item.index')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Item</a>
                     <a href="{{route('history.index')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">History</a>
                     <a href="{{route('komputer')}}" class="menu-link block px-4 py-2 hover:bg-gray-200">Komputer</a>
+                    @if(auth()->user()->id_level === 3)
+                        <a href="{{ route('history.approve') }}" class="menu-link block px-4 py-2 hover:bg-gray-200">History - Approved</a>
+                    @endif
                 </div>
             </div>
 

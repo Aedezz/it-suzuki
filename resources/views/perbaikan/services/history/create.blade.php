@@ -150,7 +150,7 @@
                 <div class="container mt-4" style="margin-left: 25px; margin-top: -30px">
                     <div class="form-row flex flex-wrap -mx-2">
                         <!-- Pastikan form menggunakan metode POST dan memiliki CSRF token -->
-                        <form action="{{ route('services.history.store') }}" method="POST" class="w-full">
+                        <form action="{{ route('history.store') }}" method="POST" class="w-full">
                             @csrf
                             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="flex flex-col">
@@ -163,7 +163,11 @@
                                 <script>
                                     const today = new Date();
                                     const formattedDate = today.toISOString().split('T')[0];
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                    const today = new Date();
+                                    const formattedDate = today.toISOString().split('T')[0];
                                     document.getElementById("tanggal").value = formattedDate;
+                                });
                                 </script>
 
                                 <div class="flex flex-col">
@@ -175,15 +179,19 @@
 
                                 <div class="flex flex-col">
                                     <label for="nama" class="text-sm text-gray-700 font-medium mb-2">Pengguna</label>
-                                    <input type="text" name="nama" id="nama" required
-                                        class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                                        placeholder="Masukan Nama Pengguna" onkeyup="searchPegawai()" autocomplete="off" />
-                                    <ul id="result" ></ul>
-                                    <input type="hidden" name="kode_pegawai" id="kode_pegawai" />
+                                    <select name="kode_pegawai" id="kode_pegawai" required
+                                        class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">
+                                        <option value="">Pilih Pengguna</option>
+                                        @foreach($pegawaiData as $pegawai)
+                                            <option value="{{ $pegawai->kode_pegawai }}" data-cabang="{{ $pegawai->kode_cabang }}" data-divisi="{{ $pegawai->kode_divisi }}">
+                                                {{ $pegawai->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     <input type="hidden" name="kode_cabang" id="kode_cabang" />
                                     <input type="hidden" name="kode_divisi" id="kode_divisi" />
                                 </div>
-
+                                
 
                                 <div class="flex flex-col">
                                     <label for="keterangan" class="text-sm text-gray-700 font-medium mb-2">Keterangan</label>
@@ -279,42 +287,15 @@
 
         @push('script')
         <script>
-            function searchPegawai() {
-                const query = document.getElementById('nama').value;
-                const resultContainer = document.getElementById('result');
+            document.getElementById('kode_pegawai').addEventListener('change', function () {
+                const selectedOption = this.options[this.selectedIndex];
+                const kodeCabang = selectedOption.getAttribute('data-cabang');
+                const kodeDivisi = selectedOption.getAttribute('data-divisi');
         
-                if (query.length < 3) { 
-                    resultContainer.innerHTML = ''; 
-                    return; 
-                }
-        
-                fetch(`/search-pegawai?query=${encodeURIComponent(query)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        resultContainer.innerHTML = '';
-                        if (data.length > 0) {
-                            data.forEach(pegawai => {
-                                const li = document.createElement('li');
-                                li.textContent = `${pegawai.nama}`;
-                                li.className = 'p-2 cursor-pointer bg-white border-b hover:bg-gray-100';
-                                li.onclick = function () {
-                                    document.getElementById('nama').value = pegawai.nama;
-                                    resultContainer.innerHTML = ''; // Clear results
-                                    document.getElementById('kode_pegawai').value = pegawai.kode_pegawai; // Set hidden input
-                                    document.getElementById('kode_divisi').value = pegawai.kode_divisi; // Set hidden input
-                                    document.getElementById('kode_cabang').value = pegawai.kode_cabang; // Set hidden input
-                                };
-                                resultContainer.appendChild(li);
-                            });
-                        } else {
-                            resultContainer.innerHTML = '<li class="p-2 text-gray-500">Data tidak ditemukan</li>';
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        </script>
-        
+                document.getElementById('kode_cabang').value = kodeCabang;
+                document.getElementById('kode_divisi').value = kodeDivisi;
+            });
+        </script>        
         @endpush
-
     @endpush
 </body>

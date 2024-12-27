@@ -51,7 +51,7 @@ class ItemPerbaikanController extends Controller
     }
     
     // Mengirim data item ke view untuk diedit
-    return view('perbaikan.services.edit', compact('item'));
+    return view('perbaikan.services.item.edit', compact('item'));
 }
 
 public function update(Request $request, $id)

@@ -23,13 +23,13 @@
         <table id="example" class="display w-full table-auto border-collapse">
             <thead>
                 <tr>
-                    <th class="px-4 py-2 text-left">No</th>
-                    <th class="px-4 py-2 text-left">Tanggal</th>
-                    <th class="px-4 py-2 text-left">NIK</th>
-                    <th class="px-4 py-2 text-left">Nama</th>
-                    <th class="px-4 py-2 text-left">Divisi</th>
-                    <th class="px-4 py-2 text-left">Cabang</th>
-                    <th class="px-4 py-2 text-left">Aksi</th>
+                    <th class="px-4 py-2 text-center">No</th>
+                    <th class="px-4 py-2 text-center">Tanggal</th>
+                    <th class="px-4 py-2 text-center">NIK</th>
+                    <th class="px-4 py-2 text-center">Nama</th>
+                    <th class="px-4 py-2 text-center">Divisi</th>
+                    <th class="px-4 py-2 text-center">Cabang</th>
+                    <th class="px-4 py-2 text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,13 +43,13 @@
                     <td class="px-4 py-2">{{ $d->cabang}}</td>
                     <td class="px-4 py-2">
                         <div class="flex items-center justify-center space-x-1">
-                            <a href="{{ route('komputer.detail', $d->id) }}" class="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition duration-300" title="View">
+                            <a href="{{ route('komputer.detail', $d->id) }}" class="bg-blue-500 text-white w-8 h-8 flex justify-center items-center rounded-md hover:bg-blue-600 transition duration-300" title="View">
                                 <i class="bi bi-eye"></i>
                             </a>
                             <form onsubmit="return confirmDelete('{{ $d->id }}');" id="delete-form-{{ $d->id }}" method="POST" action="{{ route('komputer.destroy', $d->id) }}" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="bg-red-500 text-white p-1 rounded-md hover:bg-red-600 transition duration-300" title="Hapus Data" onclick="confirmDelete('{{ $d->id }}')">
+                                <button type="button" class="bg-red-500 text-white w-8 h-8 flex justify-center items-center rounded-md hover:bg-red-600 transition duration-300" title="Hapus Data" onclick="confirmDelete('{{ $d->id }}')">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>                            
