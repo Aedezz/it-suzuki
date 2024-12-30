@@ -28,7 +28,8 @@ class HistoryPerbaikanController extends Controller
                 'pegawai.nik as pegawai_nik', 
                 'pegawai.nama as pegawai_nama'
             )
-            ->orderBy('service.id', 'desc') // Mengurutkan berdasarkan ID secara menurun
+            ->orderBy('service.status', 'desc')
+            ->orderBy('service.id', 'desc') // Mengurutkan berdasarkan status secara ascending
             ->get();
         
         // Mengubah koleksi perangkat menjadi array dengan 'id' sebagai kunci
@@ -176,7 +177,8 @@ class HistoryPerbaikanController extends Controller
                 'pegawai.nik as pegawai_nik', 
                 'pegawai.nama as pegawai_nama',
             )
-            ->orderBy('service.id', 'desc') // Mengurutkan berdasarkan ID secara menurun
+            ->orderBy('service.spv_status', 'asc') // Mengurutkan berdasarkan spv_status secara ascending
+            ->orderBy('service.id', 'desc')
             ->get();
         
         // Mengubah koleksi perangkat menjadi array dengan 'id' sebagai kunci
@@ -206,6 +208,7 @@ class HistoryPerbaikanController extends Controller
             'service.sn',
             'service.keterangan',
             'service.rekomendasi',
+            'service.spv_status',
 
             'pegawai.nik as pegawai_nik',
             'pegawai.nama as pegawai_nama',

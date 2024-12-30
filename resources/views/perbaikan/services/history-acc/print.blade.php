@@ -91,7 +91,7 @@
 
         /* Signature Section */
         .signature-section {
-            margin-top: 20px;
+            margin-bottom: 11cm;
             display: block;
             text-align: center;
             margin-left: auto;  /* Centers the section */
@@ -105,7 +105,7 @@
             width: 22%; /* Reduce the width of each signature column */
             text-align: center;
             font-size: 0.85em; /* Smaller font */
-            margin-right: 75px; /* Add margin between the columns */
+            margin-right: 100px; /* Add margin between the columns */
             vertical-align: bottom;
         }
 
@@ -241,7 +241,7 @@
         <div class="signature-column">
             <p>Diperiksa Oleh (STAFF IT)</p>
             <div class="signature-box">
-                {{-- Kalau ada user baru, mohon di tambah lagi ya function @if nya atau copy aja --}}
+                {{-- Kalau ada user baru, mohon di tambah lagi ya function @if nya atau copy aja ya beb --}}
                 @if(Auth::user()->username == 'rawr')
                     <img src="{{ 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('images/ttd-help/ttd1.png'))) }}">
                 @elseif(Auth::user()->username == 'rawr1')
@@ -257,7 +257,14 @@
         <!-- Column for Manager IT -->
         <div class="signature-column">
             <p>Disetujui Oleh (ASS/MANAGER IT)</p>
-            <div class="signature-box"></div> <!-- Empty box for manual signature -->
+            <div class="signature-box">
+                {{-- Kalau ada user baru, mohon di tambah lagi ya function @if nya atau copy aja ya beb --}}
+                @if($history->spv_status == 1)
+                    <img src="{{ 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('images/ttd-help/ttd1.png'))) }}">
+                @elseif($history->spv_status == 0)
+                    <p>Di Approve lagi yaa</p>
+                @endif
+            </div>
             <p class="signature-line">________________________________</p>
             <p class="date-line">TGL: {{ date('d F Y', strtotime($history->tanggal)) }}</p>
         </div>

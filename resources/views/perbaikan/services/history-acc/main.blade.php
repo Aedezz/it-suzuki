@@ -119,9 +119,13 @@
                                     <div>
                                         {{ $data->keterangan }}
                                         <br>
-                                        <span class="text-sm text-gray-500 block">Approve by STAFF IT </span>
+                                        @if ($data->spv_status == 1)
+                                            <span class="text-sm text-gray-500 block">Done!</span>
+                                        @else
+                                            <span class="text-sm text-gray-500 block">Approve by STAFF IT</span>
+                                        @endif
                                     </div>
-                                </td>
+                                </td>                                
 
                                 <td class="flex justify-center space-x-1">
                                     <!-- Tombol Print (tetap di kanan) -->

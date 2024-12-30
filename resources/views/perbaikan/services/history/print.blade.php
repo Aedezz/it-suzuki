@@ -91,7 +91,7 @@
 
         /* Signature Section */
         .signature-section {
-            margin-top: 20px;
+            margin-bottom: 11cm;
             display: block;
             text-align: center;
         }
@@ -100,13 +100,13 @@
             display: inline-block;
             width: 22%; /* Reduce the width of each signature column */
             text-align: center;
-            font-size: 0.75em; /* Smaller font */
-            margin-right: 15px; /* Reduced space between columns */
+            font-size: 0.85em; /* Smaller font */
+            margin-right: 100px; /* Increase the gap between columns */
             vertical-align: bottom;
         }
 
         .signature-column:last-child {
-            margin-right: 0;
+            margin-right: 0; /* Remove the margin for the last column */
         }
 
         .signature-line {

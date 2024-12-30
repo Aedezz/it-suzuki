@@ -1,139 +1,65 @@
-@extends('../dalam/layout')
+@extends('layout.barang')
 
-@section('style')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
 <style>
     .rectangle-container {
         width: 100%;
         padding: 16px;
     }
-
+    
+    /* No scrolling, just ensure it stays within the layout */
     #tableContainer {
         width: 100%;
-        overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
-    }
-
-    table.dataTable {
-        width: 100% !important;
-        table-layout: fixed; /* Fixed layout for more control over column width */
-    }
-
-    table.dataTable th,
-    table.dataTable td {
-        white-space: normal; /* Allows text to wrap */
-        word-wrap: break-word; /* Breaks long words onto the next line */
-        text-align: center; /* Centers text for better alignment */
-        padding: 4px 8px; /* Reduced padding for tighter cells */
-        font-size: 14px; /* Optional: Reduce font size for tighter appearance */
-    }
-
-    /* Adjust "No" column width */
-    table.dataTable th:first-child,
-    table.dataTable td:first-child {
-        width: 50px; /* Set a fixed width for the "No" column */
-    }
-
-    /* Allow "Nama Item" to take remaining space */
-    table.dataTable th:nth-child(2),
-    table.dataTable td:nth-child(2) {
-        width: auto; /* Let it grow to take available space */
-    }
-
-    /* Adjust "Aksi" column width */
-    table.dataTable th:last-child,
-    table.dataTable td:last-child {
-        width: 130px; /* Set a fixed width for the "Aksi" column */
-    }
-
-    /* Orange Aksi Buttons */
-    .aksi-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        background-color: #e40a0a;
-        color: white;
-        transition: background-color 0.3s;
-    }
-
-    .aksi-button:hover {
-        background-color: #a70808;
-    }
-
-    .add-button-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 16px; /* Space between button and table */
-    }
-
-    .dataTables_length, .dataTables_filter {
-        padding: 8px;
-        border-radius: 8px;
-    }
-
-    .dataTables_length select, .dataTables_filter input {
-        border: 1px solid #e2e8f0;
-        padding: 4px 8px;
-        border-radius: 4px;
     }
 </style>
-@endsection
 
-<link rel="icon" href="../images/perbaikan/logo-tab.png">
+<div class="flex justify-center items-center mt-10">
+    <div class="form-it-container relative w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6">
+        <!-- Title with styled bottom border -->
+        <div>
+            <h2 class="font-sans text-xl sm:text-2xl font-bold" style="color: rgb(45, 45, 45)">
+                Daftar Item
+            </h2>
+            <div class="mt-3 border-b-2 border-gray-300"></div>
+        </div>
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
-    <!-- SweetAlert Status Message -->
-    @if (session('status'))
-    <script>
-        Swal.fire({
-            title: '{{ session('status')['judul'] }}',
-            text: '{{ session('status')['pesan'] }}',
-            icon: '{{ session('status')['icon'] }}',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    @endif
+        <!-- Create Button -->
+        {{-- <a href="{{ route('create') }}"
+            class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 flex items-center">
+            <i class="fa-solid fa-plus mr-2"></i>
+            Tambah
+        </a> --}}
 
-    <!-- Main Container -->
-    <div class="flex justify-center items-center mt-10">
-        <div class="relative w-full lg:w-11/12 xl:w-10/12 bg-white rounded-lg shadow-md p-6">
-            
-            <!-- Title and Action Menu -->
-            <div class="flex justify-between items-center px-4 py-8">
-                <!-- Title -->
-                <h2 class="font-sans font-bold text-lg md:text-2xl" style="font-size: 20px; margin-top: -20px;">
-                    Daftar Item
-                </h2>
-            
-                <!-- Create Button -->
-                {{-- <a href="{{ route('item.create') }}"
-                    class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 flex items-center">
-                    <i class="fa-solid fa-plus mr-2"></i>
-                    Tambah
-                </a> --}}
+        @if (session('success'))
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-md shadow-lg">
+                {{ session('success') }}
             </div>
+        @endif
 
-            <!-- Table Container -->
-            <div id="tableContainer" class="w-full">
+        <!-- Table -->
+        <div class="mt-8 w-full">
+            <div id="tableContainer" class="transition-all duration-500 ease-in-out">
                 <table id="example" class="display w-full table-auto border-collapse">
                     <thead>
                         <tr>
-                            <th class="px-4 py-2">No</th>
-                            <th class="px-4 py-2">Nama Item</th>
-                            <th class="px-4 py-2">Aksi</th>
+                            <th class="px-4 py-3 text-center">No</th>
+                            <th class="px-4 py-3 text-center">Nama Item</th>
+                            <th class="px-4 py-3 text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($item as $data)
                             <tr>
-                                <td>{{ $data->id }}</td>
-                                <td>{{ $data->nama }}</td>
+                                <td class="px-4 py-2 text-center">{{ $data->id }}</td>
+                                <td class="px-4 py-2 text-center">{{ $data->nama }}</td>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <div class="flex justify-center space-x-2">
                                         <!-- Edit Button -->
                                         <div class="flex justify-center w-full">
-                                            <a href="{{ route('item.edit', $data->id) }}" title="Perbarui"
+                                            <a href="{{ route('item.edit', $data->id) }}"
                                                 class="relative w-8 h-8 rounded-lg bg-blue-500 text-white flex justify-center items-center hover:bg-blue-600" title="Perbarui">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
@@ -147,21 +73,28 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                paging: true,
-                searching: true,
-                ordering: true,
-                responsive: true,
-                pageLength: 25,
-                lengthMenu: [10, 25, 50, 100]
-            });
+<script>
+    // SweetAlert for status message
+    @if (session('status'))
+    Swal.fire({
+        title: '{{ session('status')['judul'] }}',
+        text: '{{ session('status')['pesan'] }}',
+        icon: '{{ session('status')['icon'] }}',
+        confirmButtonText: 'OK'
+    });
+    @endif
+
+    $(document).ready(function() {
+        $('#example').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            responsive: true,
+            pageLength: 25, // Show 25 rows by default
+            lengthMenu: [10, 25, 50, 100] // Allow user to select rows displayed
         });
-    </script>
-</body>
+    });
+</script>

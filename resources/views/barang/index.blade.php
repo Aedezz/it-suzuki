@@ -18,10 +18,13 @@
 
 <div class="flex justify-center items-center mt-10">
     <div class="form-it-container relative w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6">
-        <!-- Title in the top left corner -->
-        <h2 class="font-sans text-xl sm:text-2xl font-bold absolute top-6 left-7" style="color: rgb(45, 45, 45)">
-            Daftar Barang
-        </h2>
+        <!-- Title with styled bottom border -->
+        <div>
+            <h2 class="font-sans text-xl sm:text-2xl font-bold" style="color: rgb(45, 45, 45)">
+                Daftar Barang
+            </h2>
+            <div class="mt-3 border-b-2 border-gray-300"></div>
+        </div>
 
         <!-- Create Button -->
         {{-- <a href="{{ route('create') }}"
@@ -37,7 +40,7 @@
         @endif
 
         <!-- Table -->
-        <div class="mt-16 w-full">
+        <div class="mt-8 w-full">
             <div id="tableContainer" class="transition-all duration-500 ease-in-out">
                 <table id="example" class="display w-full table-auto border-collapse">
                     <thead>
@@ -69,6 +72,16 @@
 </div>
 
 <script>
+    // SweetAlert for status message
+    @if (session('status'))
+    Swal.fire({
+        title: '{{ session('status')['judul'] }}',
+        text: '{{ session('status')['pesan'] }}',
+        icon: '{{ session('status')['icon'] }}',
+        confirmButtonText: 'OK'
+    });
+    @endif
+
     $(document).ready(function() {
         $('#example').DataTable({
             paging: true,
