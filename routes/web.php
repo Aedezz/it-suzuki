@@ -90,23 +90,29 @@ Route::get('/general/deskripsi/{id_deskripsi}/edit', [DeskripsiPerbaikanControll
 Route::put('/general/deskripsi/{id_deskripsi}', [DeskripsiPerbaikanController::class, 'update'])->name('deskripsi.update');
 Route::delete('/general/deskripsi/{id_deskripsi}', [DeskripsiPerbaikanController::class, 'destroy'])->name('deskripsi.destroy');
 
-// Services Item
-Route::get('/services/item', [ItemPerbaikanController::class, 'index'])->name('item.index');
-// Menampilkan form untuk membuat periode perbaikan baru
-Route::get('/services/create', [ItemPerbaikanController::class, 'create'])->name('item.create');
-// Menyimpan Deskripsi perbaikan baru
-Route::post('/services/item', [ItemPerbaikanController::class, 'store'])->name('item.store');
-Route::get('/services/item/{id}/edit', [ItemPerbaikanController::class, 'edit'])->name('item.edit');
-Route::put('/services/item/{id}', [ItemPerbaikanController::class, 'update'])->name('item.update');
+// Make Resource karena ini routenya cmn berhubungan dengan CRUD
+Route::resource('services/item', ItemPerbaikanController::class)->names([
+    'index' => 'item.index',
+    'create' => 'item.create',
+    'store' => 'item.store',
+    'edit' => 'item.edit',
+    'update' => 'item.update',
+]);
 
-//HISTORI ROUTE PERBAIKAN
-Route::get('/services/history', [HistoryPerbaikanController::class, 'index'])->name('history.index');
-// Route untuk form create (GET)
-Route::get('/services/history/create', [HistoryPerbaikanController::class, 'create'])->name('services.history.create');
+Route::prefix('services/history')->name('history.')->group(function() {
+    // HISTORI ROUTE PERBAIKAN
+    Route::get('/', [HistoryPerbaikanController::class, 'index'])->name('index');
+    Route::get('/create', [HistoryPerbaikanController::class, 'create'])->name('create');
+    Route::post('/store', [HistoryPerbaikanController::class, 'store'])->name('store');
+    Route::get('/search-pegawai', [HistoryPerbaikanController::class, 'searchPegawai'])->name('searchPegawai');
+    Route::get('/print/{id}', [HistoryPerbaikanController::class, 'print'])->name('print');
+    Route::post('/approve/{id}', [HistoryPerbaikanController::class, 'check'])->name('check');
 
-// Route untuk menghandle POST (auto-live atau pengiriman data)
-Route::post('/services/history/store', [HistoryPerbaikanController::class, 'store'])->name('services.history.store');
-Route::get('/search-pegawai', [HistoryPerbaikanController::class, 'searchPegawai']);
+    // HISTORY - ACC
+    Route::get('/acc', [HistoryPerbaikanController::class, 'halamanAcc'])->name('approve');
+    Route::get('/print-acc/{id}', [HistoryPerbaikanController::class, 'print2'])->name('print2');
+    Route::post('/acc/selesai/{id}', [HistoryPerbaikanController::class, 'accTerakhir'])->name('full-acc');
+});
 
 // Route::get('/report/aktifitas/v', [ReportAktifitasController::class, 'index'])->name('aktifitas.index');
 Route::get('/report/aktifitas', [ReportAktifitasController::class, 'previewReport'])->name('aktifitas.preview');

@@ -1,49 +1,96 @@
 @extends('layout.barang')
 
-@section('content')
-<div class="container mx-auto mt-10 px-6 max-w-screen-lg">
-    <h1 class="text-4xl font-bold text-center mb-6 text-gray-800">Daftar Barang</h1>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-    @if (session('success'))
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-md shadow-lg">
-            {{ session('success') }}
+<style>
+    .rectangle-container {
+        width: 100%;
+        padding: 16px;
+    }
+    
+    /* No scrolling, just ensure it stays within the layout */
+    #tableContainer {
+        width: 100%;
+    }
+</style>
+
+<div class="flex justify-center items-center mt-10">
+    <div class="form-it-container relative w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6">
+        <!-- Title with styled bottom border -->
+        <div>
+            <h2 class="font-sans text-xl sm:text-2xl font-bold" style="color: rgb(45, 45, 45)">
+                Daftar Barang
+            </h2>
+            <div class="mt-3 border-b-2 border-gray-300"></div>
         </div>
-    @endif
 
-    <div class="flex justify-end mb-4">
-        <a href="{{ route('barang.create') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-300">Tambah Barang</a>
-    </div>
+        <!-- Create Button -->
+        {{-- <a href="{{ route('create') }}"
+            class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 flex items-center">
+            <i class="fa-solid fa-plus mr-2"></i>
+            Tambah
+        </a> --}}
 
-    <!-- Tabel Daftar Barang -->
-    <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
-        <table class="min-w-full table-auto border-collapse text-sm text-gray-700">
-            <thead class="bg-gradient-to-r from-indigo-500 to-indigo-700 text-white">
-                <tr>
-                    <th class="px-4 py-3 text-left border-b-2 border-gray-300">No</th>
-                    <th class="px-4 py-3 text-left border-b-2 border-gray-300">Nama Barang</th>
-                    <th class="px-4 py-3 text-left border-b-2 border-gray-300">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($barangs as $index => $barang)
-                    <tr class="hover:bg-indigo-50 transition duration-300">
-                        <td class="border-b-2 border-gray-200 px-4 py-3 text-left">{{ $index + 1 }}</td>
-                        <td class="border-b-2 border-gray-200 px-4 py-3 text-left">{{ $barang->nama }}</td>
-                        <td class="border-b-2 border-gray-200 px-4 py-3 text-left">
-                            <!-- Tombol Edit dengan Ikon -->
-                            <a href="{{ route('barang.edit', $barang->id) }}" 
-                                class="bg-yellow-500 text-white w-8 h-8 flex items-center justify-center rounded-full shadow-md hover:bg-yellow-600 transition duration-300"
-                                title="Edit Barang">
-                                 <!-- Icon Pensil -->
-                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 3l5 5-11 11H5v-5L16 3z"></path>
-                                 </svg>
-                             </a>                                                       
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        @if (session('success'))
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-md shadow-lg">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Table -->
+        <div class="mt-8 w-full">
+            <div id="tableContainer" class="transition-all duration-500 ease-in-out">
+                <table id="example" class="display w-full table-auto border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-3 text-center">No</th>
+                            <th class="px-4 py-3 text-center">Nama Barang</th>
+                            <th class="px-4 py-3 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($barangs as $index => $barang)
+                            <tr>
+                                <td class="px-4 py-2 text-center">{{ $index + 1 }}</td>
+                                <td class="px-4 py-2">{{ $barang->nama }}</td>
+                                <td class="flex justify-center space-x-2">
+                                    <!-- Tombol Edit dengan Ikon -->
+                                    <a href="{{ route('barang.edit', $barang->id) }}" 
+                                        class="relative w-8 h-8 rounded-lg bg-blue-500 text-white flex justify-center items-center hover:bg-blue-600" title="Perbarui">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-@endsection
+
+<script>
+    // SweetAlert for status message
+    @if (session('status'))
+    Swal.fire({
+        title: '{{ session('status')['judul'] }}',
+        text: '{{ session('status')['pesan'] }}',
+        icon: '{{ session('status')['icon'] }}',
+        confirmButtonText: 'OK'
+    });
+    @endif
+
+    $(document).ready(function() {
+        $('#example').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            responsive: true,
+            pageLength: 25, // Show 25 rows by default
+            lengthMenu: [10, 25, 50, 100] // Allow user to select rows displayed
+        });
+    });
+</script>
