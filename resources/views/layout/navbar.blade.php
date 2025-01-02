@@ -1,232 +1,225 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="icon" href="{{ asset('images/logo-tab.png') }}">
+    <link rel="icon" href="../images/perbaikan/logo-tab.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>IT System</title>
+    <title>IT Suzuki</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Tombol Login */
-        .login-btn {
-            display: flex;
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    /* Animasi Slide Up untuk Mobile Menu */
+    .slide-up {
+        max-height: 0;
+        /* Menutup menu dengan mengatur max-height ke 0 */
+        opacity: 0;
+        /* Menyembunyikan menu */
+        transform: translateY(-20px);
+        /* Efek pergeseran ke atas */
+        transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        overflow: hidden;
+        /* Mencegah konten menu keluar dari batas */
+    }
+
+    /* Animasi Slide Down untuk Mobile Menu */
+    .slide-down {
+        max-height: 500px;
+        /* Tentukan tinggi maksimum menu saat terbuka */
+        opacity: 1;
+        /* Membuat menu terlihat */
+        transform: translateY(0);
+        /* Mengembalikan posisi ke normal saat membuka */
+        transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        overflow: hidden;
+        /* Pastikan konten tidak melampaui batas */
+    }
+
+    /* Menampilkan menu jika memiliki class 'show' */
+    #menu {
+        position: fixed;
+        top: 75px;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background-color: #ffffff;
+        display: block;
+        padding-top: -20px;
+        max-height: 0;
+        /* Saat ditutup, max-height diatur ke 0 */
+        opacity: 0;
+        /* Menu tersembunyi */
+        transform: translateY(-20px);
+        /* Efek meluncur ke atas saat ditutup */
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    /* Menampilkan menu jika memiliki class 'show' */
+    #menu.show {
+        display: block;
+        max-height: 500px;
+        /* Tentukan tinggi menu saat terbuka */
+        opacity: 1;
+        /* Menu terlihat */
+        transform: translateY(0);
+        /* Menu kembali ke posisi semula saat terbuka */
+    }
+
+
+
+    @media (min-width: 768px) {
+        #menu {
+            display: none;
+        }
+
+        .md\:block {
+            display: block !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .md\:block {
+            display: none;
+        }
+
+        .login-mobile {
+            display: block;
+        }
+
+        /* Navbar Sticky */
+        nav {
+            position: sticky;
+            top: 0;
+            /* Agar navbar tetap di atas saat scroll */
+            z-index: 9999;
+            /* Pastikan navbar berada di atas konten lainnya */
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Memberikan sedikit bayangan pada navbar */
             align-items: center;
-            font-size: 16px;
-            padding: 8px 12px;
-            background-color: #4A90E2;
-            color: white;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-            cursor: pointer; /* Menambahkan cursor pointer */
+            padding-top: 20px;
+            padding-bottom: 20px;
+            height: 75px;
+            display: flex;
         }
 
-        .login-btn:hover {
-            background-color: #357ABD;
-        }
 
-        /* Gaya umum navbar */
-        .navbar {
+        .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background-color: #2d3748;
-            color: white;
-            position: relative;
-            z-index: 2000;
-        }
-
-        .navbar-logo h2 {
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .navbar-logo a {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .navbar-links {
-            display: flex;
-            gap: 4px; /* Mengurangi gap antar elemen menu */
-            padding-left: 8px; /* Menjaga jarak antara logo dan menu */
-        }
-
-        .navbar-links a {
-            color: white;
-            font-size: 16px;
-            text-decoration: none;
-            padding: 8px 12px;
-            position: relative;
-        }
-
-        /* Garis bawah dan warna hover */
-        .navbar-links a::after,
-        .sidebar a::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background-color: #cbd5e0;
-            transition: width 0.3s;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
-        .navbar-links a:hover::after,
-        .sidebar a:hover::after {
             width: 100%;
         }
 
-        .navbar-links a:hover,
-        .sidebar a:hover {
-            color: #cbd5e0;
-            /* Warna hover */
+        .logo {
+            margin-left: 25px;
+            margin-right: 15px;
+            width: auto;
         }
 
-        /* Gaya sidebar responsif */
-        .sidebar {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -250px;
-            width: 250px;
-            height: 100%;
-            background-color: #2d3748;
-            padding-top: 20px;
-            z-index: 1000;
-            transition: 0.3s;
-        }
-
-        .sidebar.show {
-            right: 0;
-        }
-
-        .sidebar a {
-            padding: 15px 20px;
-            text-decoration: none;
-            font-size: 18px;
-            color: white;
-            display: block;
-            position: relative;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #4a5568;
-            color: #cbd5e0;
-        }
-
-        /* Tombol hamburger */
-        .menu-btn {
-            display: none;
-            font-size: 30px;
-            color: white;
-            cursor: pointer;
-            position: absolute;
-            right: 60px;
-        }
-
-        /* Tombol Login */
-        .login-btn {
+        #menu-toggle {
             display: flex;
+            justify-content: center;
             align-items: center;
-            font-size: 16px;
-            padding: 8px 12px;
-            background-color: #4A90E2;
-            color: white;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            background: none;
+            border: none;
+            padding: 10px;
         }
 
-        .login-btn:hover {
-            background-color: #357ABD;
+        #menu-toggle {
+            margin-top: 10px;
         }
+    }
+</style>
 
-        .login-btn i {
-            margin-right: 8px;
-        }
+<body>
+    <!-- component -->
+    <nav class="bg-white shadow shadow-gray-300 w-100 px-8 md:px-auto">
+        <div class="md:h-20 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
+            <!-- Logo -->
+            <div class="logo text-blue-500 md:order-1">
+                <img src="{{ asset('images/logo.PNG') }}"
+                    style="margin-left: -65px; width: 270px; height: auto; object-fit: contain;" alt="Logo">
+            </div>
 
-        /* Responsif untuk tampilan mobile */
-        @media (max-width: 768px) {
-            .navbar-links {
-                display: none;
-            }
+            <!-- Menu Links (Desktop) -->
+            <div class="text-gray-500 order-3 w-full md:w-auto md:order-2 md:block hidden">
+                <ul class="flex font-semibold justify-between" style="margin-right: 100px">
+                    <li><a href="{{ route('dashboard') }}" class="md:px-4 md:py-2 hover:text-blue-500">Beranda</a></li>
+                    <li><a href="{{ route('pc.create') }}" class="md:px-4 md:py-2 hover:text-blue-500">Install Komputer</a></li>
+                    <li><a href="{{ route('pembuatan.create') }}" class="md:px-4 md:py-2 hover:text-blue-500">Pembuatan User</a></li>
+                    <li><a href="{{ route('perbaikan') }}" class="md:px-4 md:py-2 hover:text-blue-500">Perbaikan Perangkat</a></li>
+                    <li><a href="#" class="md:px-4 md:py-2 hover:text-blue-500">Download Berita Acara</a></li>
+                </ul>
+            </div>
 
-            .navbar {
-                height: 60px;
-            }
+            <!-- Login Button (Desktop) -->
+            <div class="order-2 md:order-3 hidden md:block" style="margin-right: -55px">
+                <button
+                    class="flex items-center rounded-md border border-blue-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-blue-600 hover:text-white hover:bg-blue-800 hover:border-blue-800 focus:text-white focus:bg-blue-800 focus:border-blue-800 active:border-blue-800 active:text-white active:bg-blue-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    type="button" onclick="window.location.href='{{ route('login') }}'"> LOGIN IT </button>
+            </div>
 
-            .menu-btn {
-                display: block;
-                right: 20px;
-            }
+            <!-- Mobile Menu Button -->
+            <div class="block md:hidden">
+                <button id="menu-toggle" class="focus:outline-none">
+                    <svg id="menu-icon" class="h-8 w-8 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
 
-            /* Sidebar tampil di mode responsif */
-            .sidebar {
-                display: block;
-            }
-
-            .sidebar a {
-                padding: 15px;
-                font-size: 18px;
-            }
-
-            /* Navbar-logo tetap di kiri pada tampilan mobile */
-            .navbar-logo {
-                position: absolute;
-                top: 15px;
-                left: 15px;
-            }
-        }
-    </style>
-</head>
-
-<body bgcolor="#E2F1E7">
-    <div class="navbar bg-gray-800 text-white flex items-center p-4">
-        <div class="navbar-logo ml-0 mr-2"> <!-- Mengurangi margin kiri pada logo -->
-            <a href="#" class="text-xl font-bold">IT System</a>
+            <!-- Mobile Sidebar -->
+            <div id="menu" class="hidden w-full md:hidden bg-gray-50 shadow-md p-4">
+                <ul class="space-y-4 text-gray-700 font-semibold">
+                    <li><a href="{{ route('dashboard') }}" class="block hover:text-blue-500">Beranda</a></li>
+                    <li><a href="{{ route('pc.create') }}" class="block hover:text-blue-500">Install Komputer</a></li>
+                    <li><a href="{{ route('pembuatan.create') }}" class="block hover:text-blue-500">Pembuatan User</a></li>
+                    <li><a href="{{ route('perbaikan') }}" class="block hover:text-blue-500">Perbaikan Perangkat</a></li>
+                    <li><a href="#" class="block hover:text-blue-500">Download Berita Acara</a></li>
+                </ul>
+                <!-- LOGIN IT button in mobile menu -->
+                <button class="w-28 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-2 text-sm text-center" onclick="window.location.href='{{ route('login') }}'">
+                    LOGIN IT
+                </button>
+            </div>
         </div>
-        <div class="navbar-links flex gap-4"> <!-- Mengurangi gap lebih jauh -->
-            {{-- Icon Home --}}
-            <a href="/" class="hover:text-gray-400 flex items-center">
-                <i class="bi bi-house-fill mr-1"></i>
-                Beranda
-            </a>
-            {{-- Menu --}}
-            <a href="{{ route('pc.create') }}" class="hover:text-gray-400 font-sans">Install Komputer & Laptop</a>
-            <a href="{{ route('pembuatan.create') }}" class="hover:text-gray-400 font-sans">Pembuatan User & Reset Password</a>
-            <a href="{{ route('perbaikan') }}" class="hover:text-gray-400 font-sans">Perbaikan Perangkat</a>
-            <a href="#" class="hover:text-gray-400 font-sans">Download Berita Acara</a>
-        </div>
-
-        <div class="login-btn flex items-center ml-4" onclick="window.location.href='{{ route('login') }}'">
-            <i class="bi bi-box-arrow-in-right"></i>
-            Login
-        </div>
-
-        <div class="menu-btn" onclick="toggleSidebar()">☰</div>
-    </div>
-
-    <div id="sidebar" class="sidebar">
-        <a href="{{ route('pc.create') }}" class="hover:text-gray-400 font-sans">Install Komputer/Laptop</a>
-        <a href="{{ route('pembuatan.create') }}" class="hover:text-gray-400 font-sans">Pembuatan User/Reset Password</a>
-        <a href="{{ route('perbaikan') }}" class="hover:text-gray-400 font-sans">Perbaikan Perangkat</a>
-        <a href="#" class="hover:text-gray-400 font-sans">Download Berita Acara</a>
-    </div>
+    </nav>
 
     <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('show');
-        }
+        document.getElementById("menu-toggle").onclick = function() {
+            let menu = document.getElementById("menu");
+            let icon = document.getElementById("menu-icon");
+
+            // Toggle class untuk menampilkan atau menyembunyikan menu
+            if (menu.classList.contains("show")) {
+                menu.classList.remove("show");
+                menu.classList.add("slide-up"); // Tambahkan kelas slide-up saat menutup
+            } else {
+                menu.classList.add("show");
+                menu.classList.remove("slide-up"); // Hapus kelas slide-up jika menu dibuka
+                menu.classList.add("slide-down"); // Tambahkan kelas slide-down saat membuka
+            }
+
+            // Mengubah ikon menu menjadi silang atau hamburger
+            if (menu.classList.contains("show")) {
+                icon.innerHTML =
+                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+            } else {
+                icon.innerHTML =
+                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+            }
+        };
     </script>
 
 </body>
-
 </html>
