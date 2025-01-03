@@ -185,10 +185,10 @@
                 <!-- Gambar yang ditampilkan di atas logo -->
                 <div class="block lg:hidden mb-4">
                     <div class="w-full h-52 bg-contain bg-center bg-no-repeat"
-                        style="background-image: url('../images/perbaikan/login-icon2.png');">
+                        style="background-image: url('../images/login-icon2.png');">
                     </div>
                 </div>
-
+                
                 <!-- Logo -->
                 <div>
                     <img src="{{ asset('images/logo.PNG') }}" style="width: 80%;" class="w-36 mx-auto" />
