@@ -1,61 +1,32 @@
 @extends('../dalam/main2')
 
-@section('style')
-    <!-- CSS Styling -->
-    <style>
-        /* Flexbox untuk centering konten secara vertikal dan horizontal */
-        body, html {
-            height: 100%;  /* Pastikan body dan html memenuhi seluruh tinggi layar */
-            margin: 0; /* Menghilangkan margin default */
-        }
-
-        .content-wrapper {
-            display: flex;
-            justify-content: center;  /* Horizontally center */
-            align-items: center;  /* Vertically center */
-            height: 60%;  /* Full height */
-            background-color: #f7f7f7; /* Latar belakang abu-abu terang */
-            padding: 20px; /* Padding untuk jarak tepi */
-            margin-top: 0; /* Hilangkan margin top agar card lebih dekat ke atas */
-        }
-
-        .container {
-            padding: 40px;
-            background-color: #ffffff; /* Warna putih untuk konten */
-            border-radius: 8px; /* Sudut melengkung */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan halus */
-            width: 100%; /* Full width */
-            max-width: 100%; /* Tidak ada pembatas lebar */
-            box-sizing: border-box; /* Agar padding tidak mempengaruhi lebar */
-        }
-
-        .display-4 {
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        .text-info {
-            color: #17a2b8;
-        }
-
-        .lead {
-            font-size: 1.25rem;
-            color: #555; /* Warna teks lebih gelap agar lebih mudah dibaca */
-        }
-
-        h1, p {
-            color: #333; /* Teks lebih gelap agar kontras */
-        }
-    </style>
-@endsection
-
 @section('content')
-    <div class="content-wrapper">
-        <div class="container text-center">
-            <h1 class="display-4 text-primary">Selamat Datang di </br><span class="text-info">IT System</span></h1> </br>
-            <p class="lead">Tempat terbaik untuk mengelola dan mengembangkan sistem informasi. Nikmati pengalaman menggunakan sistem kami.</p>
+<div class="content-wrapper">
+
+  <section class="dark:bg-gray-900" style="margin-top: -23px">
+    <div class="grid max-w-screen-xl px-4 pt-11 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-20">
+        <div class="mr-auto place-self-center lg:col-span-7">
+            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-4xl xl:text-5xl dark:text-white">Membangun Sistem IT<br>Handal & Inovatif.</h1>
+            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Kelola, simpan, dan analisis data dengan mudah dalam satu sistem terpadu. Kami menghadirkan solusi untuk pengolahan data yang cepat, aman, dan efisien. <a href="#" class="hover:underline">Memastikan informasi</a> anda selalu tersedia dan<a href="#" class="hover:underline"> terorganisir dengan baik.</a></p>
+            <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+                <a href="#" class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium text-center text-gray-900 border border-gray-200 rounded-lg sm:w-auto hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    <i class="fas fa-chart-bar mr-2"></i> Manajemen Data Terpusat
+                </a>
+                <a href="#" class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium text-center text-gray-900 border border-gray-200 rounded-lg sm:w-auto hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    <i class="fas fa-lock mr-2"></i> Keamanan Maksimal
+                </a>
+                <a href="#" class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium text-center text-gray-900 border border-gray-200 rounded-lg sm:w-auto hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    <i class="fas fa-bolt mr-2"></i> Akses Cepat & Mudah
+                </a>
+            </div>
         </div>
+        <div class="hidden lg lg:col-span-5 lg:flex" style="margin-top: -70px; ">
+            <img src="{{ asset('images/hero/img-1.png') }}" alt="hero image">
+        </div>                
     </div>
+</section>
+</div>
+
 @endsection
 
 @push('script')
@@ -102,3 +73,6 @@
     @endif
 
 @endpush
+
+
+

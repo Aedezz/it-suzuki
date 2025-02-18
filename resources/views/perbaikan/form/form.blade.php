@@ -1,7 +1,7 @@
 @extends('perbaikan.layout.layout-table')
 
 @section('style')
-    <style>
+<style>
         /*Overrides for Tailwind CSS */
 
         /* Form fields */
@@ -217,7 +217,7 @@
                     @foreach ($form as $data)
                         <tr>
                             <td>{{ $data->nomor }}</td>
-                            <td class="px-4 py-2" style="width: 100px; align-items: center">{{ $data->formatted_tanggal }}</td>
+                            <td class="px-4 py-2" style="width: 100px; align-items: center" data-order="{{ strtotime($data->tanggal) }}">{{ $data->formatted_tanggal }}</td>
                             <td>{{ $data->nik }}</td>
                             <td>{{ $data->nama_lengkap }}</td>
                             <td>{{ $data->divisi_cabang }}</td>
@@ -280,13 +280,15 @@
 
 @push('script')
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                "columnDefs": [{
-                    "targets": 8, // Mengatur agar kolom Aksi (kolom ke-9) tidak disembunyikan
-                    "visible": true, // Pastikan kolom Aksi terlihat
-                }]
-            });
-        });
+      $(document).ready(function() {
+    $('#example').DataTable({
+        "order": [[1, "desc"]], // Sesuaikan dengan indeks kolom tanggal
+        "columnDefs": [{ 
+            "targets": 8, 
+            "visible": true
+        }]
+    });
+});
+
     </script>
 @endpush

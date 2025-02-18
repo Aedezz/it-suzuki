@@ -2,7 +2,7 @@
 
 @section('title', 'Batch Information')
 
-<style>
+{{-- <style>
     /* Tentukan elemen tersembunyi dengan transisi smooth */
     .hidden {
         max-height: 0;
@@ -57,7 +57,7 @@
         text-decoration: none;
         /* Menghapus garis bawah */
     }
-</style>
+</style> --}}
 
 @section('content')
     <div class="container mx-auto px-6 py-8">

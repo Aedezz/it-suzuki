@@ -37,7 +37,7 @@ class AuthController extends Controller
         // Cek kredensial
         if (Auth::attempt($credentials)) {
             // Kirim pesan sukses login
-            return redirect()->intended('/dashboard')->with('success', 'Selamat datang, ' . Auth::user()->nama . '!');
+            return redirect()->intended('/dashboard')->with('success', 'Haloo!, ' . Auth::user()->nama . '!');
         }
 
         // Jika login gagal

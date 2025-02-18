@@ -23,6 +23,9 @@ class ChecklistPerbaikanController extends Controller
    {
        // Mengambil data status (cek) berdasarkan id
        $data = DB::table('form_perangkat')->where('id', $id)->first();
+       
+       
+       
    
        // Periksa apakah data ditemukan
        if (!$data) {
@@ -38,5 +41,6 @@ class ChecklistPerbaikanController extends Controller
        // Mengirim response sukses
        return response()->json(['message' => 'Status berhasil diperbarui']);
    }
+   
    
     }

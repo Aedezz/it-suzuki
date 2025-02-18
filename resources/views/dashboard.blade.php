@@ -131,6 +131,9 @@
             width: 80px;
             height: 40px;
         }
+        .form-it-container{
+            margin-top: 90px;
+        }
     }
 </style>
 <div class="car-animation">

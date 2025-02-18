@@ -188,7 +188,7 @@
                         style="background-image: url('../images/login-icon2.png');">
                     </div>
                 </div>
-                
+
                 <!-- Logo -->
                 <div>
                     <img src="{{ asset('images/logo.PNG') }}" style="width: 80%;" class="w-36 mx-auto" />

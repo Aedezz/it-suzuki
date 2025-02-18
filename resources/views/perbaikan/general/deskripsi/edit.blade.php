@@ -1,5 +1,6 @@
 
-@extends('../dalam/layout')
+@extends('dalam.layout')
+
 
 @section('style')
     <style>
@@ -130,9 +131,8 @@
     </style>
 @endsection
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
-
     @section('content')
+    <body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
         <!--Container-->
         <div class="flex justify-center items-center mt-10">
             <div class="form-it-container w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-hidden">
@@ -215,6 +215,7 @@
 
             </div>
         </div>
+    </body>
     @endsection
 
     @push('script')
@@ -223,7 +224,7 @@
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
-        @push('script')
+     
         <script>
             @if (session('success'))
                 let timerInterval;
@@ -246,7 +247,7 @@
                 });
             @endif
         </script>
-    @endpush
+        
     
     @endpush
-</body>
+

@@ -1,18 +1,139 @@
-@extends('layout.barang')
-
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <style>
-    .rectangle-container {
-        width: 100%;
-        padding: 16px;
+    /* Add slide-down and slide-up animation */
+
+    nav {
+        margin-bottom: 10px;
     }
-    
-    /* No scrolling, just ensure it stays within the layout */
-    #tableContainer {
+
+    .s1,
+    .s2,
+    .s3,
+    .s4,
+    .s5 {
+        padding-left: -20px;
+    }
+
+    .slide-up {
+        transition: max-height 0.5s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    /* Add height to navbar */
+    .navbar {
+        min-height: 80px;
+        /* Atur tinggi navbar di desktop */
+    }
+
+    /* Make sure the items are vertically centered */
+    .navbar .container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+    }
+
+    /* Additional styling for the logo to keep it centered */
+    .navbar img {
+        height: 3.5rem;
+        /* Set logo height for desktop */
+    }
+
+    /* Hover line effect on navbar items */
+    .navbar .container a {
+        position: relative;
+        display: inline-block;
+    }
+
+    .navbar .container a:hover::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
         width: 100%;
+        height: 2px;
+        background-color: #008a0e;
+        /* Warna garis bawah */
+        transition: width 1s ease;
+        width: 100%;
+    }
+
+    /* Hover line effect on sidebar items */
+    .slide-up ul li a {
+        position: relative;
+        display: inline-block;
+    }
+
+    .slide-up ul li a:hover::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #008a0e;
+        /* Warna garis bawah */
+        transition: width 0.3s ease;
+        width: 100%;
+    }
+
+    .nav {
+        position: relative;
+        /* Menjadikan .nav sebagai posisi acuan */
+    }
+
+    .nav ul {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        /* Mengatur dropdown muncul tepat di bawah menu */
+        background: white;
+        text-gray-500;
+        font-semibold;
+        width: 200px;
+        /* Sesuaikan dengan kebutuhan */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav:hover ul,
+    .nav ul.opacity-100 {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    #form-dropdown {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform-origin: top;
+        transform: scaleY(0);
+        opacity: 0;
+    }
+
+    #form-dropdown.opacity-100 {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    i.fa-angle-down {
+        transition: transform 0.3s ease;
+        /* Animasi rotasi ikon */
+    }
+
+    i.fa-angle-down.rotate-180 {
+        transform: rotate(180deg);
+        /* Putar ikon ke atas */
     }
 </style>
 
@@ -173,86 +294,3 @@
         </ul>
     </div>
 </nav>
-
-<div class="flex justify-center items-center mt-10">
-    <div class="form-it-container relative w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6">
-        <!-- Title with styled bottom border -->
-        <div>
-            <h2 class="font-sans text-xl sm:text-2xl font-bold" style="color: rgb(45, 45, 45)">
-                Daftar Item
-            </h2>
-            <div class="mt-3 border-b-2 border-gray-300"></div>
-        </div>
-
-        <!-- Create Button -->
-        {{-- <a href="{{ route('create') }}"
-            class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 flex items-center">
-            <i class="fa-solid fa-plus mr-2"></i>
-            Tambah
-        </a> --}}
-
-        @if (session('success'))
-            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-md shadow-lg">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        <!-- Table -->
-        <div class="mt-8 w-full">
-            <div id="tableContainer" class="transition-all duration-500 ease-in-out">
-                <table id="example" class="display w-full table-auto border-collapse">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-3 text-center">No</th>
-                            <th class="px-4 py-3 text-center">Nama Item</th>
-                            <th class="px-4 py-3 text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($item as $data)
-                            <tr>
-                                <td class="px-4 py-2 text-center">{{ $data->id }}</td>
-                                <td class="px-4 py-2 text-center">{{ $data->nama }}</td>
-                                <td class="p-4 border-b border-blue-gray-50">
-                                    <div class="flex justify-center space-x-2">
-                                        <!-- Edit Button -->
-                                        <div class="flex justify-center w-full">
-                                            <a href="{{ route('item.edit', $data->id) }}"
-                                                class="relative w-8 h-8 rounded-lg bg-blue-500 text-white flex justify-center items-center hover:bg-blue-600" title="Perbarui">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // SweetAlert for status message
-    @if (session('status'))
-    Swal.fire({
-        title: '{{ session('status')['judul'] }}',
-        text: '{{ session('status')['pesan'] }}',
-        icon: '{{ session('status')['icon'] }}',
-        confirmButtonText: 'OK'
-    });
-    @endif
-
-    $(document).ready(function() {
-        $('#example').DataTable({
-            paging: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            responsive: true,
-            pageLength: 25, // Show 25 rows by default
-            lengthMenu: [10, 25, 50, 100] // Allow user to select rows displayed
-        });
-    });
-</script>

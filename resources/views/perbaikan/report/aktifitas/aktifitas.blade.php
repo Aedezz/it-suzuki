@@ -130,46 +130,46 @@
                     </thead>
                     <tbody>
                         @forelse ($data as $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td class="px-4 py-2" style="width: 100px; align-items: center">{{ $item->tgl_catatan }}</td>
-                            <td>{{ $item->grup_nama }}</td>
-                            <td>{{ $item->modul_nama }}</td>
-                            <td>{{ $item->keterangan }}</td>
-                            <td>{{ $item->solusi }}</td>
-                            <td>{{ $item->nama }}</td>
-                        </tr>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td class="px-4 py-2" style="width: 100px; align-items: center">{{ $item->tgl_catatan }}
+                                </td>
+                                <td>{{ $item->grup_nama }}</td>
+                                <td>{{ $item->modul_nama }}</td>
+                                <td>{{ $item->keterangan }}</td>
+                                <td>{{ $item->solusi }}</td>
+                                <td>{{ $item->nama }}</td>
+                            </tr>
                         @empty
-                        <tr>
-                            <td colspan="7">Tidak Ada Data Untuk Ditampilkan</td>
-                        </tr>
+                            <tr>
+                                <td colspan="7">Tidak Ada Data Untuk Ditampilkan</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-        @endsection
+@endsection
 
 
-        @push('script')
-        <script>
-            $(document).ready(function() {
-                $('#example').DataTable({
-    responsive: true,
-    autoWidth: false,
-    fixedColumns: true, // Prevent layout shifting
-    columnDefs: [
-        {
-            targets: [6],
-            visible: true, // Pastikan kolom terlihat
-        },
-        {
-            targets: "_all",
-            className: "dt-center",
-        },
-    ],
-});
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                responsive: true,
+                autoWidth: false,
+                fixedColumns: true, // Prevent layout shifting
+                columnDefs: [{
+                        targets: [6],
+                        visible: true, // Pastikan kolom terlihat
+                    },
+                    {
+                        targets: "_all",
+                        className: "dt-center",
+                    },
+                ],
             });
-        </script>
-        @endpush
+        });
+    </script>
+@endpush
