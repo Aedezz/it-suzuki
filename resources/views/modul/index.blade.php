@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-
+<body class="bg-gray-100">
     <div class="flex justify-center items-center mt-5">
         <div
             class="form-it-container w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-auto">
@@ -119,7 +119,7 @@
                     @endif
                 </div>
             </div>
-
+        </body>
 
 
 {{-- @section('content')

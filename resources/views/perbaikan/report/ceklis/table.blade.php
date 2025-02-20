@@ -130,7 +130,7 @@
 @endsection
 <link rel="icon" href="../images/perbaikan/logo-tab.png">
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+<body class="bg-gray-50 text-gray-900 tracking-wider leading-normal">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         @if (session('status'))

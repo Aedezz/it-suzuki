@@ -1,18 +1,16 @@
-@include('layout.menu-navbar')
+@extends('layout.general')
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+
 
     @section('content')
         <div class="flex justify-center items-center mt-10">
-            <div
-                class="form-it-container w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-hidden">
+            <div class="form-it-container w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-hidden">
                 <!-- Title in the top left corner -->
                 <h2 class="font-sans text-xl sm:text-2xl font-bold" style="color: rgb(45, 45, 45); margin-bottom: 20px;">
                     Periode
                 </h2>
-                <hr>
                 <hr>
                 <!-- Form Section -->
                 <div class="container mt-2">
@@ -89,7 +87,7 @@
                             </div>
                         </form>
 
-
+@endsection
 
 
                         <script>

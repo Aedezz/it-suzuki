@@ -1,4 +1,4 @@
-@extends('../dalam/layout')
+@extends('layout.general')
 
 @section('style')
     <style>
@@ -129,7 +129,6 @@
     </style>
 @endsection
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
 
     @section('content')
         <div class="flex justify-center items-center mt-10">
@@ -180,3 +179,5 @@
                     </div>
                 </div>
             </div>
+        </div>
+    @endsection

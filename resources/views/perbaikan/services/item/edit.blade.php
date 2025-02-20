@@ -1,4 +1,4 @@
-@extends('../dalam/layout')
+@extends('layout.service')
 
 @section('style')
     <style>
@@ -129,8 +129,7 @@
     </style>
 @endsection
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
-
+<body class="bg-gray-100">
     @section('content')
         <!--Container-->
         <div class="container w-full md:w-4/5 xl:w-3/5 mx-auto px-2">
@@ -182,7 +181,7 @@
             </div>
         </div>
     @endsection
-
+</body>
     @push('script')
         <!--DataTables JS-->
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

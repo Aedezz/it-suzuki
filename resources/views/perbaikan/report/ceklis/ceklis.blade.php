@@ -129,7 +129,7 @@
     </style>
 @endsection
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+<body class="bg-gray-50 text-gray-900 tracking-wider leading-normal">
 
     @section('content')
         <!--Container-->

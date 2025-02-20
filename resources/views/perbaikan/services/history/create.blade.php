@@ -1,4 +1,4 @@
-@extends('../dalam/layout')
+@extends('layout.service')
 
 @section('style')
     <style>
@@ -129,7 +129,7 @@
     </style>
 @endsection
 
-<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+
 
     @section('content')
         <!--Container-->
@@ -279,13 +279,11 @@
         </div>
     @endsection
 
-    @push('script')
         <!--DataTables JS-->
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
-        @push('script')
         <script>
             document.getElementById('kode_pegawai').addEventListener('change', function () {
                 const selectedOption = this.options[this.selectedIndex];
@@ -296,6 +294,3 @@
                 document.getElementById('kode_divisi').value = kodeDivisi;
             });
         </script>        
-        @endpush
-    @endpush
-</body>

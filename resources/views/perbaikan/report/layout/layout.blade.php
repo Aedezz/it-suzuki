@@ -4,7 +4,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 @stack('style')
-
+<body class="bg-gray-50">
 <div class="flex justify-center items-center mt-10">
     <div
         class="form-it-container w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-hidden">
@@ -12,7 +12,6 @@
         <h2 class="font-sans text-xl sm:text-2xl font-bold absolute top-6 left-7" style="color: rgb(45, 45, 45)">
             Report Aktifitas
         </h2>
-
 
         {{-- <ul
             class="mt-14 flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 space-x-4 border-b-2 border-gray-300">
@@ -58,7 +57,7 @@
         </div>
     </div>
 </div>
-
+</body>
 
 <!--DataTables JS-->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

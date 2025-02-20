@@ -308,7 +308,7 @@
         </ul>
     </div>
 </nav>
-
+<body class="bg-gray-50">
 <div class="flex justify-center items-center mt-10">
     <div class="form-it-container w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6 relative max-h-[80vh] overflow-hidden">
         <!-- Title in the top left corner -->
@@ -349,7 +349,7 @@
         </div>
     </div>
 </div>
-
+</body>
 <script>
     const links = document.querySelectorAll('.data-link, .laporan-link, .ceklist-link');
     const bottomLine = document.querySelector('.link-bottom-line');
