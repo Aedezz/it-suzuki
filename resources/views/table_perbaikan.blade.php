@@ -5,20 +5,21 @@
         <div class="w-full overflow-x-auto">
             <style>
                 .container {
-    height: auto;
-    padding: 0;
-    margin: 0;
-}
+                    height: auto;
+                    padding: 0;
+                    margin: 0;
+                }
 
                 .button1:hover {
                     background-color: rgb(139, 0, 139);
                     transition: background-color 0.5s;
                 }
 
-                 .button2:hover {
+                .button2:hover {
                     background-color: rgb(0, 153, 28);
                     transition: background-color 0.5s;
                 }
+
                 .table {
                     border-collapse: collapse;
                     width: 100%;
@@ -29,8 +30,10 @@
                 th {
                     border: 2px solid #333;
                     text-align: left;
-                    padding: 16px; /* Mengatur padding untuk kontrol tinggi baris */
-                    height: 20px; /* Menetapkan tinggi tetap untuk setiap sel */
+                    padding: 16px;
+                    /* Mengatur padding untuk kontrol tinggi baris */
+                    height: 20px;
+                    /* Menetapkan tinggi tetap untuk setiap sel */
                 }
 
 
@@ -56,63 +59,71 @@
                     background-color: #007bff;
                     a color: white;
                 }
-                .judul{
+
+                .judul {
                     text-align: center;
-                    margin-bottom: 25px; 
+                    margin-bottom: 25px;
                 }
+
                 @media (max-width: 768px) {
-    /* Mengatur tabel untuk responsif */
-    table {
-        width: 100%;
-        height: auto; /* Membiarkan tinggi tabel menyesuaikan dengan konten */
-    }
 
-    td, th {
-        padding: 8px; /* Mengurangi padding untuk tampilan lebih compact */
-        font-size: 15px;
-    }
+                    /* Mengatur tabel untuk responsif */
+                    table {
+                        width: 100%;
+                        height: auto;
+                        /* Membiarkan tinggi tabel menyesuaikan dengan konten */
+                    }
 
-    /* Mengurangi margin bawah pada judul */
-    .judul {
-        margin-bottom: 10px;
-        font-size: 20px
-    }
+                    td,
+                    th {
+                        padding: 8px;
+                        /* Mengurangi padding untuk tampilan lebih compact */
+                        font-size: 15px;
+                    }
 
-    .flex {
-        flex-direction: column; /* Mengatur elemen dalam flexbox ke kolom di mode kecil */
-    }
+                    /* Mengurangi margin bawah pada judul */
+                    .judul {
+                        margin-bottom: 10px;
+                        font-size: 20px
+                    }
 
-    .w-full {
-        width: 100%;
-    }
+                    .flex {
+                        flex-direction: column;
+                        /* Mengatur elemen dalam flexbox ke kolom di mode kecil */
+                    }
 
-    /* Mengurangi padding dan margin pada elemen wrapper */
-    .w-full.max-w-8xl {
-        padding: 4px;
-        margin-bottom: 0; /* Menghilangkan margin bawah */
-    }
+                    .w-full {
+                        width: 100%;
+                    }
 
-    .p-8 {
-        padding: 4px; /* Mengurangi padding pada elemen yang memiliki kelas p-8 */
-    }
+                    /* Mengurangi padding dan margin pada elemen wrapper */
+                    .w-full.max-w-8xl {
+                        padding: 4px;
+                        margin-bottom: 0;
+                        /* Menghilangkan margin bawah */
+                    }
 
-    /* Mengatur container supaya tidak ada margin atau padding yang berlebihan */
-    .container {
-        padding: 0;
-        margin: 0;
-    }
+                    .p-8 {
+                        padding: 4px;
+                        /* Mengurangi padding pada elemen yang memiliki kelas p-8 */
+                    }
 
-    /* Pastikan tidak ada margin atau padding pada elemen lain yang menyebabkan ruang kosong */
-    .container.mx-auto {
-        margin-bottom: 0;
-    }
+                    /* Mengatur container supaya tidak ada margin atau padding yang berlebihan */
+                    .container {
+                        padding: 0;
+                        margin: 0;
+                    }
 
-    /* Mengatur tinggi elemen form agar sesuai dengan konten */
-    .w-full {
-        height: auto;
-    }
-}
+                    /* Pastikan tidak ada margin atau padding pada elemen lain yang menyebabkan ruang kosong */
+                    .container.mx-auto {
+                        margin-bottom: 0;
+                    }
 
+                    /* Mengatur tinggi elemen form agar sesuai dengan konten */
+                    .w-full {
+                        height: auto;
+                    }
+                }
             </style>
 
             <div class="flex justify-center items-start p-8 bg-gray-50 rounded-lg shadow-md">
@@ -169,7 +180,7 @@
                             <form action="{{ route('dashboard') }}" method="GET">
                                 <tr class="text-gray-700" style="margin">
                                     <td class="px-4 py-3 border" style="background-color: white;">Action</td>
-                                    <td class="px-4 py-3 text-md font-semibold border" style="background-color: white" >
+                                    <td class="px-4 py-3 text-md font-semibold border" style="background-color: white">
                                         <button type="submit"
                                             class="button1 px-6 py-2 bg-purple-700 text-white rounded-md font-semibold mx-1 mt-4 hover:bg-purple-800">PRINT</button>
                                         <button type="submit"

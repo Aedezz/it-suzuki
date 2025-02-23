@@ -161,7 +161,6 @@
             <ul class="text-gray-500 font-semibold md:space-x-2 md:flex md:flex-row" style="font-size: 16px;">
                 <li><a href="{{ route('dashboard') }}" class="s1 px-4 py-2 hover:text-indigo-500">Beranda</a>
                 </li>
-                <li><a href="#" class="s5 px-2 py-1 hover:text-indigo-400">Logbook</a></li>
 
                 <li><a href="{{ route('branch-info') }}" class="s3 px-2 py-1 hover:text-indigo-400">Branch
                         Information</a></li>
@@ -281,7 +280,6 @@
     <div id="menu" class="slide-up w-full md:hidden">
 
         <ul class="text-gray-500 font-semibold space-y-2">
-            <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Logbook</a></li>
             <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Outstanding</a></li>
             <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Branch Information</a></li>
             <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Help</a></li>

@@ -3,7 +3,7 @@
 @section('title', 'Problem - Tabel')
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
+<div class="flex justify-between items-center mb-6 mt-9">
     <div>
         <input 
             type="text" 
@@ -43,14 +43,14 @@
     <table class="min-w-full bg-white rounded-lg shadow-md">
         <thead class="bg-gray-50 text-left text-gray-600 font-medium border-b">
             <tr>
-                <th class="px-4 py-2">No</th>
-                <th class="px-4 py-2">Category</th>
-                <th class="px-4 py-2">Down</th>
-                <th class="px-4 py-2">Up</th>
-                <th class="px-4 py-2">PIC</th>
-                <th class="px-4 py-2">Information</th>
-                <th class="px-4 py-2">Branch</th>
-            </tr>
+                <th class="px-4 py-2 text-center">No</th>
+                <th class="px-4 py-2 text-center">Category</th>
+                <th class="px-4 py-2 text-center">Down</th>
+                <th class="px-4 py-2 text-center">Up</th>
+                <th class="px-4 py-2 text-center">PIC</th>
+                <th class="px-4 py-2 text-center">Information</th>
+                <th class="px-4 py-2 text-center">Branch</th>
+            </tr>            
         </thead>
         <tbody id="table-body">
             @include('problem.table')

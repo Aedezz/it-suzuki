@@ -8,7 +8,7 @@
         <td class="px-4 py-2 border-b text-center">
             {{ $problem->up ? \Carbon\Carbon::parse($problem->up)->format('d M Y H:i') : '-' }}
         </td>
-        <td class="px-4 py-2 border-b text-center">{{ $problem->pic ?? '-' }}</td>
+       <td class="px-4 py-2 border-b text-center whitespace-nowrap">{{ $problem->pic ?? '-' }}</td>
         <td class="px-4 py-2 border-b text-center">{{ $problem->informasi ?? '-' }}</td>
         <td class="px-4 py-2 border-b text-center">{{ $problem->nama_cabang ?? '-' }}</td>
     </tr>

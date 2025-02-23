@@ -10,11 +10,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
-
+<body class="bg-gray-50">
     <!-- Main Content Section -->
-    <div class="flex justify-center mt-12">
-        <div class="w-full max-w-3xl bg-white p-8 rounded-lg shadow-lg border border-gray-300">
+    <div class="flex justify-center mt-9">
+        <div class="w-full max-w-3xl bg-white p-8 rounded-lg shadow-lg border border-gray-300 mb-10">
             <h1 class="text-2xl font-semibold text-gray-800 mb-8 text-center">Data Perbaikan Perangkat</h1>
             <hr class=" border-gray-300" style="margin-bottom: 25px; margin-top: -20px">
             <!-- Table with borders -->
@@ -87,7 +86,4 @@
         </div>
         <!-- End of table wrapper -->
     </div>
-
-    </div>
-    </div>
-    </section>
+</body>

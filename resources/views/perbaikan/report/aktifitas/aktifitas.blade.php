@@ -61,7 +61,6 @@
     </style>
 @endsection
 
-
 <link rel="icon" href="../images/perbaikan/logo-tab.png">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -91,7 +90,7 @@
 
                         <!-- Input Nama dan Tombol Preview -->
                         <div class="flex items-center space-x-4 flex-1">
-                            <select name="nama" id="nama" required
+                            <select name="nama" id="nama"
                                 class="bg-gray-100 border border-gray-200 rounded py-2 px-3 focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-60">
                                 <option value="">Semua Nama</option>
                                 @foreach ($users as $item)

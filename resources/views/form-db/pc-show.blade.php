@@ -8,12 +8,12 @@
     <title>Instalasi View</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50">
 
     <!-- Main Content Section -->
     <div class="flex justify-center mt-12">
         <div class="w-full max-w-3xl bg-white p-8 rounded-lg shadow-lg border border-gray-300">
-            <h1 class="text-2xl font-semibold text-gray-800 mb-8">Form Install Komputer/Laptop</h1>
+            <h1 class="text-2xl font-semibold text-gray-800 mb-8">Form Install Komputer & Laptop</h1>
             
             <!-- Table with borders -->
             <table class="min-w-full table-auto border-collapse border border-gray-200">
