@@ -37,7 +37,7 @@ class AuthController extends Controller
         // Cek kredensial
         if (Auth::attempt($credentials)) {
             // Kirim pesan sukses login
-            return redirect()->intended('/dashboard')->with('success', 'Haloo!, ' . Auth::user()->nama . '!');
+            return redirect()->intended('/dashboard')->with('success', 'Selamat Datang!, ' . Auth::user()->nama . '!');
         }
 
         // Jika login gagal
@@ -69,7 +69,7 @@ class AuthController extends Controller
             'status' => 1, // Default status aktif
         ]);
 
-        return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login!');
+        return redirect()->route('login')->with('success', 'Akun Berhasil Dibuat!');
     }
 
     // Logout user
@@ -77,7 +77,7 @@ class AuthController extends Controller
     {
         Auth::logout();
         // Kirim pesan logout setelah logout berhasil
-        return redirect()->route('dashboard')->with('logout', 'Anda telah berhasil logout!');
+        return redirect()->route('dashboard')->with('logout', 'Anda Telah Logout!');
     }
 
     // Menampilkan form reset password
@@ -96,7 +96,7 @@ class AuthController extends Controller
 
         // Cek apakah password saat ini cocok dengan password di database
         if (!Hash::check($request->current_password, Auth::user()->password)) {
-            return back()->withErrors(['current_password' => 'Password saat ini tidak valid.']);
+            return back()->withErrors(['current_password' => 'Password Saat Ini Tidak Valid.']);
         }
 
         // Update password menggunakan Query Builder
@@ -104,7 +104,7 @@ class AuthController extends Controller
             ->where('id', Auth::id())
             ->update(['password' => Hash::make($request->new_password)]);
 
-        return redirect()->to('/dashboard')->with('success', 'Password berhasil diubah!');
+        return redirect()->to('/dashboard')->with('success', 'Password Berhasil Diubah!');
     }
 
 

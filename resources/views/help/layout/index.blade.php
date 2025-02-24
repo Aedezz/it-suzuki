@@ -1,6 +1,6 @@
 @include('layout.menu-navbar')
 
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-50 font-sans">
     <div class="container mx-auto mt-6 shadow-lg border p-6">
         <div class="container mx-auto mt-6">
             <!-- Title and Create Button -->

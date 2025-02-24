@@ -1,6 +1,6 @@
 @include('layout.menu-navbar')
 
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-50 font-sans">
     <div class="container mx-auto mt-6 px-16 max-w-full">
         <div class="flex flex-col space-y-4 mx-auto p-6 bg-white shadow-lg rounded-md">
             <form action="{{ route('help.store') }}" method="POST" enctype="multipart/form-data">
@@ -53,7 +53,7 @@
                     <!-- Action Buttons -->
                     <div class="flex justify-start space-x-4 mt-4 col-span-2">
                         <!-- Save Button -->
-                        <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md transition duration-300 ease-in-out hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md transition duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                             Save
                         </button>
                         

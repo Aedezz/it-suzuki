@@ -40,6 +40,12 @@ Route::get('/dashboard', function () {
     return redirect()->route('dalam/main2');
 })->name('dashboard');
 
+
+Route::get('dashboard', function () {
+    return view('dashboard.dashboard2');
+})->middleware('auth')->name('dashboard2');
+
+
 // Route Perbaikan Perangkat
 
 // Route::get('/perbaikan/create', [PerbaikanController::class, 'create'])->name('perbaikan.create');
@@ -139,9 +145,6 @@ Route::get('/create', [CobaController::class, 'create'])->name('data-entry.creat
 Route::post('/store', [CobaController::class, 'store'])->name('data-entry.store');
 Route::get('/view/{id}', [CobaController::class, 'show'])->name('data-entry.show');
 
-Route::get('dashboard', function () {
-    return view('dashboard.dashboard2');
-})->middleware('auth');
 
 //Login and Register Section
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');

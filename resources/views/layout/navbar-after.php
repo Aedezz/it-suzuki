@@ -133,7 +133,6 @@
             <div class="hidden md:flex md:items-center md:w-auto md:max-h-full"
                 style="margin-bottom: -10px; margin-right: 90px;">
                 <ul class="text-gray-500 font-semibold md:space-x-2 md:flex md:flex-row" style="font-size: 16px;">
-                    <li><a href="#" class="s5 px-2 py-1 hover:text-indigo-400">Logbook</a></li>
                     <li><a href="#" class="s2 px-2 py-1 hover:text-indigo-400">Outstanding</a></li>
                     <li><a href="#" class="s3 px-2 py-1 hover:text-indigo-400">Branch Information</a></li>
                     <li><a href="#" class="s4 px-2 py-1 hover:text-indigo-400">Help</a></li>
@@ -162,7 +161,7 @@
             <!-- Mobile Sidebar Menu (hidden on desktop) -->
             <div id="menu" class="slide-up w-full md:hidden">
                 <ul class="text-gray-500 font-semibold space-y-2">
-                    <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Logbook</a></li>
+  
                     <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Outstanding</a></li>
                     <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Branch Information</a></li>
                     <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Help</a></li>

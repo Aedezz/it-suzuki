@@ -152,7 +152,7 @@
             <!-- Menu Links (Desktop) -->
             <div class="text-gray-500 order-3 w-full md:w-auto md:order-2 md:block hidden">
                 <ul class="flex font-semibold justify-between" style="margin-right: 100px">
-                    <li><a href="{{ route('dashboard') }}" class="md:px-4 md:py-2 hover:text-blue-500">Beranda</a></li>
+                    <li><a href="{{ route('dashboard2') }}" class="md:px-4 md:py-2 hover:text-blue-500">Beranda</a></li>
                     <li><a href="{{ route('pc.create') }}" class="md:px-4 md:py-2 hover:text-blue-500">Install Komputer</a></li>
                     <li><a href="{{ route('pembuatan.create') }}" class="md:px-4 md:py-2 hover:text-blue-500">Pembuatan User</a></li>
                     <li><a href="{{ route('perbaikan') }}" class="md:px-4 md:py-2 hover:text-blue-500">Perbaikan Perangkat</a></li>

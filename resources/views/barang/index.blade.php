@@ -15,6 +15,7 @@
         width: 100%;
     }
 </style>
+
 <nav class="bg-white shadow shadow-gray-300 w-full px-8">
     <div class="container mx-auto flex items-center justify-between flex-wrap" style="margin-top: -10px;">
         <!-- Logo -->
@@ -38,9 +39,8 @@
         <div class="hidden md:flex md:items-center md:w-auto md:max-h-full"
             style="margin-bottom: -10px; margin-right: -90px;">
             <ul class="text-gray-500 font-semibold md:space-x-2 md:flex md:flex-row" style="font-size: 16px;">
-                <li><a href="{{ route('dashboard') }}" class="s1 px-4 py-2 hover:text-indigo-500">Beranda</a>
+                <li><a href="{{ route('dashboard2') }}" class="s1 px-4 py-2 hover:text-indigo-500">Beranda</a>
                 </li>
-                <li><a href="#" class="s5 px-2 py-1 hover:text-indigo-400">Logbook</a></li>
 
                 <li><a href="{{ route('branch-info') }}" class="s3 px-2 py-1 hover:text-indigo-400">Branch Information</a></li>
                 <li><a href="{{ route('help') }}" class="s4 px-2 py-1 hover:text-indigo-400">Help</a></li>
@@ -109,23 +109,31 @@
         </div>
 
 
-        <!-- Profile button -->
-        <div class="flex items-center space-x-4" style="margin-top: 5px;">
+         <!-- Profile button -->
+         <div class="flex items-center space-x-4">
             <div class="hidden md:flex relative">
+                <!-- Tombol Profile -->
                 <button id="profile-btn"
-                    class="flex items-center justify-center p-3 text-gray-800 rounded-xl focus:outline-none">
-                    {{-- <i class="fas fa-user-circle text-3xl"></i>  --}} {{ auth()->user()->nama }}
+                    class="flex items-center gap-2 p-3 text-gray-800 rounded-xl focus:outline-none">
+                    <i class="fas fa-user-circle text-3xl"></i>
+                    <span>{{ auth()->user()->nama }}</span>
                 </button>
+            
                 <!-- Dropdown Menu -->
-                <div id="dropdown-menu" style="margin-right: -55px"
-                class="absolute right-0 mt-16 w-48 bg-white border border-gray-200 border-t-white rounded-lg shadow-lg opacity-0 transform scale-y-0 origin-top transition-all duration-500 z-50">
-                <a href="{{ route('reset.password.form') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Change Password</a>
-                <a href="{{ route('logout') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Log Out</a>
+                <div id="dropdown-menu"
+                    class="absolute left-0 mt-14 w-48 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 transform scale-y-0 origin-top transition-all duration-500 z-50">
+                    
+                    <!-- Pucuk (Arrow) dengan Icon -->
+                    <i class="bi bi-caret-up-fill absolute -top-3 text-gray-300 text-xl" style="margin-left: 17px; margin-top: -3px;"></i>
+            
+                    <a href="{{ route('reset.password.form') }}"
+                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Reset Password</a>
+                    <a href="{{ route('logout') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Log
+                        Out</a>
+                </div>
+            </div>
+            
 
-            </div>
-            
-            </div>
-            
             <!-- For Mobile -->
             <div class="block md:hidden">
                 <button class="focus:outline-none">
@@ -133,13 +141,13 @@
                 </button>
             </div>
         </div>
+        </div>
     </div>
 
     <!-- Mobile Sidebar Menu -->
     <div id="menu" class="slide-up w-full md:hidden">
         
         <ul class="text-gray-500 font-semibold space-y-2">
-            <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Logbook</a></li>
             <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Outstanding</a></li>
             <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Branch Information</a></li>
             <li><a href="#" class="block px-4 py-2 hover:text-indigo-400">Help</a></li>
@@ -152,6 +160,7 @@
         </ul>
     </div>
 </nav>
+
 <div class="flex justify-center items-center mt-10">
     <div class="form-it-container relative w-full sm:w-11/12 lg:w-10/12 xl:w-11/12 2xl:w-3/4 bg-white rounded-lg shadow-md p-6">
         <!-- Title with styled bottom border -->
@@ -225,7 +234,7 @@
             ordering: true,
             info: true,
             responsive: true,
-            pageLength: 25, // Show 25 rows by default
+            pageLength: 10, // Show 25 rows by default
             lengthMenu: [10, 25, 50, 100] // Allow user to select rows displayed
         });
     });

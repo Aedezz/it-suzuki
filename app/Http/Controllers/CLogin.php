@@ -33,7 +33,7 @@ class CLogin extends Controller
         $credentials = $request->only('username', 'password'); 
  
         if (!Auth::attempt($credentials)) { 
-            return redirect()->route('login')->withErrors(['password' => 'Username atau password salah']); 
+            return redirect()->route('login')->withErrors(['password' => 'Username atau Password Salah']); 
         }
 
         // Redirect to the main page or dashboard on successful login
