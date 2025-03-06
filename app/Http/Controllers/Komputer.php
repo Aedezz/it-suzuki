@@ -12,19 +12,19 @@ class Komputer extends Controller
     {
         $komputer = DB::table('komputer')
             ->join('pegawai as kode_pegawai', 'komputer.kode_pegawai', '=', 'kode_pegawai.kode_pegawai')
-            ->join('pegawai as kode_cabang', 'komputer.kode_cabang', '=', 'kode_cabang.kode_pegawai')
-            ->join('pegawai as kode_divisi', 'komputer.kode_divisi', '=', 'kode_divisi.kode_pegawai')
+            ->join('cabang', 'komputer.kode_cabang', '=', 'cabang.id_cabang') // Fix this join
+            ->join('divisi', 'kode_pegawai.kode_divisi', '=', 'divisi.kode')
             ->select(
                 'komputer.*',
                 'kode_pegawai.nik as nik',
                 'kode_pegawai.nama as nama',
-                'kode_cabang.cabang as cabang',
-                'kode_divisi.divisi as divisi'
+                DB::raw("COALESCE(cabang.nama_cabang, 'Tidak Ada Cabang') as cabang"), // Fix the column name
+                DB::raw("COALESCE(divisi.divisi, 'Tidak Ada Divisi') as divisi")
             )
             ->paginate(20);
-    
+
         return view('komputer.datatable', compact('komputer'));
-    }    
+    }
 
     public function create()
     {
